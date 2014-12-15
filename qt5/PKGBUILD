@@ -1,4 +1,4 @@
-# $Id$
+# $Id: PKGBUILD 227559 2014-12-12 12:47:55Z andrea $
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgbase=qt5
