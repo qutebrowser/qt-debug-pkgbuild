@@ -21,6 +21,6 @@ rm *.pkg.tar* || true
 makepkg -si
 cp *.pkg.tar.xz "$outdir"
 
-repo-add "$outdir/repo.db.tar.gz" "$outdir"/*.pkg.tar.xz
+repo-add "$outdir/qt-debug.db.tar.gz" "$outdir"/*.pkg.tar.xz
 
 cd "$dir"
