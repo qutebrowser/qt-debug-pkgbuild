@@ -13,5 +13,6 @@ A note on branches
 Precompiled binary packages
 ---------------------------
 
-Binary packages for the *symbols* branch are available at
-http://qutebrowser.org/qt-symbols-pkg/
+Binary packages for the *symbols* branch are available as an unofficial
+Archlinux repo. See [the qutebrowser documentation](https://github.com/The-Compiler/qutebrowser/blob/master/doc/stacktrace.asciidoc#archlinux)
+for details.
