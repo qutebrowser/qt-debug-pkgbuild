@@ -22,5 +22,6 @@ makepkg "${makepkg_opts[@]}"
 mv *.pkg.tar.xz* "$outdir"
 
 repo-add "$outdir/qt-debug.db.tar.gz" "$outdir"/*.pkg.tar.xz
+repo-add -f "$outdir/qt-debug.files.tar.gz" "$outdir"/*.pkg.tar.xz
 
 cd "$dir"
