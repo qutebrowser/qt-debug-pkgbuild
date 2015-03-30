@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 232203 2015-03-01 07:49:05Z fyan $
+# $Id: PKGBUILD 235241 2015-03-28 17:29:29Z fyan $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 # Contributor: Yichao Yu <yyc1992@gmail.com>
@@ -10,7 +10,7 @@ pkgname=pyqt5
 pkgname=('pyqt5-common' 'python-pyqt5' 'python2-pyqt5')
 pkgver=5.4.1
 _pkgver=$pkgver
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://riverbankcomputing.co.uk/software/pyqt/intro"
 license=('GPL')
