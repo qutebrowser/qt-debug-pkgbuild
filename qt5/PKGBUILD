@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 239619 2015-05-21 16:36:07Z foutrelis $
+# $Id: PKGBUILD 240298 2015-06-03 10:23:18Z fyan $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
@@ -42,16 +42,29 @@ makedepends=('libxcb' 'xcb-proto' 'xcb-util' 'xcb-util-image' 'xcb-util-wm' 'xcb
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${pkgver}"
 source=("http://download.qt-project.org/official_releases/qt/${pkgver%.*}/${pkgver}/single/${_pkgfqn}.tar.xz"
-        'assistant.desktop' 'designer.desktop' 'linguist.desktop'
-        'qdbusviewer.desktop')
+        'assistant.desktop' 'designer.desktop' 'linguist.desktop' 'qdbusviewer.desktop'
+        'keypad-shortcuts.patch' 'avoid-calling-potentially-pure-virtual-method.patch'
+        'ibus-get-display-number-when-screen-number-is-omitted.patch')
 md5sums=('c23bd0f14d66e7901d24906a1edce9b0'
          'b2897dd6a2967bccf8f10e397aafee55'
          '76e150b20178d2d43801f7367232e5f7'
          '188da8f4c87316e730ebf1c6217bf5a0'
-         '322b419b16c75d4de0ee7ad0a246caa1')
+         '322b419b16c75d4de0ee7ad0a246caa1'
+         '665439088fc7de52a97455c5eaf87889'
+         'cab3284d52ea700b8761f4d71d68baf0'
+         '39e285d08b4951de095c2f6d6acdc925')
 
 prepare() {
   cd ${_pkgfqn}
+
+  # https://bugs.archlinux.org/task/44676
+  (cd qtbase; patch -p1 -i "$srcdir/keypad-shortcuts.patch")
+
+  # https://bugs.archlinux.org/task/43986
+  (cd qtdeclarative; patch -p1 -i "$srcdir/avoid-calling-potentially-pure-virtual-method.patch")
+
+  # https://bugs.archlinux.org/task/45180
+  (cd qtbase; patch -p1 -i "$srcdir/ibus-get-display-number-when-screen-number-is-omitted.patch")
 
   # Build qmake using Arch {C,LD}FLAGS
   # This also sets default {C,CXX,LD}FLAGS for projects built using qmake
