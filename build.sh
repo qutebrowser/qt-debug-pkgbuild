@@ -6,6 +6,8 @@ outdir=/srv/http/qutebrowser/qt-debug/x86_64
 
 if [[ $1 == repackage ]]; then
     makepkg_opts=('-siR' '--config' "$dir/makepkg.conf")
+elif [[ $1 == noextract ]]; then
+    makepkg_opts=('-si' '--noextract' '--config' "$dir/makepkg.conf")
 else
     makepkg_opts=('-si' '--config' "$dir/makepkg.conf")
 fi
