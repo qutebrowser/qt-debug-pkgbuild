@@ -6,7 +6,7 @@
 # Contributor: riai <riai@bigfoot.com> Ben <ben@benmazer.net>
 
 pkgbase=pyqt5
-pkgname=('pyqt5-common' 'python-pyqt5' 'python2-pyqt5')
+pkgname=('pyqt5-common-debug' 'python-pyqt5-debug' 'python2-pyqt5-debug')
 pkgver=5.5
 _pkgver=$pkgver
 pkgrel=2
@@ -19,6 +19,7 @@ makedepends=('python-sip' 'python2-sip' 'python-opengl' 'python2-opengl'
              'qt5-webengine' 'qt5-websockets' 'qt5-x11extras')
 source=("http://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-$pkgver/PyQt-gpl-$pkgver.tar.gz")
 md5sums=('60c0137b26c9ecbc3db0addb9638dc01')
+options=('debug' '!strip')
 
 build() {
   cp -a PyQt-gpl-${_pkgver} Py2Qt-gpl-${_pkgver}
@@ -28,7 +29,8 @@ build() {
     --confirm-license \
     --no-sip-files \
     --qsci-api \
-    -q /usr/bin/qmake-qt5
+    -q /usr/bin/qmake-qt5 \
+    --debug
 
   # Thanks Gerardo for the rpath fix
   find -name 'Makefile' | xargs sed -i 's|-Wl,-rpath,/usr/lib||g;s|-Wl,-rpath,.* ||g'
@@ -41,7 +43,8 @@ build() {
     --confirm-license \
     --no-sip-files \
     --qsci-api \
-    -q /usr/bin/qmake-qt5
+    -q /usr/bin/qmake-qt5 \
+    --debug
 
   # Thanks Gerardo for the rpath fix
   find -name 'Makefile' | xargs sed -i 's|-Wl,-rpath,/usr/lib||g;s|-Wl,-rpath,.* ||g'
@@ -49,9 +52,12 @@ build() {
   make
 }
 
-package_pyqt5-common(){
+package_pyqt5-common-debug(){
   pkgdesc="Common PyQt files shared between python-pyqt5 and python2-pyqt5"
   depends=('qt5-base')
+  provides=("pyqt5-common=$pkgver")
+  conflicts=("pyqt5-common")
+  options=('debug' '!strip')
 
   cd PyQt-gpl-${_pkgver}
   make -C pyrcc DESTDIR="${pkgdir}" INSTALL_ROOT="${pkgdir}" install
@@ -63,9 +69,9 @@ package_pyqt5-common(){
   cp -a sip/* "${pkgdir}"/usr/share/sip/PyQt5
 }
 
-package_python-pyqt5(){
+package_python-pyqt5-debug(){
   pkgdesc="A set of Python 3.x bindings for the Qt5 toolkit"
-  depends=('python-sip' 'pyqt5-common' 'python' 'python')
+  depends=('python-sip' 'pyqt5-common-debug' 'python')
   optdepends=('python-opengl: enable OpenGL 3D graphics in PyQt applications'
               'python-dbus: for python-dbus mainloop support'
               'qt5-multimedia: QtMultimedia, QtMultimediaWidgets'
@@ -75,6 +81,9 @@ package_python-pyqt5(){
               'qt5-xmlpatterns: QtXmlPatterns'
               'qt5-declarative: QtQml, qmlplugin'
               'qt5-serialport: QtSerialPort')
+  provides=("python-pyqt5=$pkgver")
+  conflicts=("python-pyqt5")
+  options=('debug' '!strip')
 
   cd PyQt-gpl-${_pkgver}
   # INSTALL_ROOT is needed for the QtDesigner module, the other Makefiles use DESTDIR
@@ -85,9 +94,9 @@ package_python-pyqt5(){
   rm "${pkgdir}"/usr/share/qt/qsci/api/python/PyQt5.api
 }
 
-package_python2-pyqt5(){
+package_python2-pyqt5-debug(){
   pkgdesc="A set of Python 2.x bindings for the Qt5 toolkit"
-  depends=('python2-sip' 'pyqt5-common' 'python2')
+  depends=('python2-sip' 'pyqt5-common-debug' 'python2')
   optdepends=('python2-opengl: enable OpenGL 3D graphics in PyQt applications'
               'python-dbus: for python-dbus mainloop support'
               'qt5-multimedia: QtMultimedia, QtMultimediaWidgets'
@@ -97,6 +106,9 @@ package_python2-pyqt5(){
               'qt5-xmlpatterns: QtXmlPatterns'
               'qt5-declarative: QtQml, qmlplugin'
               'qt5-serialport: QtSerialPort')
+  provides=("python2-pyqt5=$pkgver")
+  conflicts=("python2-pyqt5")
+  options=('debug' '!strip')
 
   cd Py2Qt-gpl-${_pkgver}
   # INSTALL_ROOT is needed for the QtDesigner module, the other Makefiles use DESTDIR
