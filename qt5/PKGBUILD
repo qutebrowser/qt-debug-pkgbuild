@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 249592 2015-10-21 04:24:21Z fyan $
+# $Id: PKGBUILD 249858 2015-10-30 06:04:11Z fyan $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
@@ -30,7 +30,7 @@ pkgname=('qt5-3d-debug'
          'qt5-x11extras-debug'
          'qt5-xmlpatterns-debug')
 pkgver=5.5.1
-pkgrel=1.1
+pkgrel=2
 arch=('i686' 'x86_64')
 url='http://www.qt.io/developers'
 license=('GPL3' 'LGPL' 'FDL' 'custom')
@@ -216,7 +216,7 @@ package_qt5-connectivity-debug() {
 
 package_qt5-declarative-debug() {
   pkgdesc='Classes for QML and JavaScript languages'
-  depends=('qt5-xmlpatterns' 'libxkbcommon-x11')
+  depends=('qt5-xmlpatterns' 'libxkbcommon-x11' 'libsm')
   conflicts=('qt' 'qt5-declarative')
   provides=("qt5-declarative=$pkgver")
   options=('debug' '!strip')
