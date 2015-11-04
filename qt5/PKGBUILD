@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 249858 2015-10-30 06:04:11Z fyan $
+# $Id: PKGBUILD 250082 2015-11-03 15:35:11Z foutrelis $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
@@ -30,7 +30,7 @@ pkgname=('qt5-3d'
          'qt5-x11extras'
          'qt5-xmlpatterns')
 pkgver=5.5.1
-pkgrel=2
+pkgrel=3
 arch=('i686' 'x86_64')
 url='http://www.qt.io/developers'
 license=('GPL3' 'LGPL' 'FDL' 'custom')
