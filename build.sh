@@ -16,14 +16,14 @@ cd "$dir/qt5"
 rm *.pkg.tar* || true
 rm -r src/python2-path || true
 makepkg "${makepkg_opts[@]}"
-mv *.pkg.tar.xz* "$outdir"
+#mv *.pkg.tar.xz* "$outdir"
 
-cd "$dir/pyqt5"
-rm *.pkg.tar* || true
-makepkg "${makepkg_opts[@]}"
-mv *.pkg.tar.xz* "$outdir"
-
-repo-add "$outdir/qt-debug.db.tar.gz" "$outdir"/*.pkg.tar.xz
-repo-add -f "$outdir/qt-debug.files.tar.gz" "$outdir"/*.pkg.tar.xz
+#cd "$dir/pyqt5"
+#rm *.pkg.tar* || true
+#makepkg "${makepkg_opts[@]}"
+#mv *.pkg.tar.xz* "$outdir"
+#
+#repo-add "$outdir/qt-debug.db.tar.gz" "$outdir"/*.pkg.tar.xz
+#repo-add -f "$outdir/qt-debug.files.tar.gz" "$outdir"/*.pkg.tar.xz
 
 cd "$dir"

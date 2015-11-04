@@ -29,8 +29,8 @@ pkgname=('qt5-3d-debug'
          'qt5-websockets-debug'
          'qt5-x11extras-debug'
          'qt5-xmlpatterns-debug')
-pkgver=5.5.1
-pkgrel=2
+pkgver=5.6.0_beta
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://www.qt.io/developers'
 license=('GPL3' 'LGPL' 'FDL' 'custom')
@@ -42,10 +42,10 @@ makedepends=('libxcb' 'xcb-proto' 'xcb-util' 'xcb-util-image' 'xcb-util-wm' 'xcb
             'libxkbcommon-x11' 'mtdev' 'harfbuzz' 'libwebp' 'leveldb' 'geoclue' 'pciutils'
             'libinput')
 groups=('qt' 'qt5')
-_pkgfqn="qt-everywhere-opensource-src-${pkgver}"
-source=("http://download.qt-project.org/official_releases/qt/${pkgver%.*}/${pkgver}/single/${_pkgfqn}.tar.xz"
+_pkgfqn="qt-everywhere-opensource-src-${pkgver//_/-}"
+source=("http://download.qt-project.org/snapshots/qt/${pkgver%.*}/${pkgver//_/-}/latest_src/${_pkgfqn}.tar.gz"
         'assistant.desktop' 'designer.desktop' 'linguist.desktop' 'qdbusviewer.desktop')
-md5sums=('c2a249e8795d45200d997d96860d0353'
+md5sums=('fdc9fda377657cec63087d594859ee6f'
          'b2897dd6a2967bccf8f10e397aafee55'
          '76e150b20178d2d43801f7367232e5f7'
          '188da8f4c87316e730ebf1c6217bf5a0'
@@ -66,7 +66,7 @@ prepare() {
   find . -name '*.py' -exec sed -i \
     's|#![ ]*/usr/bin/python$|&2|;s|#![ ]*/usr/bin/env python$|&2|' {} +
   # in qtwebengine there are still a lot of relative calls which need a workaround
-  mkdir "${srcdir}"/python2-path
+  mkdir "${srcdir}"/python2-path || true
   ln -s /usr/bin/python2 "${srcdir}"/python2-path/python
 }
 
@@ -83,7 +83,8 @@ build() {
   # FS#38796
   [[ "${CARCH}" = "i686" ]] && SSE2="-no-sse2"
 
-  PYTHON=/usr/bin/python2 ./configure -confirm-license -opensource \
+  EXTRA_QMAKEVARS_POST="CONFIG-=create_cmake" PYTHON=/usr/bin/python2 \
+  ./configure -confirm-license -opensource \
     -prefix /usr \
     -bindir /usr/lib/qt/bin \
     -docdir /usr/share/doc/qt \
@@ -104,7 +105,8 @@ build() {
     -libinput \
     -no-use-gold-linker \
     -no-reduce-relocations ${SSE2} \
-    -force-debug-info
+    -force-debug-info \
+    -verbose
 
   make
 
