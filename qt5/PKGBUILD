@@ -42,10 +42,10 @@ makedepends=('libxcb' 'xcb-proto' 'xcb-util' 'xcb-util-image' 'xcb-util-wm' 'xcb
             'libxkbcommon-x11' 'mtdev' 'harfbuzz' 'libwebp' 'leveldb' 'geoclue' 'pciutils'
             'libinput')
 groups=('qt' 'qt5')
-_pkgfqn="qt5"
-source=('git+https://code.qt.io/qt/qt5.git'
+_pkgfqn="qt-everywhere-opensource-src-${pkgver//_/-}"
+source=("http://download.qt-project.org/snapshots/qt/${pkgver%.*}/${pkgver//_/-}/latest_src/${_pkgfqn}.tar.gz"
         'assistant.desktop' 'designer.desktop' 'linguist.desktop' 'qdbusviewer.desktop')
-md5sums=('SKIP'
+md5sums=('fdc9fda377657cec63087d594859ee6f'
          'b2897dd6a2967bccf8f10e397aafee55'
          '76e150b20178d2d43801f7367232e5f7'
          '188da8f4c87316e730ebf1c6217bf5a0'
@@ -54,9 +54,6 @@ options=('debug' '!strip')
 
 prepare() {
   cd ${_pkgfqn}
-
-  sed -i 's|$self->{'\''base-url'\''} = $url;|$self->{'\''base-url'\''} = "https://code.qt.io/";|' init-repository
-  ./init-repository --module-subset=all -f
 
   # Build qmake using Arch {C,LD}FLAGS
   # This also sets default {C,CXX,LD}FLAGS for projects built using qmake
