@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 255623 2015-12-10 05:06:26Z foutrelis $
+# $Id: PKGBUILD 257377 2015-12-29 17:08:00Z heftig $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
@@ -30,7 +30,7 @@ pkgname=('qt5-3d-debug'
          'qt5-x11extras-debug'
          'qt5-xmlpatterns-debug')
 pkgver=5.5.1
-pkgrel=5
+pkgrel=7
 arch=('i686' 'x86_64')
 url='http://www.qt.io/developers'
 license=('GPL3' 'LGPL' 'FDL' 'custom')
@@ -40,7 +40,7 @@ makedepends=('libxcb' 'xcb-proto' 'xcb-util' 'xcb-util-image' 'xcb-util-wm' 'xcb
             'libmariadbclient' 'sqlite' 'unixodbc' 'libfbclient' 'libmng' 'python2' 'ruby'
             'gperf' 'libxslt' 'libxcomposite' 'fontconfig' 'bluez-libs' 'openal' 'gtk2'
             'libxkbcommon-x11' 'mtdev' 'harfbuzz' 'libwebp' 'leveldb' 'geoclue' 'pciutils'
-            'libinput')
+            'libinput' 'yasm' 'git')
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${pkgver}"
 source=("http://download.qt-project.org/official_releases/qt/${pkgver%.*}/${pkgver}/single/${_pkgfqn}.tar.xz"
@@ -68,6 +68,11 @@ prepare() {
   # in qtwebengine there are still a lot of relative calls which need a workaround
   mkdir "${srcdir}"/python2-path
   ln -s /usr/bin/python2 "${srcdir}"/python2-path/python
+
+  # Try to enable proprietary_codecs and use some system yasm
+  sed -e 's/contains(WEBENGINE_CONFIG, proprietary_codecs): //' \
+      -e '/use_system_ffmpeg=0"/a GYP_ARGS += "-Duse_system_yasm=1"' \
+      -i qtwebengine/src/core/gyp_run.pro
 }
 
 build() {
@@ -101,9 +106,7 @@ build() {
     -dbus-linked \
     -system-harfbuzz \
     -journald \
-    -libinput \
-    -no-use-gold-linker \
-    -no-reduce-relocations ${SSE2} \
+    -libinput ${SSE2} \
     -force-debug-info
 
   make
@@ -145,15 +148,13 @@ package_qt5-base-debug() {
   pkgdesc='A cross-platform application and UI framework'
   depends=('libjpeg-turbo' 'xcb-util-keysyms' 'libgl' 'dbus' 'fontconfig' 'systemd'
            'xcb-util-wm' 'libxrender' 'libxi' 'sqlite' 'xcb-util-image' 'icu'
-           'qtchooser' 'libinput')
+           'qtchooser' 'libinput' 'libsm' 'libxkbcommon-x11')
   optdepends=('qt5-svg: to use SVG icon themes'
               'postgresql-libs: PostgreSQL driver'
               'libmariadbclient: MariaDB driver'
               'unixodbc: ODBC driver'
               'libfbclient: Firebird/iBase driver'
               'mtdev: evdev plugin'
-              'libxkbcommon-x11: xcb plugin'
-              'libsm: xcb plugin'
               'gtk2: GTK2 plugin')
   conflicts=('qt' 'qt5-base')
   provides=("qt5-base=$pkgver")
@@ -216,7 +217,7 @@ package_qt5-connectivity-debug() {
 
 package_qt5-declarative-debug() {
   pkgdesc='Classes for QML and JavaScript languages'
-  depends=('qt5-xmlpatterns' 'libxkbcommon-x11' 'libsm')
+  depends=('qt5-xmlpatterns')
   conflicts=('qt' 'qt5-declarative')
   provides=("qt5-declarative=$pkgver")
   options=('debug' '!strip')
@@ -510,7 +511,7 @@ package_qt5-translations-debug() {
 
 package_qt5-wayland-debug() {
   pkgdesc='Provides APIs for Wayland'
-  depends=('qt5-base' 'libxcomposite' 'libxkbcommon')
+  depends=('qt5-base' 'libxcomposite')
   conflicts=('qt5-wayland')
   provides=("qt5-wayland=$pkgver")
   options=('debug' '!strip')
