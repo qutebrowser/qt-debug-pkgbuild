@@ -119,8 +119,8 @@ build() {
     "${QTDIR}"/qtbase/qmake/Makefile.qmake-docs
   find "${QTDIR}" -name Makefile \
     -exec sed -i "s|/usr/lib/qt/bin/qhelpgenerator|${QTDIR}/qttools/bin/qhelpgenerator|g" {} +
-  sed -i "s|/usr/lib/qt/bin/qhelpgenerator|${QTDIR}/qttools/bin/qhelpgenerator|g" \
-    qtwebkit/Source/Makefile.api
+  #sed -i "s|/usr/lib/qt/bin/qhelpgenerator|${QTDIR}/qttools/bin/qhelpgenerator|g" \
+  #  qtwebkit/Source/Makefile.api
   find "${QTDIR}" -name Makefile \
     -exec sed -i "s|/usr/lib/qt/bin/qmlplugindump|${QTDIR}/qtdeclarative/bin/qmlplugindump|g" {} +
 
@@ -560,26 +560,26 @@ package_qt5-webengine-debug() {
   rm -rf "${pkgdir}"/usr/share/doc
 }
 
-package_qt5-webkit-debug() {
-  pkgdesc='Classes for a WebKit2 based implementation and a new QML API'
-  depends=('qt5-sensors' 'qt5-location' 'qt5-webchannel' 'gst-plugins-base' 'libxslt'
-           'libxcomposite' 'libwebp')
-  optdepends=('gst-plugins-good: Webm codec support')
-  license=('GPL3' 'LGPL' 'FDL')
-  conflicts=('qt5-webkit')
-  provides=("qt5-webkit=$pkgver")
-  options=('debug' '!strip')
-
-  cd ${_pkgfqn}/qtwebkit
-  make INSTALL_ROOT="${pkgdir}" install
-
-  # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
-  find "${pkgdir}/usr/lib" -type f -name '*.prl' \
-    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
-
-  # Fix wrong path in pc file
-  perl -pi -e "s, -L${srcdir}/?\S+,,g" "${pkgdir}"/usr/lib/pkgconfig/Qt5WebKit.pc
-}
+#package_qt5-webkit-debug() {
+#  pkgdesc='Classes for a WebKit2 based implementation and a new QML API'
+#  depends=('qt5-sensors' 'qt5-location' 'qt5-webchannel' 'gst-plugins-base' 'libxslt'
+#           'libxcomposite' 'libwebp')
+#  optdepends=('gst-plugins-good: Webm codec support')
+#  license=('GPL3' 'LGPL' 'FDL')
+#  conflicts=('qt5-webkit')
+#  provides=("qt5-webkit=$pkgver")
+#  options=('debug' '!strip')
+#
+#  cd ${_pkgfqn}/qtwebkit
+#  make INSTALL_ROOT="${pkgdir}" install
+#
+#  # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
+#  find "${pkgdir}/usr/lib" -type f -name '*.prl' \
+#    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
+#
+#  # Fix wrong path in pc file
+#  perl -pi -e "s, -L${srcdir}/?\S+,,g" "${pkgdir}"/usr/lib/pkgconfig/Qt5WebKit.pc
+#}
 
 package_qt5-websockets-debug() {
   pkgdesc='Provides WebSocket communication compliant with RFC 6455'
