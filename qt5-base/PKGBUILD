@@ -2,7 +2,7 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-base
+pkgname=qt5-base-debug
 _qtver=5.6.0-rc
 pkgver=${_qtver/-/}
 pkgrel=1
@@ -118,3 +118,7 @@ package() {
     ln -s /usr/lib/qt/bin/$(basename $b) "${pkgdir}"/usr/bin/$(basename $b)-qt5
   done
 }
+
+provides+=("qt5-base=$pkgver")
+conflicts+=("qt5-base")
+options+=('debug' '!strip')

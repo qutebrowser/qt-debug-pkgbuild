@@ -2,7 +2,7 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-doc
+pkgname=qt5-doc-debug
 _qtver=5.6.0-rc
 pkgver=${_qtver/-/}
 pkgrel=1
@@ -52,3 +52,7 @@ package() {
   install -d "$pkgdir"/usr/share/licenses
   ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }
+
+provides+=("qt5-doc=$pkgver")
+conflicts+=("qt5-doc")
+options+=('debug' '!strip')
