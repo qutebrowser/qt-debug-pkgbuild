@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 258362 2016-01-16 13:27:23Z fyan $
+# $Id: PKGBUILD 261081 2016-03-06 10:49:07Z pierre $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
@@ -30,7 +30,7 @@ pkgname=('qt5-3d-debug'
          'qt5-x11extras-debug'
          'qt5-xmlpatterns-debug')
 pkgver=5.5.1
-pkgrel=9.1
+pkgrel=10.1
 arch=('i686' 'x86_64')
 url='http://www.qt.io/developers'
 license=('GPL3' 'LGPL' 'FDL' 'custom')
@@ -83,6 +83,10 @@ prepare() {
   sed -e 's/contains(WEBENGINE_CONFIG, proprietary_codecs): //' \
       -e '/use_system_ffmpeg=0"/a GYP_ARGS += "-Duse_system_yasm=1"' \
       -i qtwebengine/src/core/gyp_run.pro
+
+  sed -i 's/libsystemd-journal/libsystemd/g' \
+    qtbase/src/corelib/global/global.pri \
+    qtbase/config.tests/unix/journald/journald.pro
 }
 
 build() {
