@@ -2,7 +2,8 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-3d
+pkgname=qt5-3d-debug
+_orig_pkgname=${pkgname/-debug/}
 _qtver=5.6.0
 pkgver=${_qtver/-/}
 pkgrel=1
@@ -14,7 +15,7 @@ depends=('qt5-declarative')
 makedepends=()
 conflicts=('qt')
 groups=('qt' 'qt5')
-_pkgfqn="${pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
 md5sums=('fba04c921d53fc3ec6794e2a2a75ca60')
 

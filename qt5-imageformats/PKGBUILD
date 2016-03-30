@@ -2,7 +2,8 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-imageformats
+pkgname=qt5-imageformats-debug
+_orig_pkgname=${pkgname/-debug/}
 _qtver=5.6.0
 pkgver=${_qtver/-/}
 pkgrel=1
@@ -14,7 +15,7 @@ depends=('qt5-base' 'libtiff' 'jasper')
 makedepends=()
 conflicts=('qt')
 groups=('qt' 'qt5')
-_pkgfqn="${pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
 md5sums=('bb57c1db37e89a47f3513859ef04ae97')
 

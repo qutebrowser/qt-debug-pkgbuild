@@ -2,7 +2,8 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-webkit
+pkgname=qt5-webkit-debug
+_orig_pkgname=${pkgname/-debug/}
 _qtver=5.6.0
 pkgver=${_qtver/-/}
 pkgrel=2

@@ -2,7 +2,8 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-base
+pkgname=qt5-base-debug
+_orig_pkgname=${pkgname/-debug/}
 _qtver=5.6.0
 pkgver=${_qtver/-/}
 pkgrel=2
@@ -24,7 +25,7 @@ optdepends=('qt5-svg: to use SVG icon themes'
             'gtk2: GTK2 plugin')
 conflicts=('qt')
 groups=('qt' 'qt5')
-_pkgfqn="${pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-alsa1.11.patch
         qtbug-51648.patch qtbug-51649.patch qtbug-51676.patch)
 md5sums=('d6b6cfd333c22829c6c85fc52ceed019'

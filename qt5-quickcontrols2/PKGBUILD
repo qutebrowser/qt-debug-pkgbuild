@@ -2,7 +2,8 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-quickcontrols2
+pkgname=qt5-quickcontrols2-debug
+_orig_pkgname=${pkgname/-debug/}
 _qtver=5.6.0
 pkgver=${_qtver/-/}
 pkgrel=1
@@ -13,7 +14,7 @@ pkgdesc='Next generation user interface controls based on Qt Quick'
 depends=('qt5-declarative')
 conflicts=('qt')
 groups=('qt' 'qt5')
-_pkgfqn="${pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
 md5sums=('122dd81824cecaa7e327c003469d0df8')
 
