@@ -17,47 +17,79 @@ RUN pacman -Suy --noconfirm --needed \
     python2-opengl \
     python-dbus \
     python2-dbus \
-    # qt5
-    libxcb \
-    xcb-proto \
-    xcb-util \
-    xcb-util-image \
-    xcb-util-wm \
-    xcb-util-keysyms \
-    mesa \
-    at-spi2-core \
-    alsa-lib \
-    gst-plugins-base-libs \
+    # qt5-base
     libjpeg-turbo \
-    cups \
-    libpulse \
-    hicolor-icon-theme \
-    desktop-file-utils \
-    postgresql-libs \
-    nss \
+    xcb-util-keysyms \
+    libgl \
+    fontconfig \
+    xcb-util-wm \
+    libxrender \
+    libxi \
+    sqlite \
+    xcb-util-image \
+    icu \
+    qtchooser \
+    tslib \
+    libinput \
+    libsm \
+    libxkbcommon-x11
+    # qt5-base makedepends
+    mtdev \
+    libfbclient \
     libmariadbclient \
     sqlite \
     unixodbc \
-    libfbclient \
-    libmng \
+    postgresql-libs \
+    alsa-lib \
+    gst-plugins-base-libs \
+    gtk2 \
+    libpulse \
+    cups \
+    freetds \
+    # qt5-declarative makedepends
     python2 \
-    ruby \
+    # qt5-imageformats
+    libtiff \
+    jasper \
+    # qt5-multimedia
+    gst-plugins-base-libs \
+    libpulse \
+    openal \
+    # qt5-wayland
+    libxcomposite \
+    libxkbcommon \
+    # qt5-webengine
+    libxcomposite \
+    libxrandr \
+    libxtst \
+    libxcursor \
+    libpulse \
+    pciutils \
+    libxss \
+    libvpx \
+    opus \
+    libevent \
+    libsrtp \
+    jsonpp \
+    libwebp \
+    snappy \
+    minizip \
+    nss \
+    libxml2 \
+    libxslt \
+    # qt5-webengine makedepends
+    python2 \
+    git \
     gperf \
+    # qt5-webkit
+    libwebp \
     libxslt \
     libxcomposite \
-    fontconfig \
-    bluez-libs \
-    openal \
-    gtk2 \
-    libxkbcommon-x11 \
-    mtdev \
-    harfbuzz \
-    libwebp \
-    leveldb \
-    geoclue \
-    pciutils \
-    libinput \
-    yasm \
+    gst-plugins-base \
+    # qt5-webkit makepends
+    ruby \
+    gperf \
+    python2 \
     # To avoid "GPGME error: Inappropriate ioctl for device"
     | cat
 RUN sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf && \
