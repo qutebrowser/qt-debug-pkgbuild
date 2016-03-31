@@ -114,4 +114,5 @@ WORKDIR /home/user
 CMD while read pkg; do \
         cd ~/$pkg && \
         makepkg -i --noconfirm \
+        ; \
     done < pkglist
