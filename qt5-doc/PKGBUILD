@@ -15,6 +15,7 @@ pkgdesc='A cross-platform application and UI framework (Documentation)'
 depends=('qt5-base')
 makedepends=('qt5-tools' 'python2')
 conflicts=('qt' 'qt5-doc')
+provides=("qt5-doc==$pkgver")
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/single/${_pkgfqn}.tar.xz")

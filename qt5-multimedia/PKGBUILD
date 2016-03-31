@@ -15,6 +15,7 @@ depends=('qt5-base' 'gst-plugins-base-libs' 'libpulse' 'openal')
 makedepends=('qt5-declarative')
 optdepends=('qt5-declarative: QML bindings')
 conflicts=('qt' 'qt5-multimedia')
+provides=("qt5-multimedia==$pkgver")
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")

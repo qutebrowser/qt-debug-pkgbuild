@@ -15,6 +15,7 @@ depends=('qt5-webchannel' 'qt5-location' 'libxcomposite' 'libxrandr' 'libxtst' '
          'libevent' 'libsrtp' 'jsoncpp' 'libwebp' 'snappy' 'minizip' 'nss' 'libxml2' 'libxslt')
 makedepends=('python2' 'git' 'gperf')
 conflicts=('qt' 'qt5-webengine')
+provides=("qt5-webengine==$pkgver")
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-webengine-nss.patch)

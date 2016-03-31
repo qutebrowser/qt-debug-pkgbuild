@@ -14,6 +14,7 @@ pkgdesc='C++ and QML APIs for easy inclusion of 3D graphics'
 depends=('qt5-declarative')
 makedepends=()
 conflicts=('qt' 'qt5-3d')
+provides=("qt5-3d==$pkgver")
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")

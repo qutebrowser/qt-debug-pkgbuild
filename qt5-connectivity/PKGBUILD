@@ -15,6 +15,7 @@ depends=('qt5-base')
 makedepends=('qt5-declarative')
 optdepends=('qt5-declarative: QML bindings')
 conflicts=('qt' 'qt5-connectivity')
+provides=("qt5-connectivity==$pkgver")
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")

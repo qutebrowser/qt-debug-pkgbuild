@@ -13,6 +13,7 @@ license=('GPL3' 'LGPL' 'FDL' 'custom')
 pkgdesc='Next generation user interface controls based on Qt Quick'
 depends=('qt5-declarative')
 conflicts=('qt' 'qt5-quickcontrols2')
+provides=("qt5-quickcontrols2==$pkgver")
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
