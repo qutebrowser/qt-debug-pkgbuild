@@ -71,8 +71,7 @@ RUN mkdir /out && \
     useradd user -u 1001 && \
     mkdir /home/user
 
-COPY ./qt5 /home/user/qt5
-COPY ./pyqt5 /home/user/pyqt5
+COPY ./qt5-* ./pyqt5 /home/user/
 
 RUN chown -R user:users /home/user && \
     chown user:users /out
@@ -80,7 +79,7 @@ RUN chown -R user:users /home/user && \
 USER user
 WORKDIR /home/user
 
-CMD cd ~/qt5 && \
-    makepkg -i --noconfirm && \
-    cd ~/pyqt5 && \
-    makepkg -i --noconfirm
+CMD while read pkg; do \
+        cd ~/$pkg && \
+        makepkg -i --noconfirm \
+    done < pkglist
