@@ -16,6 +16,7 @@ makedepends=('ruby' 'gperf' 'python2')
 optdepends=('gst-plugins-good: Webm codec support')
 conflicts=('qt' 'qt5-webkit')
 provides=("qt5-webkit==$pkgver")
+options=("debug" "!strip")
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-opensource-src-${pkgver}"
 source=("http://download.qt.io/community_releases/${pkgver%.*}/${pkgver}/qtwebkit-opensource-src-${pkgver}.tar.xz"

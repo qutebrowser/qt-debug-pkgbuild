@@ -15,6 +15,7 @@ pkgdesc='Examples and demos from qt5 documentation'
 depends=('qt5-doc')
 conflicts=('qt' 'qt5-examples')
 provides=("qt5-examples==$pkgver")
+options=("debug" "!strip")
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/single/${_pkgfqn}.tar.xz")
