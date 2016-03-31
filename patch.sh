@@ -5,7 +5,7 @@ set -e
 for pkg in qt5-*; do
     # pkgname
     sed -i 's|pkgname=\(.*\)|pkgname=\1-debug\n_orig_pkgname=${pkgname/-debug/}|' $pkg/PKGBUILD
-    sed -i 's|_pkgfqn="${pkgname/5-/}-opensource-src-${_qtver}"|_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"|' $pkg/PKGBUILD
+    sed -i 's|_pkgfqn="${pkgname/5-/}-(.*)"|_pkgfqn="${_orig_pkgname/5-/}-\1"|' $pkg/PKGBUILD
 
     # conflicts
     grep -q conflicts $pkg/PKGBUILD || exit 1
