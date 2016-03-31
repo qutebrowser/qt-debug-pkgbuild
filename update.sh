@@ -17,17 +17,6 @@ while read pkg; do
     echo "Downloading $pkg..."
     git clone git://projects.archlinux.org/svntogit/packages.git \
         --branch=packages/$pkg --single-branch -q || exit 1
-
-    for arch in x86_64 any; do
-        path=packages/repos/extra-$arch/
-        if [[ -d $path ]]; then
-            cp -R $path $pkg
-        fi
-    done
-    if [[ ! -d $pkg ]]; then
-        echo "Did not find PKGBUILD for $pkg!" >&2
-        exit 1
-    fi
-
+    cp -R packages/trunk $pkg || exit 1
     rm -r packages
 done < pkglist
