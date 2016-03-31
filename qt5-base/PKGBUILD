@@ -91,7 +91,8 @@ build() {
     -system-harfbuzz \
     -journald \
     -no-use-gold-linker \
-    -reduce-relocations ${SSE2}
+    -reduce-relocations ${SSE2} \
+    -force-debug-info
 
   make
 }
