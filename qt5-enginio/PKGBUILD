@@ -19,7 +19,7 @@ conflicts=('qt' 'qt5-enginio')
 provides=("qt5-enginio==$pkgver")
 options=("debug" "!strip")
 groups=('qt' 'qt5')
-_pkgfqn="${pkgname/5-/}-opensource-src-${_enginiover}"
+_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_enginiover}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
 md5sums=('67362f39eca4316905f86cbba653309b')
 
