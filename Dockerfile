@@ -103,7 +103,7 @@ RUN mkdir /out && \
     useradd user -u 1001 && \
     mkdir /home/user
 
-COPY ./qt5-* ./pyqt5 /home/user/
+COPY . /home/user
 
 RUN chown -R user:users /home/user && \
     chown user:users /out
