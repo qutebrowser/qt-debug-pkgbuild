@@ -5,7 +5,9 @@ RUN echo 'Server = http://mirror.de.leaseweb.net/archlinux/$repo/os/$arch' > /et
 RUN pacman-key --init && pacman-key --populate archlinux && pacman -Sy --noconfirm archlinux-keyring
 RUN pacman -Suy --noconfirm --needed \
     git \
-    base-devel
+    base-devel \
+    # To avoid "GPGME error: Inappropriate ioctl for device"
+    | cat
 RUN pacman-db-upgrade
 RUN pacman -Suy --noconfirm --needed \
     # pyqt5
@@ -55,7 +57,9 @@ RUN pacman -Suy --noconfirm --needed \
     geoclue \
     pciutils \
     libinput \
-    yasm
+    yasm \
+    # To avoid "GPGME error: Inappropriate ioctl for device"
+    | cat
 RUN sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf && \
     sed -i 's|#BUILDDIR=.*|BUILDDIR="/tmp/makepkg"|' /etc/makepkg.conf && \
     sed -i 's|#PKGDEST=.*|PKGDEST="/out"|' /etc/makepkg.conf && \
