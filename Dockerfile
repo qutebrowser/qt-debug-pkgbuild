@@ -70,7 +70,7 @@ RUN pacman -Suy --noconfirm --needed \
     opus \
     libevent \
     libsrtp \
-    jsonpp \
+    jsoncpp \
     libwebp \
     snappy \
     minizip \
