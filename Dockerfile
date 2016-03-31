@@ -113,6 +113,6 @@ WORKDIR /home/user
 
 CMD while read pkg; do \
         cd ~/$pkg && \
-        makepkg -i --noconfirm \
+        { makepkg -i --noconfirm || exit 1 ;} \
         ; \
     done < pkglist
