@@ -32,7 +32,7 @@ RUN pacman -Suy --noconfirm --needed \
     tslib \
     libinput \
     libsm \
-    libxkbcommon-x11
+    libxkbcommon-x11 \
     # qt5-base makedepends
     mtdev \
     libfbclient \
