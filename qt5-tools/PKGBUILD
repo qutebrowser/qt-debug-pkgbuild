@@ -6,13 +6,12 @@ pkgname=qt5-tools-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.6.0
 pkgver=${_qtver/-/}
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL' 'FDL' 'custom')
 pkgdesc='A cross-platform application and UI framework (Development Tools, QtHelp)'
-depends=('qt5-base')
-makedepends=('qt5-declarative')
+depends=('qt5-webkit')
 optdepends=('qt5-doc: documentation')
 conflicts=('qt' 'qt5-tools')
 provides=("qt5-tools==$pkgver")
