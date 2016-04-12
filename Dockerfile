@@ -58,8 +58,4 @@ RUN chown -R user:users /home/user && \
 USER user
 WORKDIR /home/user
 
-CMD while read pkg; do \
-        cd ~/$pkg && \
-        { makepkg -i --noconfirm || exit 1 ;} \
-        ; \
-    done < pkglist
+CMD ./docker_entrypoint.sh
