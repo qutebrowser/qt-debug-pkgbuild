@@ -10,17 +10,17 @@ rsync -avPh --files-from=<(git ls-files) . segfault:"$qtbuilddir"
 ssh segfault "$qtbuilddir/build_segfault_docker.sh" "$@"
 
 if (( $# > 1 )); then
-    packages=$(cat pkglist)
-else
     packages=$@
+else
+    packages=$(cat pkglist)
 fi
+
+rsync -avPh segfault:"$qtbuilddir/out/" "$outdir"
 
 for pkg in $packages; do
     #repo-remove "$outdir/qt-debug.db.tar.gz" "$pkg"
 
     rm "$outdir"/$pkg-*
-
-    rsync -avPh segfault:"$qtbuilddir/out/" "$outdir"
 
     for f in "$outdir"/$pkg-*.pkg.tar.xz; do
         gpg --detach-sign --default-key 0xE80A0C82 "$f"
