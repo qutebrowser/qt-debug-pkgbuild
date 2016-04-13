@@ -7,7 +7,7 @@ qtbuilddir="~/docker/archlinux-qtbuild"
 
 ssh segfault mkdir -p "$qtbuilddir"
 rsync -avPh --files-from=<(git ls-files) . segfault:"$qtbuilddir"
-ssh segfault "$qtbuilddir/build_segfault_docker.sh"
+ssh segfault "$qtbuilddir/build_segfault_docker.sh" "$@"
 rm "$outdir"/*
 rsync -avPh segfault:"$qtbuilddir/out/" "$outdir"
 
