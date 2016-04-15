@@ -23,6 +23,8 @@ RUN pacman -Suy --noconfirm --needed \
     libpulse \
     cups \
     freetds \
+    # qt5-connectivity makedepends
+    bluez-libs \
     # qt5-declarative makedepends
     python2 \
     # qt5-webengine makedepends
