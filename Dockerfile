@@ -32,6 +32,11 @@ RUN pacman -Suy --noconfirm --needed \
     ruby \
     gperf \
     python2 \
+    # pyqt5 makedepends
+    python-opengl \
+    python2-opengl \
+    python2-dbus \
+    python-dbus \
     # to have a running Qt already
     qt5 \
     python-pyqt5 \
