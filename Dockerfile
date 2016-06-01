@@ -3,7 +3,7 @@ MAINTAINER Florian Bruhin <me@the-compiler.org>
 
 RUN echo 'Server = http://mirror.de.leaseweb.net/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
 RUN pacman-key --init && pacman-key --populate archlinux && pacman -Sy --noconfirm archlinux-keyring
-RUN pacman -Suy --noconfirm pacman | cat && pacman-db-upgrade
+RUN pacman -S --noconfirm pacman | cat && pacman-db-upgrade
 RUN pacman -Suy --noconfirm --needed \
     git \
     base-devel \
