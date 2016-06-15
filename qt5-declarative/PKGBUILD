@@ -4,7 +4,7 @@
 
 pkgname=qt5-declarative-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.6.0
+_qtver=5.6.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ options=("debug" "!strip")
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('5eb41d468d88a70574ddc5237b68f7e8')
+md5sums=('ea2a2602b8a91f2618a36be09bcd79e9')
 
 prepare() {
   mkdir -p build
