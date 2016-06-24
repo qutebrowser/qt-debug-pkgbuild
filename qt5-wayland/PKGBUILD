@@ -3,23 +3,27 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-wayland
-_qtver=5.6.1
+_qtver=5.7.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL' 'FDL' 'custom')
+license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Provides APIs for Wayland'
-depends=('qt5-base' 'libxcomposite' 'libxkbcommon')
-makedepends=()
-conflicts=('qt')
+depends=('qt5-declarative' 'libxcomposite')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-opensource-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('5b7654c9a909eb0de6c41796f16915ca')
+source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
+        qtbug-53945.patch::"https://github.com/qtproject/qtwayland/commit/75294be3.patch")
+md5sums=('2d2543a2564ee1b5db9f25dca9cc2e3b'
+         '887f656b651e230169ce02753f14d746')
 
 prepare() {
   mkdir -p build
+
+  cd ${_pkgfqn}
+# Fix out-of-tree build
+  patch -p1 -i ../qtbug-53945.patch
 }
 
 build() {
@@ -31,6 +35,7 @@ build() {
 
 package() {
   cd build
+
   make INSTALL_ROOT="$pkgdir" install
 
   # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
