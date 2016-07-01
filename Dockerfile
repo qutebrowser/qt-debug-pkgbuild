@@ -46,7 +46,7 @@ RUN pacman -Suy --noconfirm --needed \
     python2 \
     pciutils \
     libxtst \
-    libcursor \
+    libxcursor \
     libxrandr \
     libxss \
     # pyqt5 makedepends
