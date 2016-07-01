@@ -11,8 +11,8 @@ arch=('any')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='A cross-platform application and UI framework (Translations)'
-depends=('qt5-base-debug')
-makedepends=('qt5-tools-debug')
+depends=('qt5-base')
+makedepends=('qt5-tools')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-translations==$pkgver")

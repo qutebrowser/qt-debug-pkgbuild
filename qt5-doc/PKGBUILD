@@ -12,8 +12,8 @@ arch=('any')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='A cross-platform application and UI framework (Documentation)'
-depends=('qt5-base-debug')
-makedepends=('qt5-tools-debug' 'python2' 'pciutils' 'libxtst' 'libxcursor' 'libxrandr' 'libxss')
+depends=('qt5-base')
+makedepends=('qt5-tools' 'python2' 'pciutils' 'libxtst' 'libxcursor' 'libxrandr' 'libxss')
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${_qtver}"
 provides=("qt5-doc==$pkgver")
@@ -64,6 +64,6 @@ package() {
   install -d "$pkgdir"/usr/share/licenses
   ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
 
-# Fix conflicts with qt5-examples-debug
+# Fix conflicts with qt5-examples
   rm -r "$pkgdir"/usr/share/doc/qt/examples
 }

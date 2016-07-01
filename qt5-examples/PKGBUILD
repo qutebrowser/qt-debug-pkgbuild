@@ -12,7 +12,7 @@ arch=('any')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Examples and demos from qt5 documentation'
-depends=('qt5-doc-debug')
+depends=('qt5-doc')
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${_qtver}"
 provides=("qt5-examples==$pkgver")

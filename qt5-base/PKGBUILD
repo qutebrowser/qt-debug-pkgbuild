@@ -16,7 +16,7 @@ depends=('libjpeg-turbo' 'xcb-util-keysyms' 'libgl' 'fontconfig'
          'qtchooser' 'tslib' 'libinput' 'libsm' 'libxkbcommon-x11' 'libproxy')
 makedepends=('mtdev' 'libfbclient' 'libmariadbclient' 'sqlite' 'unixodbc' 'postgresql-libs' 'alsa-lib' 'gst-plugins-base-libs'
              'gtk3' 'libpulse' 'cups' 'freetds')
-optdepends=('qt5-svg-debug: to use SVG icon themes'
+optdepends=('qt5-svg: to use SVG icon themes'
             'postgresql-libs: PostgreSQL driver'
             'libmariadbclient: MariaDB driver'
             'unixodbc: ODBC driver'

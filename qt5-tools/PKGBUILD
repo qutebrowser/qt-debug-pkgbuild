@@ -11,9 +11,9 @@ arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='A cross-platform application and UI framework (Development Tools, QtHelp)'
-depends=('qt5-base-debug')
-makedepends=('qt5-declarative-debug' 'qt5-webkit-debug')
-optdepends=('qt5-doc-debug: documentation' 'qt5-webkit-debug: for Qt Assistant')
+depends=('qt5-base')
+makedepends=('qt5-declarative' 'qt5-webkit')
+optdepends=('qt5-doc: documentation' 'qt5-webkit: for Qt Assistant')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-tools==$pkgver")
