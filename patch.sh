@@ -49,7 +49,7 @@ grep -q -- -force-debug-info qt5-base/PKGBUILD || fail
 sed -i 's/\(\Wqt5-[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
 # replace all pyqt5 references
 sed -i 's/\(pyqt5[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
-# replace all pyqt5 references
+sed -i 's/-debug\.so/\.so/g' pyqt5/PKGBUILD
 # add debug options
 sed -i '/^provides=/aoptions=("debug" "!strip")' pyqt5/PKGBUILD
 grep -q options $pkg/PKGBUILD || fail
