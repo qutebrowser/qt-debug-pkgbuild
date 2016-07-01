@@ -9,18 +9,19 @@ fail() {
 
 ### First handle all qt5-* packages
 for pkg in qt5-*; do
-    # pkgname
     if grep -q _orig_pkgname $pkg/PKGBUILD; then
         echo "$pkg was already rewritten?"
         exit 1
     fi
-    sed -i 's|pkgname=\(.*\)|pkgname=\1-debug\n_orig_pkgname=${pkgname/-debug/}|' $pkg/PKGBUILD
-    sed -i 's|_pkgfqn="${pkgname/5-/}-\(.*\)"|_pkgfqn="${_orig_pkgname/5-/}-\1"|' $pkg/PKGBUILD
 
-    # depends
-    sed -i '/^depends=/s/\(qt5-\w*\)/\1-debug/g' $pkg/PKGBUILD
+    # replace all qt5-* references
+    sed -i 's/\(qt5-\w*\)/\1-debug/g' $pkg/PKGBUILD
 
-    # conflicts
+    # Use old pkgname where needed
+    sed -i '/^pkgname=/a_orig_pkgname=${pkgname/-debug/}' $pkg/PKGBUILD
+    sed -i '/^_pkgfqn=/s/pkgname/_orig_pkgname/g' $pkg/PKGBUILD
+
+    # add conflicts-entry for non-debug package
     if grep -q conflicts $pkg/PKGBUILD; then
         sed -i 's|conflicts=(\(.*\))|conflicts=(\1 '\'$pkg\'')|' $pkg/PKGBUILD
     else
@@ -28,12 +29,12 @@ for pkg in qt5-*; do
         sed -i '/^depends=/aconflicts=('\'$pkg\'')' $pkg/PKGBUILD
     fi
 
-    # provides
+    # add provides-entry for non-debug package
     grep -q provides $pkg/PKGBUILD && fail
     sed -i '/^depends=/aprovides=("'$pkg'==$pkgver")' $pkg/PKGBUILD
     grep -q provides $pkg/PKGBUILD || fail
 
-    # options
+    # add debug options
     sed -i '/^provides=/aoptions=("debug" "!strip")' $pkg/PKGBUILD
     grep -q options $pkg/PKGBUILD || fail
 done
