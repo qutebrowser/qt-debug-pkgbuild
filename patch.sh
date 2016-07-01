@@ -51,7 +51,7 @@ sed -i 's/\(\Wqt5-[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
 sed -i 's/\(pyqt5[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
 sed -i 's/-debug\.so/\.so/g' pyqt5/PKGBUILD
 # add debug options
-sed -i '/^provides=/aoptions=("debug" "!strip")' pyqt5/PKGBUILD
+sed -i '/^md5sums=/aoptions=("debug" "!strip")' pyqt5/PKGBUILD
 grep -q options $pkg/PKGBUILD || fail
 # add debug switch
 sed -i 's|-q /usr/bin/qmake-qt5|& \\\n    --debug|' pyqt5/PKGBUILD
