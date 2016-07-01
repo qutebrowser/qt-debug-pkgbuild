@@ -15,11 +15,12 @@ for pkg in qt5-*; do
     fi
 
     # replace all qt5-* references
-    sed -i 's/\(qt5-\w*\)/\1-debug/g' $pkg/PKGBUILD
+    sed -i 's/\(qt5-[a-z0-9-]*\)/\1-debug/g' $pkg/PKGBUILD
 
     # Use old pkgname where needed
     sed -i '/^pkgname=/a_orig_pkgname=${pkgname/-debug/}' $pkg/PKGBUILD
     sed -i '/^_pkgfqn=/s/pkgname/_orig_pkgname/g' $pkg/PKGBUILD
+    sed -i 's/-debug\.patch/\.patch/g' $pkg/PKGBUILD
 
     # add conflicts-entry for non-debug package
     if grep -q conflicts $pkg/PKGBUILD; then
