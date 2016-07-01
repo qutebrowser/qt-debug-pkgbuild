@@ -15,7 +15,7 @@ for pkg in qt5-*; do
     fi
 
     # replace all qt5-* references
-    sed -i 's/\(qt5-[a-z0-9-]*\)/\1-debug/g' $pkg/PKGBUILD
+    sed -i 's/\(\Wqt5-[a-z0-9-]*\)/\1-debug/g' $pkg/PKGBUILD
 
     # Use old pkgname where needed
     sed -i '/^pkgname=/a_orig_pkgname=${pkgname/-debug/}' $pkg/PKGBUILD
@@ -46,7 +46,7 @@ grep -q -- -force-debug-info qt5-base/PKGBUILD || fail
 
 ### pyqt5 patches
 # replace all qt5 references
-sed -i 's/\(qt5-[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
+sed -i 's/\(\Wqt5-[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
 # replace all pyqt5 references
 sed -i 's/\(pyqt5[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
 # replace all pyqt5 references
