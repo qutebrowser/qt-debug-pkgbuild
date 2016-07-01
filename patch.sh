@@ -33,5 +33,6 @@ for pkg in qt5-*; do
     grep -q options $pkg/PKGBUILD || exit 1
 done
 
-# -force-debug-info
+#### qt5-base patches
 sed -i 's/${SSE2}/& \\\n    -force-debug-info/' qt5-base/PKGBUILD
+grep -q -- -force-debug-info $pkg/PKGBUILD || exit 1
