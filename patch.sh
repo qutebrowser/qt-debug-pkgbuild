@@ -2,6 +2,7 @@
 
 set -e -x
 
+### First handle all qt5-* packages
 for pkg in qt5-*; do
     # pkgname
     if grep -q _orig_pkgname $pkg/PKGBUILD; then
@@ -10,6 +11,9 @@ for pkg in qt5-*; do
     fi
     sed -i 's|pkgname=\(.*\)|pkgname=\1-debug\n_orig_pkgname=${pkgname/-debug/}|' $pkg/PKGBUILD
     sed -i 's|_pkgfqn="${pkgname/5-/}-\(.*\)"|_pkgfqn="${_orig_pkgname/5-/}-\1"|' $pkg/PKGBUILD
+
+    # depends
+    sed -i '/^depends=/s/\(qt5-\w*\)/\1-debug/g' $pkg/PKGBUILD
 
     # conflicts
     if grep -q conflicts $pkg/PKGBUILD; then
