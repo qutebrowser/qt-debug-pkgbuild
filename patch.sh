@@ -14,13 +14,10 @@ for pkg in qt5-*; do
         exit 1
     fi
 
-    # replace all qt5-* references
-    sed -i 's/\(\Wqt5-[a-z0-9-]*\)/\1-debug/g' $pkg/PKGBUILD
-
-    # Use old pkgname where needed
-    sed -i '/^pkgname=/a_orig_pkgname=${pkgname/-debug/}' $pkg/PKGBUILD
+    # Adjust package names
+    sed -i 's|^pkgname=.*|&-debug\n_orig_pkgname=${pkgname/-debug/}|' $pkg/PKGBUILD
     sed -i '/^_pkgfqn=/s/pkgname/_orig_pkgname/g' $pkg/PKGBUILD
-    sed -i 's/-debug\.patch/\.patch/g' $pkg/PKGBUILD
+    sed -i 's|/usr/share/licenses/qt5-base|&-debug|g' $pkg/PKGBUILD
 
     # add conflicts-entry for non-debug package
     if grep -q conflicts $pkg/PKGBUILD; then
@@ -45,8 +42,6 @@ sed -i 's/${SSE2}/& \\\n    -force-debug-info/' qt5-base/PKGBUILD
 grep -q -- -force-debug-info qt5-base/PKGBUILD || fail
 
 ### pyqt5 patches
-# replace all qt5 references
-sed -i 's/\(\Wqt5-[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
 # replace all pyqt5 references
 sed -i 's/\(pyqt5[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
 sed -i 's/-debug\.so/\.so/g' pyqt5/PKGBUILD
