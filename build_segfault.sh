@@ -32,7 +32,7 @@ for pkg in $packages; do
             gpg --detach-sign --default-key 0xE80A0C82 "$f"
         done
 
-        repo-add "$outdir/qt-debug.db.tar.gz" "$outdir/*$pkg-"*.pkg.tar.xz
+        repo-add "$outdir/qt-debug.db.tar.gz" "$outdir/*"$pkg"-*.pkg.tar.xz
     fi
 done
 
