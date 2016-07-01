@@ -4,23 +4,23 @@
 
 pkgname=qt5-sensors-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.6.1
+_qtver=5.7.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL' 'FDL' 'custom')
+license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Provides access to sensor hardware and motion gesture recognition'
-depends=('qt5-base')
-makedepends=('qt5-declarative')
-optdepends=('qt5-declarative: QML bindings')
-conflicts=('qt' 'qt5-sensors')
-provides=("qt5-sensors==$pkgver")
-options=("debug" "!strip")
+depends=('qt5-base-debug')
+makedepends=('qt5-declarative-debug')
+optdepends=('qt5-declarative-debug: QML bindings')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
+provides=("qt5-sensors==$pkgver")
+options=("debug" "!strip")
+conflicts=('qt5-sensors')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('1042d90aaab147f854a47697a0ac3419')
+md5sums=('ccd4b5869b83d7a2c8f6dd1d61e9741a')
 
 prepare() {
   mkdir -p build
@@ -42,5 +42,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
 }

@@ -2,26 +2,23 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-enginio-debug
+pkgname=qt5-quickcontrols2-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.6.1
-_enginiover=1.6.1
+_qtver=5.7.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL' 'FDL' 'custom')
-pkgdesc='A Backend-as-a-Service solution to ease the backend development for connected and data-driven application'
-depends=('qt5-base')
-makedepends=('qt5-declarative')
-optdepends=('qt5-declarative: QML bindings')
-conflicts=('qt' 'qt5-enginio')
-provides=("qt5-enginio==$pkgver")
-options=("debug" "!strip")
+license=('GPL3' 'LGPL3' 'FDL' 'custom')
+pkgdesc='Next generation user interface controls based on Qt Quick'
+depends=('qt5-declarative-debug')
 groups=('qt' 'qt5')
-_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_enginiover}"
+_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
+provides=("qt5-quickcontrols2==$pkgver")
+options=("debug" "!strip")
+conflicts=('qt5-quickcontrols2')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('f5e8a89653355c2f34462468dbf1b05d')
+md5sums=('63c979d1d79ab4457f99d5762fc7e20f')
 
 prepare() {
   mkdir -p build
@@ -43,5 +40,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
 }

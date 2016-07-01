@@ -4,23 +4,24 @@
 
 pkgname=qt5-tools-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.6.1
+_qtver=5.7.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL' 'FDL' 'custom')
+license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='A cross-platform application and UI framework (Development Tools, QtHelp)'
-depends=('qt5-webkit')
-optdepends=('qt5-doc: documentation')
-conflicts=('qt' 'qt5-tools')
-provides=("qt5-tools==$pkgver")
-options=("debug" "!strip")
+depends=('qt5-base-debug')
+makedepends=('qt5-declarative-debug' 'qt5-webkit-debug')
+optdepends=('qt5-doc-debug: documentation' 'qt5-webkit-debug: for Qt Assistant')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.gz"
+provides=("qt5-tools==$pkgver")
+options=("debug" "!strip")
+conflicts=('qt5-tools')
+source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
         {assistant,designer,linguist,qdbusviewer}.desktop)
-md5sums=('97184bd19261a651fff5183eda25a2ac'
+md5sums=('29eb3fd31582b5801e264c62d1158553'
          'b2897dd6a2967bccf8f10e397aafee55'
          '76e150b20178d2d43801f7367232e5f7'
          '188da8f4c87316e730ebf1c6217bf5a0'
@@ -74,5 +75,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
 }

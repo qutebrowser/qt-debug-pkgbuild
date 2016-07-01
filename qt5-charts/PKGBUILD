@@ -1,25 +1,26 @@
-# $Id: PKGBUILD 240297 2015-06-03 10:22:03Z fyan $
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
-# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
 
-pkgname=qt5-graphicaleffects-debug
+pkgname=qt5-charts-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL3' 'FDL' 'custom')
-pkgdesc='Graphical effects for use with Qt Quick 2'
-depends=('qt5-declarative-debug')
-makedepends=()
+license=('GPL3')
+pkgdesc='Provides a set of easy to use chart components'
+depends=('qt5-base-debug')
+makedepends=('qt5-declarative-debug')
+optdepends=('qt5-declarative-debug: QML bindings')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-graphicaleffects==$pkgver")
+provides=("qt5-charts==$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-graphicaleffects')
+conflicts=('qt5-charts')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('f26b0de5cdbb76ae49faca226628fe65')
+md5sums=('9b4f6931c946b8dc1fad97bf8c30f485')
 
 prepare() {
   mkdir -p build
@@ -36,6 +37,7 @@ package() {
   cd build
   make INSTALL_ROOT="$pkgdir" install
 
-  install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
+  find "$pkgdir/usr/lib" -type f -name '*.prl' \
+    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 }

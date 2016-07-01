@@ -4,24 +4,23 @@
 
 pkgname=qt5-connectivity-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.6.1
+_qtver=5.7.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL' 'FDL' 'custom')
+license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Provides access to Bluetooth hardware'
-depends=('qt5-base')
-makedepends=('qt5-declarative' 'bluez-libs')
-optdepends=('qt5-declarative: QML bindings'
-            'bluez-libs: for sdpscanner')
-conflicts=('qt' 'qt5-connectivity')
-provides=("qt5-connectivity==$pkgver")
-options=("debug" "!strip")
+depends=('qt5-base-debug' 'bluez-libs')
+makedepends=('qt5-declarative-debug')
+optdepends=('qt5-declarative-debug: QML bindings')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
+provides=("qt5-connectivity==$pkgver")
+options=("debug" "!strip")
+conflicts=('qt5-connectivity')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('ad7b5e4e4c033c9d5adcd7a5c83b2007')
+md5sums=('56229b15e677ee98d56446519723fb3b')
 
 prepare() {
   mkdir -p build
@@ -43,5 +42,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
 }
