@@ -41,4 +41,4 @@ done
 
 #### qt5-base patches
 sed -i 's/${SSE2}/& \\\n    -force-debug-info/' qt5-base/PKGBUILD
-grep -q -- -force-debug-info $pkg/PKGBUILD || fail
+grep -q -- -force-debug-info qt5-base/PKGBUILD || fail
