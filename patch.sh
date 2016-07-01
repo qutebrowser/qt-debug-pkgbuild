@@ -2,6 +2,11 @@
 
 set -e -x
 
+fail() {
+    echo "!!! Error occcurred while patching, aborting!" >&2
+    exit 1
+}
+
 ### First handle all qt5-* packages
 for pkg in qt5-*; do
     # pkgname
@@ -19,20 +24,20 @@ for pkg in qt5-*; do
     if grep -q conflicts $pkg/PKGBUILD; then
         sed -i 's|conflicts=(\(.*\))|conflicts=(\1 '\'$pkg\'')|' $pkg/PKGBUILD
     else
-        grep -q depends= $pkg/PKGBUILD || exit 1
+        grep -q depends= $pkg/PKGBUILD || fail
         sed -i '/^depends=/aconflicts=('\'$pkg\'')' $pkg/PKGBUILD
     fi
 
     # provides
-    grep -q provides $pkg/PKGBUILD && exit 1
+    grep -q provides $pkg/PKGBUILD && fail
     sed -i '/^depends=/aprovides=("'$pkg'==$pkgver")' $pkg/PKGBUILD
-    grep -q provides $pkg/PKGBUILD || exit 1
+    grep -q provides $pkg/PKGBUILD || fail
 
     # options
     sed -i '/^provides=/aoptions=("debug" "!strip")' $pkg/PKGBUILD
-    grep -q options $pkg/PKGBUILD || exit 1
+    grep -q options $pkg/PKGBUILD || fail
 done
 
 #### qt5-base patches
 sed -i 's/${SSE2}/& \\\n    -force-debug-info/' qt5-base/PKGBUILD
-grep -q -- -force-debug-info $pkg/PKGBUILD || exit 1
+grep -q -- -force-debug-info $pkg/PKGBUILD || fail
