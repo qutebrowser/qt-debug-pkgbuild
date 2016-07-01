@@ -16,14 +16,21 @@ RUN pacman -Suy --noconfirm --needed \
     postgresql-libs \
     alsa-lib \
     gst-plugins-base-libs \
-    gtk2 \
+    gtk3 \
     libpulse \
     cups \
     freetds \
-    # qt5-connectivity makedepends
-    bluez-libs \
+    python2 \
+    pciutils \
+    libxtst \
+    libxcursor \
+    libxrandr \
+    libxss \
+    # qt5-multimedia makedepends
+    gst-plugins-bad \
     # qt5-declarative makedepends
     python2 \
+    cmake \
     # qt5-webengine makedepends
     python2 \
     git \
@@ -32,7 +39,19 @@ RUN pacman -Suy --noconfirm --needed \
     ruby \
     gperf \
     python2 \
+    # qt5-xmlpatterns makedepends
+    python2 \
+    cmake \
+    # qt5-doc makedepends
+    python2 \
+    pciutils \
+    libxtst \
+    libcursor \
+    libxrandr \
+    libxss \
     # pyqt5 makedepends
+    python-sip \
+    python2-sip \
     python-opengl \
     python2-opengl \
     python2-dbus \
