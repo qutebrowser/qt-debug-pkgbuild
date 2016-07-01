@@ -8,7 +8,7 @@ if (( $# == 0 )); then
             grep -vE '(^#|^$)' >> pkglist
     done
 
-    echo qt5-webkit >> pkglist
+    grep -q qt5-webkit pkglist || exit 1
     echo pyqt5 >> pkglist
 
     mapfile -t packages < pkglist
