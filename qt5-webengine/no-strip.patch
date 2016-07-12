@@ -1,0 +1,25 @@
+From 8a50fe6a47003e296b8ef924d314bf71b7b8bbb6 Mon Sep 17 00:00:00 2001
+From: Florian Bruhin <git@the-compiler.org>
+Date: Tue, 12 Jul 2016 21:15:17 +0200
+Subject: [PATCH] Don't strip debug symbols
+
+---
+ src/core/core_module.pro | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/core/core_module.pro b/src/core/core_module.pro
+index 20b7195..10df7f8 100644
+--- a/src/core/core_module.pro
++++ b/src/core/core_module.pro
+@@ -42,8 +42,6 @@ CONFIG -= bsymbolic_functions
+ 
+ contains(QT_CONFIG, egl): CONFIG += egl
+ 
+-linux: contains(QT_CONFIG, separate_debug_info): QMAKE_POST_LINK="cd $(DESTDIR) && $(STRIP) --strip-unneeded $(TARGET)"
+-
+ REPACK_DIR = $$OUT_PWD/$$getConfigDir()/gen/repack
+ # Duplicated from resources/resources.gyp
+ LOCALE_LIST = am ar bg bn ca cs da de el en-GB en-US es-419 es et fa fi fil fr gu he hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr sv sw ta te th tr uk vi zh-CN zh-TW
+-- 
+2.9.0
+

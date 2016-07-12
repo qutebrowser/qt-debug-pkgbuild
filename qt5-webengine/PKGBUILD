@@ -6,7 +6,7 @@ pkgname=qt5-webengine-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=2.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -19,10 +19,12 @@ _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-webengine==$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-webengine')
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-webengine-nss.patch
+source=(no-strip.patch
+        "http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-webengine-nss.patch
         qt5-webengine-fno-delete-null-pointer-checks.patch qt5-webengine-fno-delete-null-pointer-checks-2.patch)
 
-md5sums=('937f64886fbcb038d6fa4b44ae80cbeb'
+md5sums=('9644306bc01b7b58f0075e1b90b6ef82'
+         '937f64886fbcb038d6fa4b44ae80cbeb'
          '2a1610b34204102938a24154a52e5571'
          '5671a16fef65152928789bffd1f7cf24'
          '8145ce05fb86e762f012ca1b56f718fe')
@@ -33,6 +35,7 @@ prepare() {
   # Hack to force using python2
   mkdir -p bin
   ln -s /usr/bin/python2 bin/python
+  patch -p1 -i "$srcdir/no-strip.patch"
 
   # Fix opening some websites with recent NSS https://github.com/QupZilla/qupzilla/issues/1870 (KaOSx patch)
   cd ${_pkgfqn}
