@@ -83,7 +83,7 @@ patch_webengine() {
     sed -i 's/md5sums=(/md5sums=(TODO\n         /' qt5-webengine/PKGBUILD
     (cd qt5-webengine && updpkgsums)
     line='  patch -p1 -i "$srcdir/no-strip.patch"'
-    sed -i "/ln -s \\/usr\\/bin\\/python2/a\\$line" qt5-webengine/PKGBUILD
+    sed -i "/cd \${_pkgfqn}/a\\$line" qt5-webengine/PKGBUILD
     grep -q "$line" qt5-webengine/PKGBUILD || fail
 }
 
