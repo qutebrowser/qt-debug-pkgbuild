@@ -78,15 +78,6 @@ patch_pyqt() {
     grep -q "$line2" pyqt5/PKGBUILD || fail
 }
 
-patch_webengine() {
-    sed -i 's/source=(/source=(no-strip.patch\n        /' qt5-webengine/PKGBUILD
-    sed -i 's/md5sums=(/md5sums=(TODO\n         /' qt5-webengine/PKGBUILD
-    (cd qt5-webengine && updpkgsums)
-    line='  patch -p1 -i "$srcdir/no-strip.patch"'
-    sed -i "/cd \${_pkgfqn}/a\\$line" qt5-webengine/PKGBUILD
-    grep -q "$line" qt5-webengine/PKGBUILD || fail
-}
-
 if (( $# == 0 )); then
     packages=(qt5-* pyqt5)
 else
@@ -96,4 +87,3 @@ fi
 patch_qt "${packages[@]}"
 [[ "${packages[@]}" == *qt5-base* ]] && patch_qt_base
 [[ "${packages[@]}" == *pyqt5* ]] && patch_pyqt
-[[ "${packages[@]}" == *qt5-webengine* ]] && patch_webengine
