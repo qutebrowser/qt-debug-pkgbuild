@@ -6,7 +6,7 @@ pkgname=qt5-base-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=1.1
+pkgrel=2
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -36,12 +36,14 @@ source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submo
         # https://codereview.qt-project.org/#/c/161056/
         # https://codereview.qt-project.org/#/c/140750/
         # https://codereview.qt-project.org/#/c/157488/
-        qtbug-52988-all.patch)
+        qtbug-52988-all.patch
+        qtbug-49452.patch::"https://github.com/qt/qtbase/commit/6f423555.patch")
 md5sums=('184f9460b40752d71b15b827260580c2'
          '462f079cd46f869def6858903a718bf5'
          'da4fd787ea877516397a027412e975e1'
          '981255fb1aea0d3c0b5c5f306fe374da'
-         'e641e276caa5379018e8aa5667fab6ed')
+         'e641e276caa5379018e8aa5667fab6ed'
+         '646aea77ca90031c453a65ef61db55f9')
 
 prepare() {
   cd ${_pkgfqn}
@@ -69,6 +71,9 @@ prepare() {
 
   # Fix DBus segfault
   patch -p1 -i ../qtbug-52988-all.patch
+
+  # Fix freetype engine performance 
+  patch -p1 -i ../qtbug-49452.patch
 }
 
 build() {
