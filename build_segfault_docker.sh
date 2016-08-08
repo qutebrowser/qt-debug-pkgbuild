@@ -6,5 +6,5 @@ mkdir out 2>/dev/null
 chmod 777 out
 
 rm out/*
-docker build -t --nocache archlinux-qtbuild .
+docker build --no-cache -t archlinux-qtbuild . || exit 1
 time docker run -i --tmpfs=/tmp:size=100G,exec -v $PWD/out:/out -e "PACKAGES=$*" archlinux-qtbuild
