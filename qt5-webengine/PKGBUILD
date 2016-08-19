@@ -6,7 +6,7 @@ pkgname=qt5-webengine-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=3.1
+pkgrel=3.2
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -21,13 +21,16 @@ options=("debug" "!strip")
 conflicts=('qt5-webengine')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-webengine-nss.patch
         qt5-webengine-fno-delete-null-pointer-checks.patch qt5-webengine-fno-delete-null-pointer-checks-2.patch
-        'qt5-webengine-madv.patch::http://code.qt.io/cgit/qt/qtwebengine-chromium.git/patch/?id=b12ffcd411d4776f7120ccecb3be34344d930d2b')
+        'qt5-webengine-madv.patch::http://code.qt.io/cgit/qt/qtwebengine-chromium.git/patch/?id=b12ffcd411d4776f7120ccecb3be34344d930d2b'
+        'qt5-webengine-destructor.patch::http://code.qt.io/cgit/qt/qtwebengine.git/patch/?id=7bc32104660dd9b5dfa9920a288797a7c2790559'
+        )
 
 md5sums=('937f64886fbcb038d6fa4b44ae80cbeb'
          '2a1610b34204102938a24154a52e5571'
          '5671a16fef65152928789bffd1f7cf24'
          '8145ce05fb86e762f012ca1b56f718fe'
-         'fa76257e20031a4fc2202737fc9ebf7f')
+         'fa76257e20031a4fc2202737fc9ebf7f'
+         '950da09e721691d6923b707c846b9787')
 
 prepare() {
   mkdir -p build
@@ -42,6 +45,9 @@ prepare() {
 
   # Workaround for v8 segfaults with GCC 6
   patch -p1 -i "$srcdir"/qt5-webengine-fno-delete-null-pointer-checks.patch
+  # Fix for QTBUG-54769
+  patch -p1 -i "$srcdir"/qt5-webengine-destructor.patch
+
   cd src/3rdparty
   patch -p1 -i "$srcdir"/qt5-webengine-fno-delete-null-pointer-checks-2.patch
 
