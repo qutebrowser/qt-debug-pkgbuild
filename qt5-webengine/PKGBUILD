@@ -20,12 +20,14 @@ provides=("qt5-webengine==$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-webengine')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-webengine-nss.patch
-        qt5-webengine-fno-delete-null-pointer-checks.patch qt5-webengine-fno-delete-null-pointer-checks-2.patch)
+        qt5-webengine-fno-delete-null-pointer-checks.patch qt5-webengine-fno-delete-null-pointer-checks-2.patch
+        'qt5-webengine-madv.patch::http://code.qt.io/cgit/qt/qtwebengine-chromium.git/patch/?id=b12ffcd411d4776f7120ccecb3be34344d930d2b')
 
 md5sums=('937f64886fbcb038d6fa4b44ae80cbeb'
          '2a1610b34204102938a24154a52e5571'
          '5671a16fef65152928789bffd1f7cf24'
-         '8145ce05fb86e762f012ca1b56f718fe')
+         '8145ce05fb86e762f012ca1b56f718fe'
+         'fa76257e20031a4fc2202737fc9ebf7f')
 
 prepare() {
   mkdir -p build
@@ -42,6 +44,9 @@ prepare() {
   patch -p1 -i "$srcdir"/qt5-webengine-fno-delete-null-pointer-checks.patch
   cd src/3rdparty
   patch -p1 -i "$srcdir"/qt5-webengine-fno-delete-null-pointer-checks-2.patch
+
+  # Fix for QTBUG-55372
+  patch -p1 -i "$srcdir"/qt5-webengine-madv.patch
 }
 
 build() {
