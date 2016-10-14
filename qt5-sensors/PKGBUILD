@@ -6,7 +6,7 @@ pkgname=qt5-sensors-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=1
+pkgrel=1.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -16,7 +16,7 @@ makedepends=('qt5-declarative')
 optdepends=('qt5-declarative: QML bindings')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-sensors==$pkgver")
+provides=("qt5-sensors=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-sensors')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")

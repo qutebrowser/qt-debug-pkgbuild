@@ -7,7 +7,7 @@ pkgname=qt5-doc-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=1
+pkgrel=1.1
 arch=('any')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -16,7 +16,7 @@ depends=('qt5-base')
 makedepends=('qt5-tools' 'python2' 'pciutils' 'libxtst' 'libxcursor' 'libxrandr' 'libxss')
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${_qtver}"
-provides=("qt5-doc==$pkgver")
+provides=("qt5-doc=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/single/${_pkgfqn}.tar.xz")
 md5sums=('63ec6b584757eef8cd713e4958297251')

@@ -6,7 +6,7 @@ pkgname=qt5-declarative-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=3
+pkgrel=3.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -16,7 +16,7 @@ makedepends=('python2' 'cmake')
 groups=('qt' 'qt5')
 conflicts=('qtchooser' 'qt5-declarative')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-declarative==$pkgver")
+provides=("qt5-declarative=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-declarative-gcc6.patch)
 md5sums=('0d9e461aa54dba4793253fa2eb501f9b'

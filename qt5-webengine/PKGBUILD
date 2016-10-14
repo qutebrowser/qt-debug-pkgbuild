@@ -6,7 +6,7 @@ pkgname=qt5-webengine-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=5.1
+pkgrel=5.2
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('LGPL3' 'LGPL2.1' 'BSD')
@@ -16,7 +16,7 @@ depends=('qt5-webchannel' 'qt5-location' 'libxcomposite' 'libxrandr' 'libxtst' '
 makedepends=('python2' 'git' 'gperf')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-webengine==$pkgver")
+provides=("qt5-webengine=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-webengine')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-webengine-nss.patch

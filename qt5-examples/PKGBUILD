@@ -7,7 +7,7 @@ pkgname=qt5-examples-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=2.1
 arch=('any')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -15,7 +15,7 @@ pkgdesc='Examples and demos from qt5 documentation'
 depends=('qt5-doc')
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-opensource-src-${_qtver}"
-provides=("qt5-examples==$pkgver")
+provides=("qt5-examples=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-examples')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/single/${_pkgfqn}.tar.xz")

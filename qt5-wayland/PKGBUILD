@@ -6,7 +6,7 @@ pkgname=qt5-wayland-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=3
+pkgrel=3.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -14,7 +14,7 @@ pkgdesc='Provides APIs for Wayland'
 depends=('qt5-declarative' 'libxcomposite' 'wayland') # namcap note: wayland is needed for nvidia-libgl users
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-wayland==$pkgver")
+provides=("qt5-wayland=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-wayland')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"

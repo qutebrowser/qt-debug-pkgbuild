@@ -6,7 +6,7 @@ pkgname=qt5-webkit-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=1
+pkgrel=1.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -17,7 +17,7 @@ optdepends=('gst-plugins-good: Webm codec support')
 conflicts=('qt' 'qt5-webkit')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${pkgver}"
-provides=("qt5-webkit==$pkgver")
+provides=("qt5-webkit=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/community_releases/${pkgver%.*}/${pkgver}/qtwebkit-opensource-src-${pkgver}.tar.xz")
 md5sums=('9379b8829639645c184fa63532035098')

@@ -31,7 +31,7 @@ patch_qt() {
 
         # add provides-entry for non-debug package
         grep -q provides $pkg/PKGBUILD && fail
-        sed -i '/^_pkgfqn=/aprovides=("'$pkg'==$pkgver")' $pkg/PKGBUILD
+        sed -i '/^_pkgfqn=/aprovides=("'$pkg'=$pkgver")' $pkg/PKGBUILD
         grep -q provides $pkg/PKGBUILD || fail
 
         # add debug options
