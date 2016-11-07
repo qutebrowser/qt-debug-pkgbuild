@@ -22,8 +22,8 @@ patch_qt() {
         sed -i 's|/usr/share/licenses/qt5-base|&-debug|g' $pkg/PKGBUILD
 
         # add conflicts-entry for non-debug package
-        if grep -q conflicts $pkg/PKGBUILD; then
-            sed -i 's|conflicts=(\(.*\))|conflicts=(\1 '\'$pkg\'')|' $pkg/PKGBUILD
+        if grep -q '^conflicts=' $pkg/PKGBUILD; then
+            sed -i 's|^conflicts=(\(.*\))|conflicts=(\1 '\'$pkg\'')|' $pkg/PKGBUILD
         else
             grep -q _pkgfqn= $pkg/PKGBUILD || fail
             sed -i '/^_pkgfqn=/aconflicts=('\'$pkg\'')' $pkg/PKGBUILD
