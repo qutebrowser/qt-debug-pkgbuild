@@ -6,14 +6,14 @@ pkgname=qt5-webengine-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=6.2
+pkgrel=7.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('LGPL3' 'LGPL2.1' 'BSD')
 pkgdesc='Provides support for web applications using the Chromium browser project'
-depends=('qt5-webchannel' 'qt5-location' 'libxcomposite' 'libxrandr' 'libxtst' 'libxcursor' 'libpulse' 'pciutils' 'libxss' 'libvpx' 'opus'
-         'libevent' 'libsrtp' 'jsoncpp' 'libwebp' 'snappy' 'nss' 'protobuf') # minizip
-makedepends=('python2' 'git' 'gperf')
+depends=('qt5-webchannel' 'qt5-location' 'libxcomposite' 'libxrandr' 'pciutils' 'libxss' 'libvpx'
+         'libevent' 'libsrtp' 'snappy' 'nss' 'protobuf' 'libxslt' 'minizip' 'ffmpeg')
+makedepends=('python2' 'git' 'gperf' 'jsoncpp')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-webengine=$pkgver")
@@ -21,22 +21,23 @@ options=("debug" "!strip")
 conflicts=('qt5-webengine')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz" qt5-webengine-nss.patch
         qt5-webengine-fno-delete-null-pointer-checks.patch qt5-webengine-fno-delete-null-pointer-checks-2.patch
-        'qt5-webengine-madv.patch::http://code.qt.io/cgit/qt/qtwebengine-chromium.git/patch/?id=b12ffcd411d4776f7120ccecb3be34344d930d2b'
         'qt5-webengine-destructor.patch::http://code.qt.io/cgit/qt/qtwebengine.git/patch/?id=7bc32104660dd9b5dfa9920a288797a7c2790559'
         'qtbug54419.patch::https://codereview.qt-project.org/gitweb?p=qt/qtwebengine.git;a=patch;h=f5ee1feeed2abbcbe6db2bf9757d692b38fcbcb1'
         'qtbug55254.patch::https://codereview.qt-project.org/gitweb?p=qt/qtwebengine.git;a=patch;h=2be896801eea5beefe8c2888b092156dd0a2db97'
         'qtbug55828.patch::http://code.qt.io/cgit/qt/qtwebengine.git/patch/?id=2057634462750fc7a6157600509044564c2f47fd'
-        )
+        qt5-webengine-glibc2.24.patch::"https://github.com/qt/qtwebengine-chromium/commit/b12ffcd4.patch"
+        qtwebengine-5.7.0-icu58.patch)
 
 md5sums=('937f64886fbcb038d6fa4b44ae80cbeb'
          '2a1610b34204102938a24154a52e5571'
          '5671a16fef65152928789bffd1f7cf24'
          '8145ce05fb86e762f012ca1b56f718fe'
-         'fa76257e20031a4fc2202737fc9ebf7f'
          '950da09e721691d6923b707c846b9787'
          '88c2f8cc503e9625b9d8e84c026c93cf'
          '51adbaaecb65609f5b9083a71848231b'
-         '21d8e2c732bad0cc5a1a816acc84ee89')
+         '21d8e2c732bad0cc5a1a816acc84ee89'
+         '753154df82838d19a7629d56cec7b649'
+         'c2ffb0073e6f67a0a77a8fe39f9e9859')
 
 prepare() {
   mkdir -p build
@@ -48,6 +49,9 @@ prepare() {
   # Fix opening some websites with recent NSS https://github.com/QupZilla/qupzilla/issues/1870 (KaOSx patch)
   cd ${_pkgfqn}
  # patch -p1 -i ../qt5-webengine-nss.patch
+
+  # Fix build with ICU 58 (gentoo)
+  patch -p1 -i "$srcdir"/qtwebengine-5.7.0-icu58.patch
 
   # Workaround for v8 segfaults with GCC 6
   patch -p1 -i "$srcdir"/qt5-webengine-fno-delete-null-pointer-checks.patch
@@ -61,8 +65,8 @@ prepare() {
   cd src/3rdparty
   patch -p1 -i "$srcdir"/qt5-webengine-fno-delete-null-pointer-checks-2.patch
 
-  # Fix for QTBUG-55372
-  patch -p1 -i "$srcdir"/qt5-webengine-madv.patch
+  # Fix segfault with glibc 2.24
+  patch -p1 -i "$srcdir"/qt5-webengine-glibc2.24.patch
 }
 
 build() {
@@ -70,7 +74,7 @@ build() {
 
   export PATH="$srcdir/bin:$PATH"
   export CXXFLAGS+=" -fno-delete-null-pointer-checks"
-  qmake WEBENGINE_CONFIG+=use_proprietary_codecs ../${_pkgfqn}
+  qmake WEBENGINE_CONFIG+="use_proprietary_codecs use_system_ffmpeg use_system_icu" ../${_pkgfqn}
   make
 }
 
