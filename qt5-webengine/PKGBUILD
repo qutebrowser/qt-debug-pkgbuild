@@ -6,7 +6,7 @@ pkgname=qt5-webengine-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.7.0
 pkgver=${_qtver/-/}
-pkgrel=7.1
+pkgrel=7.2
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('LGPL3' 'LGPL2.1' 'BSD')
@@ -26,7 +26,9 @@ source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submo
         'qtbug55254.patch::https://codereview.qt-project.org/gitweb?p=qt/qtwebengine.git;a=patch;h=2be896801eea5beefe8c2888b092156dd0a2db97'
         'qtbug55828.patch::http://code.qt.io/cgit/qt/qtwebengine.git/patch/?id=2057634462750fc7a6157600509044564c2f47fd'
         qt5-webengine-glibc2.24.patch::"https://github.com/qt/qtwebengine-chromium/commit/b12ffcd4.patch"
-        qtwebengine-5.7.0-icu58.patch)
+        qtwebengine-5.7.0-icu58.patch
+        qt5-webengine-vaapi.patch::"https://codereview.qt-project.org/gitweb?p=qt/qtwebengine-chromium.git;a=patch;h=545abb6f1d40f79e6ddcf3d1584e81aa645bf2d6"
+        )
 
 md5sums=('937f64886fbcb038d6fa4b44ae80cbeb'
          '2a1610b34204102938a24154a52e5571'
@@ -37,7 +39,8 @@ md5sums=('937f64886fbcb038d6fa4b44ae80cbeb'
          '51adbaaecb65609f5b9083a71848231b'
          '21d8e2c732bad0cc5a1a816acc84ee89'
          '753154df82838d19a7629d56cec7b649'
-         'c2ffb0073e6f67a0a77a8fe39f9e9859')
+         'c2ffb0073e6f67a0a77a8fe39f9e9859'
+         '58e545b0dc93a34be44b446f50c37b8f')
 
 prepare() {
   mkdir -p build
@@ -67,6 +70,9 @@ prepare() {
 
   # Fix segfault with glibc 2.24
   patch -p1 -i "$srcdir"/qt5-webengine-glibc2.24.patch
+
+  # Enable VAAPI
+  patch -p1 -i "$srcdir"/qt5-webengine-vaapi.patch
 }
 
 build() {
