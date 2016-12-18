@@ -4,16 +4,16 @@
 
 pkgname=qt5-base-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.0
+_qtver=5.7.1
 pkgver=${_qtver/-/}
-pkgrel=7.2
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='A cross-platform application and UI framework'
 depends=('libjpeg-turbo' 'xcb-util-keysyms' 'libgl' 'fontconfig'
          'xcb-util-wm' 'libxrender' 'libxi' 'sqlite' 'xcb-util-image' 'icu'
-         'tslib' 'libinput' 'libsm' 'libxkbcommon-x11' 'libproxy')
+         'tslib' 'libinput' 'libsm' 'libxkbcommon-x11' 'libproxy' 'libcups')
 makedepends=('mtdev' 'libfbclient' 'libmariadbclient' 'sqlite' 'unixodbc' 'postgresql-libs' 'alsa-lib' 'gst-plugins-base-libs'
              'gtk3' 'libpulse' 'cups' 'freetds')
 optdepends=('qt5-svg: to use SVG icon themes'
@@ -30,22 +30,11 @@ _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-base=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
-        qtbug-53071.patch::"https://github.com/qtproject/qtbase/commit/e9041c7fc.patch"
-        qtbug-53071b.patch::"https://github.com/qtproject/qtbase/commit/cd25866f.patch"
-        qtbug-53237.patch::"https://github.com/qtproject/qtbase/commit/8e889378.patch"
-        # https://codereview.qt-project.org/#/c/161056/
-        # https://codereview.qt-project.org/#/c/140750/
-        # https://codereview.qt-project.org/#/c/157488/
-        qtbug-52988-all.patch
-        qtbug-49452.patch::"https://github.com/qt/qtbase/commit/6f423555.patch"
-        qtbase-memory-leak.patch::"https://github.com/qt/qtbase/commit/42283868.patch")
-md5sums=('184f9460b40752d71b15b827260580c2'
-         '462f079cd46f869def6858903a718bf5'
-         'da4fd787ea877516397a027412e975e1'
-         '981255fb1aea0d3c0b5c5f306fe374da'
-         'e641e276caa5379018e8aa5667fab6ed'
-         '646aea77ca90031c453a65ef61db55f9'
-         '9842c327b091b360da7a4d90f5fdf4da')
+        qtbug-49061.patch::"https://github.com/qt/qtbase/commit/494376f9.patch"
+        qtbug-55583.patch::"https://github.com/qt/qtbase/commit/84ea00d4.patch")
+md5sums=('f0809befe04160fbb73bbf38a06a2073'
+         'c86af27562bbbe05c3defd63d00130fd'
+         '7b11584d9ea1ccb6c419e9b9816dee63')
 
 prepare() {
   cd ${_pkgfqn}
@@ -64,21 +53,11 @@ prepare() {
   # Fix libsystemd-journal detection
   sed -e 's|libsystemd-journal|libsystemd|' -i config.tests/unix/journald/journald.pro -i src/corelib/global/global.pri
 
-  # Fix parsing of tzfile(5) POSIX rule zone names with bracket quotes
-  patch -p1 -i ../qtbug-53071.patch
-  patch -p1 -i ../qtbug-53071b.patch
+  # Don't unload plugins in QPluginLoader https://bugreports.qt.io/browse/QTBUG-49061
+  patch -p1 -i ../qtbug-49061.patch
 
-  # Fix UNSIGNED values in QMYSQL
-  patch -p1 -i ../qtbug-53237.patch
-
-  # Fix DBus segfault
-  patch -p1 -i ../qtbug-52988-all.patch
-
-  # Fix freetype engine performance 
-  patch -p1 -i ../qtbug-49452.patch
-
-  # Fix memory leak
-  patch -p1 -i ../qtbase-memory-leak.patch
+  # Fix file chooser segfault on gnome/wayland https://bugreports.qt.io/browse/QTBUG-55583
+  patch -p1 -i ../qtbug-55583.patch
 }
 
 build() {
