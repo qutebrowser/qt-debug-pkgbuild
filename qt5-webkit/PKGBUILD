@@ -4,9 +4,9 @@
 
 pkgname=qt5-webkit-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.0
+_qtver=5.7.1
 pkgver=${_qtver/-/}
-pkgrel=3
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -20,7 +20,7 @@ _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${pkgver}"
 provides=("qt5-webkit=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/community_releases/${pkgver%.*}/${pkgver}/qtwebkit-opensource-src-${pkgver}.tar.xz")
-md5sums=('9379b8829639645c184fa63532035098')
+md5sums=('4fa8f47383ce36d59dcc36d701ce93cd')
 
 prepare() {
   mkdir -p build

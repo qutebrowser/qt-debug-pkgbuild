@@ -4,9 +4,9 @@
 
 pkgname=qt5-scxml-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.0
+_qtver=5.7.1
 pkgver=${_qtver/-/}
-pkgrel=2.1
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -19,7 +19,7 @@ provides=("qt5-scxml=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-scxml')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('94ef6ad85733a1f9a8d92372ad652da3')
+md5sums=('455014b5efdfbdb00f0f2048b53eea13')
 
 prepare() {
   mkdir -p build
