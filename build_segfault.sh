@@ -24,7 +24,7 @@ else
 fi
 
 for pkg in $packages; do
-    rm -f "$outdir"/$pkg-*
+    rm -f "$outdir"/*$pkg-*
     rsync -avPh segfault:"$qtbuilddir/out/*${pkg}-*" "$outdir"
 
     if (( ! temp )); then
