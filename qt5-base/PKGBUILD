@@ -6,7 +6,7 @@ pkgname=qt5-base-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.8.0
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=2.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -42,6 +42,9 @@ prepare() {
     mkspecs/common/gcc-base.conf
   sed -i -e "s|^\(QMAKE_LFLAGS_RELEASE.*\)|\1 ${LDFLAGS}|" \
     mkspecs/common/g++-unix.conf
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70129
+  sed -i -e "s|QMAKE_CFLAGS_ISYSTEM.*|QMAKE_CFLAGS_ISYSTEM =|" \
+    mkspecs/common/gcc-base.conf
 
   # Use python2 for Python 2.x
   find . -name '*.py' -exec sed -i \
