@@ -49,6 +49,11 @@ RUN pacman -Suy --noconfirm --needed \
     libxcursor \
     libxrandr \
     libxss \
+    # qt5-location makedepends
+    gypsy \
+    gconf \
+    # qt5-speech makedepends
+    flite \
     # pyqt5 makedepends
     python-sip \
     python2-sip \
