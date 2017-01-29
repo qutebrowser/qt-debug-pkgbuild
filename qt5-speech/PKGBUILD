@@ -1,22 +1,21 @@
-# $Id$
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
 
-pkgname=qt5-gamepad
+pkgname=qt5-speech
 _qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL3' 'FDL' 'custom')
-pkgdesc='Adds support for getting events from gamepad devices'
-depends=('qt5-base' 'sdl2')
-makedepends=('qt5-declarative')
-optdepends=('qt5-declarative: QML bindings')
-groups=('qt' 'qt5')
+license=(GPL3 LGPL3 FDL custom)
+pkgdesc='Qt module to make text to speech and speech recognition easy'
+depends=(qt5-multimedia speech-dispatcher)
+makedepends=(flite)
+optdepends=('flite: flite TTS backend')
+groups=(qt qt5)
 _pkgfqn="${pkgname/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('eac2f30dfff1027c3adedaff841b4772')
+md5sums=('021bcba221e4d175bf4368ee6a19296d')
 
 prepare() {
   mkdir -p build
