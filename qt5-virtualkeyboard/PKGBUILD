@@ -4,7 +4,7 @@
 
 pkgname=qt5-virtualkeyboard-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.1
+_qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ provides=("qt5-virtualkeyboard=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-virtualkeyboard')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('00d6170df3e5fc7204cfd827a8eb3eda')
+md5sums=('efdd5a64234dc0ef7e47505502ca5d28')
 
 prepare() {
   mkdir -p build

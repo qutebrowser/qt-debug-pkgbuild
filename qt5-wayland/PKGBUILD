@@ -4,7 +4,7 @@
 
 pkgname=qt5-wayland-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.1
+_qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ provides=("qt5-wayland=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-wayland')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('2fab8874622f8b89be4bc91780a43fad')
+md5sums=('0a40bd721bd5e1630601beab660c6ea9')
 
 prepare() {
   mkdir -p build

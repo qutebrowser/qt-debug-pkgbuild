@@ -4,7 +4,7 @@
 
 pkgname=qt5-serialport-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.1
+_qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ provides=("qt5-serialport=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-serialport')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('0169f558df728c0743fd344b3b2e8aa7')
+md5sums=('1a39fbb6436761a2ea3edce6628a41bd')
 
 prepare() {
   mkdir -p build

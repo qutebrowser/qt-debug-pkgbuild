@@ -4,7 +4,7 @@
 
 pkgname=qt5-websockets-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.1
+_qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -20,7 +20,7 @@ provides=("qt5-websockets=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-websockets')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('c85d2352acf446f6fa3aa355c1221ca7')
+md5sums=('99bbe29bb05a19b6fca7077eb07d7d1b')
 
 prepare() {
   mkdir -p build

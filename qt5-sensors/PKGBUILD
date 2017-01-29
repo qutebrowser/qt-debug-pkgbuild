@@ -4,7 +4,7 @@
 
 pkgname=qt5-sensors-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.1
+_qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -20,7 +20,7 @@ provides=("qt5-sensors=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-sensors')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('6ee0851638bd0bc1ba5be5acc166919f')
+md5sums=('c2062e07ab5d52d0fb8ef19c5ef6f86d')
 
 prepare() {
   mkdir -p build

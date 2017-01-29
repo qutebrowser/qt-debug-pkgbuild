@@ -1,25 +1,23 @@
-# $Id: PKGBUILD 240297 2015-06-03 10:22:03Z fyan $
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
-# Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-graphicaleffects-debug
+pkgname=qt5-networkauth-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL3' 'FDL' 'custom')
-pkgdesc='Graphical effects for use with Qt Quick 2'
-depends=('qt5-declarative')
-makedepends=()
-groups=('qt' 'qt5')
+license=(GPL3 LGPL3 FDL custom)
+pkgdesc='Network authentication module'
+depends=(qt5-base)
+groups=(qt qt5)
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-graphicaleffects=$pkgver")
+provides=("qt5-networkauth=$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-graphicaleffects')
+conflicts=('qt5-networkauth')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('0f74145f0fbb3db8d2f9711b83531fcf')
+md5sums=('2e85ab8ae1f60520b2b007113df1cef9')
 
 prepare() {
   mkdir -p build
@@ -35,6 +33,10 @@ build() {
 package() {
   cd build
   make INSTALL_ROOT="$pkgdir" install
+
+  # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
+  find "$pkgdir/usr/lib" -type f -name '*.prl' \
+    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
   ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}

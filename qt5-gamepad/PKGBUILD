@@ -4,7 +4,7 @@
 
 pkgname=qt5-gamepad-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.7.1
+_qtver=5.8.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -20,7 +20,7 @@ provides=("qt5-gamepad=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-gamepad')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('47d0db3e92795179b590cfe04bd82e51')
+md5sums=('eac2f30dfff1027c3adedaff841b4772')
 
 prepare() {
   mkdir -p build
