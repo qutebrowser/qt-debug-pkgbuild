@@ -54,6 +54,7 @@ RUN pacman -Suy --noconfirm --needed \
     gconf \
     # qt5-speech makedepends
     flite \
+    speech-dispatcher \
     # pyqt5 makedepends
     python-sip \
     python2-sip \
