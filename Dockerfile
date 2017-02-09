@@ -1,9 +1,6 @@
-FROM base/archlinux
+FROM thecompiler/archlinux
 MAINTAINER Florian Bruhin <me@the-compiler.org>
 
-RUN echo 'Server = http://mirror.de.leaseweb.net/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
-RUN pacman-key --init && pacman-key --populate archlinux && pacman -Sy --noconfirm archlinux-keyring
-RUN pacman -S --noconfirm pacman | cat && pacman-db-upgrade
 RUN pacman -Suy --noconfirm --needed \
     git \
     base-devel \
@@ -65,24 +62,16 @@ RUN pacman -Suy --noconfirm --needed \
     # to have a running Qt already
     qt5 \
     python-pyqt5 \
-    python2-pyqt5 \
-    # To avoid "GPGME error: Inappropriate ioctl for device"
-    | cat
+    python2-pyqt5
 RUN sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf && \
     sed -i 's|#BUILDDIR=.*|BUILDDIR="/tmp/makepkg"|' /etc/makepkg.conf && \
     sed -i 's|#PKGDEST=.*|PKGDEST="/out"|' /etc/makepkg.conf && \
     sed -i 's|COMPRESSXZ=.*|COMPRESSXZ=(xz -c -z --threads=0 -)|' /etc/makepkg.conf
 
-
-RUN mkdir /out && \
-    echo 'ALL ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers && \
-    useradd user -u 1001 && \
-    mkdir /home/user
-
 COPY . /home/user
 
-RUN chown -R user:users /home/user && \
-    chown user:users /out
+RUN mkdir /out && \
+    chown -R user:users /home/user /out
 
 USER user
 WORKDIR /home/user
