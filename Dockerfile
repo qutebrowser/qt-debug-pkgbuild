@@ -32,10 +32,11 @@ RUN pacman -Suy --noconfirm --needed \
     python2 \
     git \
     gperf \
-    # qt5-webkit makepends
+    # qt5-webkit{,-ng} makepends
     ruby \
     gperf \
     python2 \
+    hyphen \
     # qt5-xmlpatterns makedepends
     python2 \
     cmake \
