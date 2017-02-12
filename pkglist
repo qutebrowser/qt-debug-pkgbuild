@@ -33,4 +33,5 @@ qt5-webview
 qt5-websockets
 qt5-x11extras
 qt5-webkit
+qt5-webkit-ng
 pyqt5
