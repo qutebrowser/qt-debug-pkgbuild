@@ -6,7 +6,7 @@ pkgname=qt5-wayland-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.8.0
 pkgver=${_qtver/-/}
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -17,11 +17,17 @@ _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-wayland=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-wayland')
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('0a40bd721bd5e1630601beab660c6ea9')
+source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
+        revert-5b807802.patch)
+md5sums=('0a40bd721bd5e1630601beab660c6ea9'
+         '95e986e9c0ab5ebe03c85efb69ee751a')
 
 prepare() {
   mkdir -p build
+
+# Revert commit that breaks Plasma Wayland
+  cd ${_pkgfqn}
+  patch -Rp1 -i ../revert-5b807802.patch
 }
 
 build() {
