@@ -23,6 +23,7 @@ RUN pacman -Suy --noconfirm --needed \
     libxcursor \
     libxrandr \
     libxss \
+    openssl-1.0 \
     # qt5-multimedia makedepends
     gst-plugins-bad \
     # qt5-declarative makedepends
