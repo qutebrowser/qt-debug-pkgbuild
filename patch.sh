@@ -10,6 +10,7 @@ fail() {
 patch_qt() {
     for pkg in "$@"; do
         [[ $pkg != *qt5-* ]] && continue
+        [[ $pkg == qt5-base ]] && continue
 
         if grep -q _orig_pkgname $pkg/PKGBUILD; then
             echo "$pkg was already rewritten?"
@@ -19,7 +20,6 @@ patch_qt() {
         # Adjust package names
         sed -i 's|^pkgname=.*|&-debug\n_orig_pkgname=${pkgname/-debug/}|' $pkg/PKGBUILD
         sed -i '/^_pkgfqn=/s/pkgname/_orig_pkgname/g' $pkg/PKGBUILD
-        sed -i 's|/usr/share/licenses/qt5-base|&-debug|g' $pkg/PKGBUILD
 
         # add conflicts-entry for non-debug package
         if grep -q '^conflicts=' $pkg/PKGBUILD; then
@@ -43,8 +43,38 @@ patch_qt() {
 }
 
 patch_qt_base() {
+    if grep -q _orig_pkgbase $pkg/PKGBUILD; then
+        echo "qt5-base was already rewritten?"
+        exit 1
+    fi
+
+    # add debug switch
     sed -i 's/${SSE2}/& \\\n    -force-debug-info/' qt5-base/PKGBUILD
     grep -q -- -force-debug-info qt5-base/PKGBUILD || fail
+
+    # adjust package names
+    sed -i '/^pkgname=.*/s/\([ )]\)/-debug&/g' qt5-base/PKGBUILD
+    sed -i 's/\${pkgbase/${_orig_pkgbase/g' qt5-base/PKGBUILD
+    sed -i 's|^pkgbase=.*|&-debug\n_orig_pkgbase=${pkgbase/-debug/}|' qt5-base/PKGBUILD
+
+    # add provides/conflicts/options sections to package functions
+    line1='  provides=("qt5-base=$pkgver")'
+    line2='  conflicts+=("qt5-base")'
+    line3='  options=("debug" "!strip")'
+    sed -i "/^package_qt5-base/a\\$line1\\n$line2\\n$line3" qt5-base/PKGBUILD
+    sed -i 's/package_qt5-base/&-debug/' qt5-base/PKGBUILD
+    grep -q package_qt5-base-debug qt5-base/PKGBUILD || fail
+    grep -q "$line1" qt5-base/PKGBUILD || fail
+    grep -q "$line2" qt5-base/PKGBUILD || fail
+    grep -q "$line3" qt5-base/PKGBUILD || fail
+
+    line1='  provides=("qt5-xcb-private-headers=$pkgver")'
+    line2='  conflicts+=("qt5-xcb-private-headers")'
+    sed -i "/^package_qt5-xcb-private-headers/a\\$line1\\n$line2\\n$line3" qt5-base/PKGBUILD
+    sed -i 's/package_qt5-xcb-private-headers/&-debug/' qt5-base/PKGBUILD
+    grep -q package_qt5-xcb-private-headers-debug qt5-base/PKGBUILD || fail
+    grep -q "$line1" qt5-base/PKGBUILD || fail
+    grep -q "$line2" qt5-base/PKGBUILD || fail
 }
 
 patch_pyqt() {

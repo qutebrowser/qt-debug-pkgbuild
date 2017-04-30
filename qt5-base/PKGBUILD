@@ -2,18 +2,19 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-base-debug
-_orig_pkgname=${pkgname/-debug/}
+pkgbase=qt5-base-debug
+_orig_pkgbase=${pkgbase/-debug/}
+pkgname=(qt5-base-debug qt5-xcb-private-headers-debug)
 _qtver=5.8.0
 pkgver=${_qtver/-/}
-pkgrel=7.1
+pkgrel=11.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='A cross-platform application and UI framework'
 depends=('libjpeg-turbo' 'xcb-util-keysyms' 'xcb-util-renderutil' 'libgl' 'fontconfig'
          'xcb-util-wm' 'libxrender' 'libxi' 'sqlite' 'xcb-util-image' 'icu'
-         'tslib' 'libinput' 'libsm' 'libxkbcommon-x11' 'libproxy' 'libcups') # 'openssl-1.0'
+         'tslib' 'libinput' 'libsm' 'libxkbcommon-x11' 'libproxy' 'libcups' 'openssl-1.0')
 makedepends=('libfbclient' 'libmariadbclient' 'sqlite' 'unixodbc' 'postgresql-libs' 'alsa-lib' 'gst-plugins-base-libs'
              'gtk3' 'libpulse' 'cups' 'freetds')
 optdepends=('qt5-svg: to use SVG icon themes'
@@ -23,11 +24,9 @@ optdepends=('qt5-svg: to use SVG icon themes'
             'libfbclient: Firebird/iBase driver'
             'freetds: MS SQL driver'
             'gtk3: GTK platform plugin')
-conflicts=('qtchooser' 'qt5-base')
+conflicts=('qtchooser')
 groups=('qt' 'qt5')
-_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-base=$pkgver")
-options=("debug" "!strip")
+_pkgfqn="${_orig_pkgbase/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
         qt5-base-journald.patch::"https://github.com/qt/qtbase/commit/0c8f3229.patch"
         plasma-crash-1.patch::https://github.com/qt/qtbase/commit/3bd0fd8f.patch
@@ -76,8 +75,8 @@ build() {
   # FS#38796
   [[ "${CARCH}" = "i686" ]] && SSE2="-no-sse2"
 
-#  echo "QMAKE_CXXFLAGS += -I/usr/include/openssl-1.0" >> mkspecs/linux-g++/qmake.conf
-#  export OPENSSL_LIBS='-L/usr/lib/openssl-1.0 -lssl -lcrypto'
+  echo "INCLUDEPATH += /usr/include/openssl-1.0" >> src/network/network.pro
+  export OPENSSL_LIBS='-L/usr/lib/openssl-1.0 -lssl -lcrypto'
 
   PYTHON=/usr/bin/python2 ./configure -confirm-license -opensource -v \
     -prefix /usr \
@@ -103,12 +102,17 @@ build() {
   make
 }
 
-package() {
+package_qt5-base-debug() {
+  provides=("qt5-base=$pkgver")
+  conflicts+=("qt5-base")
+  options=("debug" "!strip")
+  pkgdesc='A cross-platform application and UI framework'
+
   cd ${_pkgfqn}
   make INSTALL_ROOT="${pkgdir}" install
 
   install -D -m644 LGPL_EXCEPTION.txt \
-    "${pkgdir}"/usr/share/licenses/${pkgname}/LGPL_EXCEPTION.txt
+    "${pkgdir}"/usr/share/licenses/${_orig_pkgbase}/LGPL_EXCEPTION.txt
 
   # Drop QMAKE_PRL_BUILD_DIR because reference the build dir
   find "${pkgdir}/usr/lib" -type f -name '*.prl' \
@@ -122,4 +126,20 @@ package() {
   for b in "${pkgdir}"/usr/bin/*; do
     ln -s /usr/bin/$(basename $b) "${pkgdir}"/usr/bin/$(basename $b)-qt5
   done
+}
+
+package_qt5-xcb-private-headers-debug() {
+  provides=("qt5-xcb-private-headers=$pkgver")
+  conflicts+=("qt5-xcb-private-headers")
+  options=("debug" "!strip")
+  pkgdesc='Private headers for Qt5 Xcb'
+
+  depends=("qt5-base=$pkgver")
+  optdepends=()
+  groups=()
+  conflicts=()
+
+  cd ${_pkgfqn}
+  install -d -m755 "$pkgdir"/usr/include/qtxcb-private
+  cp -r src/plugins/platforms/xcb/*.h "$pkgdir"/usr/include/qtxcb-private/
 }
