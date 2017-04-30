@@ -21,6 +21,7 @@ if (( $# > 0 )); then
     packages=$@
 else
     packages=$(cat pkglist)
+    packages+=('qt5-xcb-private-headers')
 fi
 
 for pkg in $packages; do
