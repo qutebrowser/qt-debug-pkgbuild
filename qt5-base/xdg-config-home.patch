@@ -1,0 +1,29 @@
+From 1d6700171cf41c17983edff285c3658933610523 Mon Sep 17 00:00:00 2001
+From: Florian Bruhin <git@the-compiler.org>
+Date: Tue, 7 Feb 2017 16:18:18 +0100
+Subject: [PATCH] Respect XDG_CONFIG_HOME when getting ibus socket location
+
+Task-number: QTBUG-58687
+Change-Id: I97ea8b7d7caf922227a92348fb914aead1ecd312
+Reviewed-by: Tinu Weber
+Reviewed-by: Takao Fujiwara <takao.fujiwara1@gmail.com>
+Reviewed-by: Konstantin Tokarev <annulen@yandex.ru>
+Reviewed-by: Shawn Rutledge <shawn.rutledge@qt.io>
+---
+ src/plugins/platforminputcontexts/ibus/qibusplatforminputcontext.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/plugins/platforminputcontexts/ibus/qibusplatforminputcontext.cpp b/src/plugins/platforminputcontexts/ibus/qibusplatforminputcontext.cpp
+index 736c66e..0a55f68 100644
+--- a/src/plugins/platforminputcontexts/ibus/qibusplatforminputcontext.cpp
++++ b/src/plugins/platforminputcontexts/ibus/qibusplatforminputcontext.cpp
+@@ -572,7 +572,8 @@ QString QIBusPlatformInputContextPrivate::getSocketPath()
+     if (debug)
+         qDebug() << "host=" << host << "displayNumber" << displayNumber;
+ 
+-    return QDir::homePath() + QLatin1String("/.config/ibus/bus/") +
++    return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
++               QLatin1String("/ibus/bus/") +
+                QLatin1String(QDBusConnection::localMachineId()) +
+                QLatin1Char('-') + QString::fromLocal8Bit(host) + QLatin1Char('-') + QString::fromLocal8Bit(displayNumber);
+ }
