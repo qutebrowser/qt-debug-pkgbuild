@@ -32,12 +32,12 @@ source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submo
 md5sums=('6e7fb2be161c6db4d988a4f5b329672f'
          '2a1610b34204102938a24154a52e5571'
          '9d225d1bf83ea45dbf6556d30d35fcb8'
-         '3762cbdbc6a752e4d876e048e5e16de6'
-         '951ac7549fff82f9d1d11e9bf50556ba'
-         'd5da5608285ad764f37fe196f9afe5a1'
-         'c7b5acd58319d23d769c19f42323e8ec'
-         '663f8454990de96fad4c8c78bcd6f819'
-         '849ab18980b0523405f0282c83b4a54c')
+         '0219eab606c732b2d5c0badec65bc5aa'
+         '9cdb9bfec2dee46b09969a6e9a018e7f'
+         '8898bbae4c4059963d5c31a6cabe93dd'
+         '700db01ba526a4b08f9e355ed9951165'
+         '8762d933ea50b0147c8b10e241a24330'
+         '2c04883620761476fa4e2985988e11a4')
 
 prepare() {
   mkdir -p build
