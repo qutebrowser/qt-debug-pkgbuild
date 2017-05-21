@@ -7,4 +7,4 @@ chmod 777 out
 
 rm out/*
 docker build --no-cache -t archlinux-qtbuild . || exit 1
-time docker run -it --tmpfs=/tmp:size=100G,exec -v $PWD/out:/out -e "PACKAGES=$*" archlinux-qtbuild
+time docker run -i --tmpfs=/tmp:size=100G,exec -v $PWD/out:/out -e "PACKAGES=$*" archlinux-qtbuild
