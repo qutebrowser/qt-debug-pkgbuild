@@ -17,7 +17,7 @@ for pkg in $PACKAGES; do
 
     # Remove the thing we're building so we can install -debug easily.
     [[ $pkg == pyqt5 ]] && pkg="pyqt5-common python-pyqt5 python2-pyqt5"
-    [[ $pkg != qt5-webkit-ng ]] && sudo pacman -Rdd --noconfirm $pkg
+    sudo pacman -Rdd --noconfirm $pkg || true
 
     makepkg -i -f --noconfirm
 done
