@@ -23,6 +23,8 @@ RUN pacman -Suy --noconfirm --needed \
     libxcursor \
     libxrandr \
     libxss \
+    pcre2 \
+    double-conversion \
     # qt5-multimedia makedepends
     gst-plugins-bad \
     # qt5-declarative makedepends
@@ -32,6 +34,7 @@ RUN pacman -Suy --noconfirm --needed \
     python2 \
     git \
     gperf \
+    ninja \
     # qt5-webkit{,-ng} makepends
     ruby \
     gperf \
@@ -47,6 +50,7 @@ RUN pacman -Suy --noconfirm --needed \
     libxcursor \
     libxrandr \
     libxss \
+    git \
     # qt5-location makedepends
     gypsy \
     gconf \
