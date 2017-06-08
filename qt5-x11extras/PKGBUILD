@@ -4,7 +4,7 @@
 
 pkgname=qt5-x11extras-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ provides=("qt5-x11extras=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-x11extras')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('a29256a11122e68e8507433d34d9f9ae')
+sha256sums=('9e03d2856dc21eb59f2c8a572f33960a32f6f990b3353440d0e744fc93d0bf6a')
 
 prepare() {
   mkdir -p build
@@ -41,5 +41,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }

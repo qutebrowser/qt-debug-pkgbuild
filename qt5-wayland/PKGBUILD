@@ -4,9 +4,9 @@
 
 pkgname=qt5-wayland-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -17,17 +17,11 @@ _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-wayland=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-wayland')
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
-        revert-5b807802.patch)
-md5sums=('0a40bd721bd5e1630601beab660c6ea9'
-         '95e986e9c0ab5ebe03c85efb69ee751a')
+source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('9b802bb6f5237a21fc1ffe0877c75a90b94a6207d03006b94ca697c072a79d7e')
 
 prepare() {
   mkdir -p build
-
-# Revert commit that breaks Plasma Wayland
-  cd ${_pkgfqn}
-  patch -Rp1 -i ../revert-5b807802.patch
 }
 
 build() {
@@ -47,5 +41,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }

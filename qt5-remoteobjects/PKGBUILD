@@ -1,25 +1,25 @@
-# $Id: PKGBUILD 240297 2015-06-03 10:22:03Z fyan $
+# $Id: PKGBUILD 293803 2017-04-21 11:54:59Z arojas $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
-# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
 
-pkgname=qt5-canvas3d-debug
+pkgname=qt5-remoteobjects-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.9.0
 pkgver=${_qtver/-/}
 pkgrel=1
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL3' 'FDL' 'custom')
-pkgdesc='A JavaScript 3D rendering API for Qt Quick'
-depends=('qt5-declarative')
+license=(GPL3 LGPL3 FDL custom)
+pkgdesc='Inter-process communication (IPC) module developed for Qt'
+depends=(qt5-base)
 makedepends=()
-groups=('qt' 'qt5')
+groups=(qt qt5)
 _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
-provides=("qt5-canvas3d=$pkgver")
+provides=("qt5-remoteobjects=$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-canvas3d')
+conflicts=('qt5-remoteobjects')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('d817bc52bdd04982e13b4820ef02f52b6186e905c459576e24d7e30b733a3bcb')
+sha256sums=('d9f73293f41cef01a18098fc184dada4c4bd1821f487560505937daef5d90d39')
 
 prepare() {
   mkdir -p build

@@ -4,7 +4,7 @@
 
 pkgname=qt5-translations-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('any')
@@ -19,7 +19,7 @@ provides=("qt5-translations=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-translations')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('b6c6748a923b9639c7d018cfdb04caf4')
+sha256sums=('5cc981d823a989ddc22b4c278b5b8391fd38656d70e6fa9c8d84fe23d1dc4f77')
 
 prepare() {
   mkdir -p build
@@ -37,5 +37,5 @@ package() {
   make INSTALL_ROOT="$pkgdir" install
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }

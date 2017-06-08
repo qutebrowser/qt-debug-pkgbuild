@@ -4,7 +4,7 @@
 
 pkgname=qt5-multimedia-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -20,7 +20,7 @@ provides=("qt5-multimedia=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-multimedia')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('c8610023cfe036d3ad7c13f6e99892cf')
+sha256sums=('0bb370923ba2e6d122940b07352a1a2f52ebbb061bec72e30df22a9e2edd60ee')
 
 prepare() {
   mkdir -p build
@@ -42,5 +42,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }

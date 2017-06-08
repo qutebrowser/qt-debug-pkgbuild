@@ -4,7 +4,7 @@
 
 pkgname=qt5-scxml-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ provides=("qt5-scxml=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-scxml')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('498c638710cf519f08e5a782f8feed63')
+sha256sums=('64596100756c238434e2d213c6c123987b751fd6f26dfa39f146463028b45238')
 
 prepare() {
   mkdir -p build
@@ -41,5 +41,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }

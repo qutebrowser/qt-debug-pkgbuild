@@ -4,9 +4,9 @@
 
 pkgname=qt5-imageformats-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -19,7 +19,7 @@ provides=("qt5-imageformats=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-imageformats')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('75e6580e5db2a16deffe072cd2dc60ed')
+sha256sums=('2461795047194bddabdf768af862ba374db58418a7c3e26019a8d5f1e7a85481')
 
 prepare() {
   mkdir -p build
@@ -37,5 +37,5 @@ package() {
   make INSTALL_ROOT="$pkgdir" install
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }

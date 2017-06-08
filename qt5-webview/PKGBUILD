@@ -4,9 +4,9 @@
 
 pkgname=qt5-webview-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -19,7 +19,7 @@ provides=("qt5-webview=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-webview')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('00c8056667a9a7143f4522452fc40f3b')
+sha256sums=('1ca7f10aa42b9fb2e2c49237791b24aef1c54c3a0c78617dce30bdea7dd3d22b')
 
 prepare() {
   mkdir -p build
@@ -41,5 +41,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }

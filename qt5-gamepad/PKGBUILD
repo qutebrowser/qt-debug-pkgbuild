@@ -4,7 +4,7 @@
 
 pkgname=qt5-gamepad-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.8.0
+_qtver=5.9.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -20,7 +20,7 @@ provides=("qt5-gamepad=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-gamepad')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-md5sums=('eac2f30dfff1027c3adedaff841b4772')
+sha256sums=('2795f78487060b4fde07e436c93fa2d9b62f2420bb54648ad0a6b7783516f252')
 
 prepare() {
   mkdir -p build
@@ -42,5 +42,5 @@ package() {
     -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
   install -d "$pkgdir"/usr/share/licenses
-  ln -s /usr/share/licenses/qt5-base-debug "$pkgdir"/usr/share/licenses/${pkgname}
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
 }
