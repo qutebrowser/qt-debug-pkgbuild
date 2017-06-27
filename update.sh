@@ -9,7 +9,6 @@ if (( $# == 0 )); then
     done
 
     grep -q qt5-webkit pkglist || echo qt5-webkit >> pkglist
-    echo qt5-webkit-ng >> pkglist
     echo pyqt5 >> pkglist
 
     mapfile -t packages < pkglist
