@@ -21,6 +21,10 @@ patch_qt() {
         sed -i 's|^pkgname=.*|&-debug\n_orig_pkgname=${pkgname/-debug/}|' $pkg/PKGBUILD
         sed -i '/^_pkgfqn=/s/pkgname/_orig_pkgname/g' $pkg/PKGBUILD
 
+        # update conflicts/replaces for qt5-webkit-ng
+        sed -i 's/conflicts=(qt5-webkit-ng)/conflicts=(qt5-webkit-ng qt5-webkit-ng-debug)/' $pkg/PKGBUILD
+        sed -i 's/replaces=(qt5-webkit-ng)/replaces=(qt5-webkit-ng qt5-webkit-ng-debug)/' $pkg/PKGBUILD
+
         # add conflicts-entry for non-debug package
         if grep -q '^conflicts=' $pkg/PKGBUILD; then
             sed -i 's|^conflicts=(\(.*\))|conflicts=(\1 '\'$pkg\'')|' $pkg/PKGBUILD
