@@ -1,0 +1,47 @@
+From fb2730ed0587530a4d9059e88a4802b6587ae3b7 Mon Sep 17 00:00:00 2001
+From: Florian Bruhin <git@the-compiler.org>
+Date: Fri, 30 Jun 2017 18:21:14 +0200
+Subject: [PATCH] Use memcpy
+
+---
+ Source/WTF/wtf/text/StringImpl.h | 24 +-----------------------
+ 1 file changed, 1 insertion(+), 23 deletions(-)
+
+diff --git a/Source/WTF/wtf/text/StringImpl.h b/Source/WTF/wtf/text/StringImpl.h
+index 5781c1c08fa..8140702fcea 100644
+--- a/Source/WTF/wtf/text/StringImpl.h
++++ b/Source/WTF/wtf/text/StringImpl.h
+@@ -615,29 +615,7 @@ public:
+     // FIXME: Does this really belong in StringImpl?
+     template <typename T> static void copyChars(T* destination, const T* source, unsigned numCharacters)
+     {
+-        if (numCharacters == 1) {
+-            *destination = *source;
+-            return;
+-        }
+-
+-        if (numCharacters <= s_copyCharsInlineCutOff) {
+-            unsigned i = 0;
+-#if (CPU(X86) || CPU(X86_64))
+-            const unsigned charsPerInt = sizeof(uint32_t) / sizeof(T);
+-
+-            if (numCharacters > charsPerInt) {
+-                unsigned stopCount = numCharacters & ~(charsPerInt - 1);
+-
+-                const uint32_t* srcCharacters = reinterpret_cast<const uint32_t*>(source);
+-                uint32_t* destCharacters = reinterpret_cast<uint32_t*>(destination);
+-                for (unsigned j = 0; i < stopCount; i += charsPerInt, ++j)
+-                    destCharacters[j] = srcCharacters[j];
+-            }
+-#endif
+-            for (; i < numCharacters; ++i)
+-                destination[i] = source[i];
+-        } else
+-            memcpy(destination, source, numCharacters * sizeof(T));
++        memcpy(destination, source, numCharacters * sizeof(T));
+     }
+ 
+     ALWAYS_INLINE static void copyChars(UChar* destination, const LChar* source, unsigned numCharacters)
+-- 
+2.13.2
+
