@@ -4,7 +4,7 @@
 
 pkgname=qt5-imageformats-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.0
+_qtver=5.9.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ provides=("qt5-imageformats=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-imageformats')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('2461795047194bddabdf768af862ba374db58418a7c3e26019a8d5f1e7a85481')
+sha256sums=('79fee307310a66100bd3d907ea69bd039dcd727c15f27e990167e7a27d1b8a47')
 
 prepare() {
   mkdir -p build
