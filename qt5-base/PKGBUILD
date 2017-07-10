@@ -7,7 +7,7 @@ _orig_pkgbase=${pkgbase/-debug/}
 pkgname=(qt5-base-debug qt5-xcb-private-headers-debug)
 _qtver=5.9.1
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=2.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -55,6 +55,10 @@ prepare() {
   patch -p1 -i ../qtbug-61731.patch
   # Fix doc navigation
   patch -p1 -i ../qtcreatorbug-18448.patch
+  # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70129
+  sed -i -e "s|QMAKE_CFLAGS_ISYSTEM.*|QMAKE_CFLAGS_ISYSTEM =|" \
+      mkspecs/common/gcc-base.conf
+
 }
 
 build() {
