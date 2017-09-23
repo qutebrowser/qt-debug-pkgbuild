@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 240297 2015-06-03 10:22:03Z fyan $
+# $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
@@ -7,7 +7,7 @@ _orig_pkgbase=${pkgbase/-debug/}
 pkgname=(qt5-base-debug qt5-xcb-private-headers-debug)
 _qtver=5.9.1
 pkgver=${_qtver/-/}
-pkgrel=3.1
+pkgrel=5.1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -29,10 +29,12 @@ groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgbase/5-/}-opensource-src-${_qtver}"
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
         qtbug-61731.patch::"https://github.com/qt/qtbase/commit/386af91c.patch"
-        qtcreatorbug-18448.patch::"https://github.com/qt/qtbase/commit/2a9f678f.patch")
+        qtcreatorbug-18448.patch::"https://github.com/qt/qtbase/commit/2a9f678f.patch"
+        harmony-fix.diff)
 sha256sums=('bc9a21e9f6fff9629019fdf9f989f064751d5073c3a28dc596def92f4d4275c6'
             'b164a873894cfc783980e883082d2b22b5aab00166c6751f66e78d4c41c3e2e3'
-            '5f878d144ac18097376dce154a411449cde181ddce2d93501114f890c9cdb1c3')
+            '5f878d144ac18097376dce154a411449cde181ddce2d93501114f890c9cdb1c3'
+            '8451c0a86e887492b706950ce533c616e687b790c54e86fb1f405dc2074737a3')
 
 prepare() {
   cd ${_pkgfqn}
@@ -59,6 +61,8 @@ prepare() {
   sed -i -e "s|QMAKE_CFLAGS_ISYSTEM.*|QMAKE_CFLAGS_ISYSTEM =|" \
       mkspecs/common/gcc-base.conf
 
+  # Freetype 2.8.1
+  patch -p1 -i ../harmony-fix.diff
 }
 
 build() {
