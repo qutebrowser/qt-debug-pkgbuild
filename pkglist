@@ -8,6 +8,7 @@ qt5-tools
 qt5-translations
 qt5-webchannel
 qt5-webengine
+qt5-websockets
 qt5-3d
 qt5-canvas3d
 qt5-charts
@@ -30,8 +31,8 @@ qt5-speech
 qt5-svg
 qt5-virtualkeyboard
 qt5-wayland
+qt5-webglplugin
 qt5-webview
-qt5-websockets
 qt5-x11extras
 qt5-webkit
 pyqt5

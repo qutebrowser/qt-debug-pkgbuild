@@ -4,9 +4,9 @@
 
 pkgname=qt5-webengine-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.1
+_qtver=5.9.2
 pkgver=${_qtver/-/}
-pkgrel=4
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('LGPL3' 'LGPL2.1' 'BSD')
@@ -21,9 +21,8 @@ provides=("qt5-webengine=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-webengine')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
-         clip-ft-glyph.diff harmony-fix.diff)
-sha256sums=('f6a37eeb9188474a16d29ede498fce959396ab80329a0a83eaeb925251686401'
-            'd5e5580a96ecc4a66ce12dde0737c1ed5cb31017a6ec488ffe372192ed893e1b'
+         harmony-fix.diff)
+sha256sums=('cab069e4589f806640bebe4077c70e5cd5ffeb146c6e8caca6c4454fc0c4a108'
             '2c309c0f6978e6a399422319b5034b01881d5526cf48b2ee5fcc7f418029a344')
 
 prepare() {
@@ -36,7 +35,6 @@ prepare() {
   cd ${_pkgfqn}
 
   # FreeType 2.8.1
-  patch -d src/3rdparty/chromium/third_party -Np3 < ../clip-ft-glyph.diff
   patch -Np1 -i ../harmony-fix.diff
 }
 

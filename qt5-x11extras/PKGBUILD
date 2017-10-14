@@ -4,9 +4,9 @@
 
 pkgname=qt5-x11extras-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.1
+_qtver=5.9.2
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -19,7 +19,7 @@ provides=("qt5-x11extras=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-x11extras')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('a63d0e28958331d672dbd0f8c554bdaddbc974a27be37601f7f221a2ef1ad601')
+sha256sums=('db85450ad4851816a4fade1ffc10d078d28f2cca174cffa6cbd6d1220b395ac5')
 
 prepare() {
   mkdir -p build
