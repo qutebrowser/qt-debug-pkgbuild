@@ -4,10 +4,10 @@
 
 pkgname=qt5-xmlpatterns-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.2
+_qtver=5.9.3
 pkgver=${_qtver/-/}
 pkgrel=1
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Support for XPath, XQuery, XSLT and XML schema validation'
@@ -19,7 +19,7 @@ _pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
 provides=("qt5-xmlpatterns=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('0aa6aa83087d5754cfefaa3d119454009fc2dd5f266c1eb2ea7a434cef22d34e')
+sha256sums=('cf9c66a612a963382f7b4b51ac8ee5e920bd035b26ecb5c5957f8f3d3286f0ba')
 
 prepare() {
   mkdir -p build

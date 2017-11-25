@@ -4,7 +4,7 @@
 
 pkgname=qt5-translations-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.2
+_qtver=5.9.3
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('any')
@@ -19,7 +19,7 @@ provides=("qt5-translations=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-translations')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('5df16ddf9da0f42a3040aef2a92ad7da67381e2e4c132632fddf3a7a8026d12f')
+sha256sums=('40ac57ec79dd4fd27dff7a9d8abe8ebe2106c19a4b60daf007353f4671909bd9')
 
 prepare() {
   mkdir -p build
