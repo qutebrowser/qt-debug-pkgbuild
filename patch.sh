@@ -53,7 +53,7 @@ patch_qt_base() {
     fi
 
     # add debug switch
-    sed -i 's/${SSE2}/& \\\n    -force-debug-info/' qt5-base/PKGBUILD
+    sed -i 's/-reduce-relocations/& \\\n    -force-debug-info/' qt5-base/PKGBUILD
     grep -q -- -force-debug-info qt5-base/PKGBUILD || fail
 
     # adjust package names

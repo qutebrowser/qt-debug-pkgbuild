@@ -3,7 +3,7 @@
 
 pkgname=qt5-speech-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.3
+_qtver=5.10.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=(x86_64)
@@ -14,12 +14,12 @@ depends=(qt5-multimedia)
 makedepends=(flite speech-dispatcher)
 optdepends=('flite: flite TTS backend' 'speech-dispatcher: speech-dispatcher TTS backend')
 groups=(qt qt5)
-_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-speech=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-speech')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('01526024437dfc1e4f652e0b883fc3333260321aacee4c51774018bf86bb99b0')
+sha256sums=('79159e1a9502ccb67145e0f6bdc43e3c2248835ff22be04a10c18db15a845ac1')
 
 prepare() {
   mkdir -p build

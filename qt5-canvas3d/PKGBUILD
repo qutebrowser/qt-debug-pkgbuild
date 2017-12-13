@@ -4,7 +4,7 @@
 
 pkgname=qt5-canvas3d-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.3
+_qtver=5.10.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -14,12 +14,12 @@ pkgdesc='A JavaScript 3D rendering API for Qt Quick'
 depends=('qt5-declarative')
 makedepends=()
 groups=('qt' 'qt5')
-_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-canvas3d=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-canvas3d')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('5e38b17844af801be57844da0379cc6882750b9019034f4fe884aae70c300abc')
+sha256sums=('d289626f06236f2c0e3065416fd6a8a72b8895cb5253ee2d9b6320df5b452987')
 
 prepare() {
   mkdir -p build

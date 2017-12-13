@@ -4,7 +4,7 @@
 
 pkgname=qt5-imageformats-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.3
+_qtver=5.10.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -14,12 +14,12 @@ pkgdesc='Plugins for additional image formats: TIFF, MNG, TGA, WBMP'
 depends=('qt5-base' 'jasper' 'libmng' 'libwebp')
 makedepends=()
 groups=('qt' 'qt5')
-_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-imageformats=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-imageformats')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('d4b309ddbac2275cafadffc62047a26ed8f169bde015925761894843eae725dd')
+sha256sums=('91bfb884f965af6d6c187f8ac4f9bb1f9fe0af59cbbe36e035ee5f5510b7f4fc')
 
 prepare() {
   mkdir -p build

@@ -1,25 +1,24 @@
 # $Id: PKGBUILD 240297 2015-06-03 10:22:03Z fyan $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
-# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
 
-pkgname=qt5-serialbus-debug
+pkgname=qt5-webglplugin-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.10.0
 pkgver=${_qtver/-/}
 pkgrel=1
-arch=('x86_64')
+arch=(x86_64)
 url='http://qt-project.org/'
-license=('GPL3' 'LGPL3' 'FDL' 'custom')
-pkgdesc='Qt module for general purpose serial bus access'
-depends=('qt5-serialport')
-makedepends=()
-groups=('qt' 'qt5')
+license=(GPL3 LGPL3 FDL custom)
+pkgdesc='QPA plugin for running an application via a browser using streamed WebGL commands'
+depends=(qt5-websockets qt5-declarative)
+groups=(qt qt5)
 _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
-provides=("qt5-serialbus=$pkgver")
+provides=("qt5-webglplugin=$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-serialbus')
+conflicts=('qt5-webglplugin')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('3f594784d952dd40e6d7740cd6267a9259a877330cecd83feebef81f5200391b')
+sha256sums=('670a75984698d51e0d1182a999e07d26021b3c01ba0e69ed2c470c4a6959fc41')
 
 prepare() {
   mkdir -p build

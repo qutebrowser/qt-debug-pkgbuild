@@ -4,7 +4,7 @@
 
 pkgname=qt5-xmlpatterns-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.9.3
+_qtver=5.10.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -15,11 +15,11 @@ depends=('qt5-base')
 makedepends=()
 conflicts=('qtchooser' 'qt5-xmlpatterns')
 groups=('qt' 'qt5')
-_pkgfqn="${_orig_pkgname/5-/}-opensource-src-${_qtver}"
+_pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-xmlpatterns=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('cf9c66a612a963382f7b4b51ac8ee5e920bd035b26ecb5c5957f8f3d3286f0ba')
+sha256sums=('b08abca6227e942a128e478b2eb81416c40925418d89064ee151c155e3d203c3')
 
 prepare() {
   mkdir -p build

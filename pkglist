@@ -31,6 +31,7 @@ qt5-speech
 qt5-svg
 qt5-virtualkeyboard
 qt5-wayland
+qt5-webglplugin
 qt5-webview
 qt5-x11extras
 qt5-webkit
