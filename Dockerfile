@@ -5,7 +5,6 @@ RUN pacman -Suy --noconfirm --needed \
     git \
     base-devel \
     # qt5-base makedepends
-    mtdev \
     libfbclient \
     libmariadbclient \
     sqlite \
@@ -17,33 +16,22 @@ RUN pacman -Suy --noconfirm --needed \
     libpulse \
     cups \
     freetds \
-    python2 \
-    pciutils \
-    libxtst \
-    libxcursor \
-    libxrandr \
-    libxss \
-    pcre2 \
-    double-conversion \
+    vulkan-headers \
     # qt5-multimedia makedepends
     gst-plugins-bad \
     # qt5-declarative makedepends
     python2 \
-    cmake \
     # qt5-webengine makedepends
     python2 \
     git \
     gperf \
+    jsoncpp \
     ninja \
     # qt5-webkit makepends
+    cmake \
     ruby \
     gperf \
     python2 \
-    hyphen \
-    cmake \
-    # qt5-xmlpatterns makedepends
-    python2 \
-    cmake \
     # qt5-doc makedepends
     python2 \
     pciutils \
@@ -51,7 +39,9 @@ RUN pacman -Suy --noconfirm --needed \
     libxcursor \
     libxrandr \
     libxss \
-    git \
+    libxcomposite \
+    gperf \
+    nss \
     # qt5-location makedepends
     gypsy \
     gconf \
