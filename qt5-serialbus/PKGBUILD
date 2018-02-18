@@ -4,7 +4,7 @@
 
 pkgname=qt5-serialbus-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.10.0
+_qtver=5.10.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -19,7 +19,7 @@ provides=("qt5-serialbus=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-serialbus')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('3f594784d952dd40e6d7740cd6267a9259a877330cecd83feebef81f5200391b')
+sha256sums=('0650a17950f140130ec20520b06592618850cc5673a815cb4fd585590d922257')
 
 prepare() {
   mkdir -p build

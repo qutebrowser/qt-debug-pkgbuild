@@ -4,9 +4,9 @@
 
 pkgname=qt5-3d-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.10.0
+_qtver=5.10.1
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=1
 arch=('x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -18,7 +18,7 @@ provides=("qt5-3d=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-3d')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('12457e7227c793274329371c60b9028ab3e44db837e875e2c460367c1dbd34ab')
+sha256sums=('041fb42536a72bbf9be17a6f52d4b73ce93fb98b456fd63503cc47d80d196b3b')
 
 prepare() {
   mkdir -p build
