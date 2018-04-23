@@ -91,6 +91,9 @@ patch_pyqt() {
     # add debug switch
     sed -i 's|-q /usr/bin/qmake-qt5|& \\\n    --debug|' pyqt5/PKGBUILD
     grep -q -- --debug pyqt5/PKGBUILD || fail
+    # fix up patch name
+    sed -i 's/pyqt5-cura-crash-debug\.patch/pyqt5-cura-crash\.patch/' pyqt5/PKGBUILD
+    grep -qF pyqt5-cura-crash.patch pyqt5/PKGBUILD || fail
 
     # add provides/conflicts/options sections to package functions
     line1='  provides=("pyqt5-common=$pkgver")'
