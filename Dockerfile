@@ -42,6 +42,7 @@ RUN pacman -Suy --noconfirm --needed \
     libxcomposite \
     gperf \
     nss \
+    clang \
     # qt5-location makedepends
     gypsy \
     gconf \
