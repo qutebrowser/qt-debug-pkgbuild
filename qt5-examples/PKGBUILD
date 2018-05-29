@@ -5,7 +5,7 @@
 
 pkgname=qt5-examples-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.10.1
+_qtver=5.11.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('any')
@@ -19,7 +19,7 @@ provides=("qt5-examples=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-examples')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/single/${_pkgfqn}.tar.xz")
-sha256sums=('05ffba7b811b854ed558abf2be2ddbd3bb6ddd0b60ea4b5da75d277ac15e740a')
+sha256sums=('67ddb8bf33bbfd19ebc641467ccce2e57fd0b80c6082457f1f5a76e8df83c865')
 
 package() {
   _base="$pkgdir"/usr/share/doc/qt/examples

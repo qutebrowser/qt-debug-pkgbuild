@@ -3,7 +3,7 @@
 
 pkgname=qt5-networkauth-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.10.1
+_qtver=5.11.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=(x86_64)
@@ -17,7 +17,7 @@ provides=("qt5-networkauth=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-networkauth')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('97231c319bd623d81eebaa1b5cdba4064bc4e69332c695a15cf8792b54b5dcdc')
+sha256sums=('d56b068f02272690a2814d80102dcba26e366dde8848bcaf6745a1a5258728cf')
 
 prepare() {
   mkdir -p build
