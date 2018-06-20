@@ -3,7 +3,7 @@
 
 pkgname=qt5-speech-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.11.0
+_qtver=5.11.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=(x86_64)
@@ -19,7 +19,7 @@ provides=("qt5-speech=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-speech')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('a1c125f9dde6817ae41be668973b8f365c20e1860d5924ea7736383c1578eead')
+sha256sums=('dcc782c7d6693b0874881cf6ccc7269681bd8bf5f6e1a83c4ab18c27a35a9bdb')
 
 prepare() {
   mkdir -p build

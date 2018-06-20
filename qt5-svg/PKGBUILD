@@ -4,7 +4,7 @@
 
 pkgname=qt5-svg-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.11.0
+_qtver=5.11.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -18,7 +18,7 @@ provides=("qt5-svg=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-svg')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('4b8efe60678a37c731356cc146886360e5852a1cd4a8ba6339fb950a2e7d1f54')
+sha256sums=('1d6aff3e3304ceec670c0f19029771ff21279553d561158063436b26c18b3037')
 
 prepare() {
   mkdir -p build

@@ -8,7 +8,7 @@
 pkgbase=pyqt5-debug
 pkgname=('pyqt5-common-debug' 'python-pyqt5-debug' 'python2-pyqt5-debug')
 pkgver=5.10.1
-pkgrel=3
+pkgrel=6
 arch=('x86_64')
 url="http://riverbankcomputing.co.uk/software/pyqt/intro"
 license=('GPL')

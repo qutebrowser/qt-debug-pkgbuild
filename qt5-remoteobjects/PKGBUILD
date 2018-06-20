@@ -4,7 +4,7 @@
 
 pkgname=qt5-remoteobjects-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.11.0
+_qtver=5.11.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=(x86_64)
@@ -20,7 +20,7 @@ provides=("qt5-remoteobjects=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-remoteobjects')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('09af3b3e104497576f6d5ad36027ea8837e19ee390914d33dcdc5d057b0f16b2')
+sha256sums=('eb2d69c662cd828a11d248e61742e3e494507e640757ec63dc64db24867069fb')
 
 prepare() {
   mkdir -p build
