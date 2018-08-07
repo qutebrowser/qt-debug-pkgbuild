@@ -91,6 +91,10 @@ patch_pyqt() {
     # add debug switch
     sed -i 's|--qsci-api|& \\\n    --debug|' pyqt5/PKGBUILD
     grep -q -- --debug pyqt5/PKGBUILD || fail
+    # fix up sip name
+    sed -i 's/\(python2\?-sip-pyqt5\)-debug/\1/g' pyqt5/PKGBUILD
+    grep -qF python-sip-pyqt5-debug pyqt5/PKGBUILD && fail
+    grep -qF python2-sip-pyqt5-debug pyqt5/PKGBUILD && fail
 
     # add provides/conflicts/options sections to package functions
     line1='  provides=("pyqt5-common=$pkgver")'
