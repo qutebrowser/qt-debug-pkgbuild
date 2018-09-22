@@ -1,10 +1,9 @@
-# $Id: PKGBUILD 240297 2015-06-03 10:22:03Z fyan $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-svg-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.11.1
+_qtver=5.11.2
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -18,7 +17,7 @@ provides=("qt5-svg=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-svg')
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('1d6aff3e3304ceec670c0f19029771ff21279553d561158063436b26c18b3037')
+sha256sums=('bc16bbf855b466e77dda996d8c91fa73db7fe14d3aa98ce6d92145ca1a1bd166')
 
 prepare() {
   mkdir -p build

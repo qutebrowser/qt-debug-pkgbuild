@@ -1,10 +1,9 @@
-# $Id: PKGBUILD 240297 2015-06-03 10:22:03Z fyan $
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-declarative-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.11.1
+_qtver=5.11.2
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -20,7 +19,7 @@ _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-declarative=$pkgver")
 options=("debug" "!strip")
 source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('9ecf5ef6bf618fcb6719a4b22e3d9f9ce7623c2344667038171d5662624c4f3a')
+sha256sums=('220d86f8031e9d45f3c369c3fd517aaa4c5783ad62c843a21fa7cc3c0a36f2cd')
 
 prepare() {
   mkdir -p build
