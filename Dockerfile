@@ -43,9 +43,6 @@ RUN pacman -Suy --noconfirm --needed \
     gperf \
     nss \
     clang \
-    # qt5-location makedepends
-    gypsy \
-    gconf \
     # qt5-speech makedepends
     flite \
     speech-dispatcher \
