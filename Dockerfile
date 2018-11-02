@@ -47,10 +47,12 @@ RUN pacman -Suy --noconfirm --needed \
     flite \
     speech-dispatcher \
     # pyqt5 makedepends
-    python-sip \
-    python2-sip \
+    python-sip-pyqt5 \
+    python2-sip-pyqt5 \
+    sip \
     python-opengl \
     python2-opengl \
+    python2-enum34 \
     python2-dbus \
     python-dbus \
     # to have a running Qt already
