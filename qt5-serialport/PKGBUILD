@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-serialport
-_qtver=5.11.2
+_qtver=5.12.0-beta4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -13,8 +13,8 @@ depends=('qt5-base')
 makedepends=()
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('b01b69ce421d449402363c0cf617fcc8856e39d6d2c28aa3d06d1f5359dc6f6e')
+source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('a263f5f52cab3b959c06537ad301f49b38899d90bae8f82b863170425984f22d')
 
 prepare() {
   mkdir -p build

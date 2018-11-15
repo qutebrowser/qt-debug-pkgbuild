@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-xmlpatterns
-_qtver=5.11.2
+_qtver=5.12.0-beta4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -14,8 +14,8 @@ makedepends=()
 conflicts=('qtchooser')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('5fd5f680ba40dadf81665417501e1f3778982aea0e268bf4f75a420d54a86746')
+source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('ee74c1a4cd14be25f0b951ea2c787ab4f35042e19d004556bf15bb8fca40d383')
 
 prepare() {
   mkdir -p build

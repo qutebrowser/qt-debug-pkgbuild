@@ -3,7 +3,7 @@
 # Contributor: Michael Hansen <zrax0111 gmail com>
 
 pkgname=qt5-examples
-_qtver=5.11.2
+_qtver=5.12.0-beta4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('any')
@@ -13,8 +13,8 @@ pkgdesc='Examples and demos from qt5 documentation'
 depends=('qt5-doc')
 groups=('qt' 'qt5')
 _pkgfqn="qt-everywhere-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/single/${_pkgfqn}.tar.xz")
-sha256sums=('c6104b840b6caee596fa9a35bc5f57f67ed5a99d6a36497b6fe66f990a53ca81')
+source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/single/${_pkgfqn}.tar.xz")
+sha256sums=('a6714664ed21e745954a72293231058128341808a93fa6db4a91c6f1c678a053')
 
 package() {
   _base="$pkgdir"/usr/share/doc/qt/examples

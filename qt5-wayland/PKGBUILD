@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-wayland
-_qtver=5.11.2
+_qtver=5.12.0-beta4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -12,8 +12,8 @@ pkgdesc='Provides APIs for Wayland'
 depends=('qt5-declarative' 'libxcomposite' 'wayland') # namcap note: wayland is needed for nvidia-libgl users
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('4e35e15da360480a5aef414246f70d29b0252b6a9c7e129e63afba3fb2ecb771')
+source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('a6b2659a60850988f81423a183032ee6e9981134ab98e563f21084d147a459f6')
 
 prepare() {
   mkdir -p build

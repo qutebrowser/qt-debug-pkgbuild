@@ -2,9 +2,9 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-location
-_qtver=5.11.2
+_qtver=5.12.0-beta4
 pkgver=${_qtver/-/}
-pkgrel=2
+pkgrel=1
 arch=('x86_64')
 url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
@@ -12,8 +12,8 @@ pkgdesc='Provides access to position, satellite and area monitoring classes'
 depends=('qt5-declarative')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('d698911edfb2d45b7adca6557b3de880e966cb8823a8adf1beb3a3079560024e')
+source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('226f871d224fb7a75fa04cc259d947afa5341950648fb7d2c2ccec6d34435bd4')
 
 prepare() {
   mkdir -p build

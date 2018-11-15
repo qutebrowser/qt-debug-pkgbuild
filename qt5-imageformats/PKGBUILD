@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-imageformats
-_qtver=5.11.2
+_qtver=5.12.0-beta4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -13,8 +13,8 @@ depends=('qt5-base' 'jasper' 'libmng' 'libwebp')
 makedepends=()
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('27e5d10551d0b5bf4799d09e5412ea2e6898b09aa1521ea24bce660ee6183a68')
+source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('b4e0242ccae7a3e54f87b93e35bd2e454e71370ccdd06a85ad3b55e26f03d228')
 
 prepare() {
   mkdir -p build

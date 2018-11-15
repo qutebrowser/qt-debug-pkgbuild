@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-translations
-_qtver=5.11.2
+_qtver=5.12.0-beta4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('any')
@@ -13,8 +13,8 @@ depends=('qt5-base')
 makedepends=('qt5-tools')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('cec1a83757e9c776f6c65020bf8963e9d2037963e5a93531e6274442128d034b')
+source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('cc71d6c32285613b24480d9cb413bc668b75571ff2fdac012abc73c5526a14a1')
 
 prepare() {
   mkdir -p build
