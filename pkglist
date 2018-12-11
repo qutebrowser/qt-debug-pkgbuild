@@ -1,5 +1,4 @@
 qt5-base
-qt5-xmlpatterns
 qt5-declarative
 qt5-location
 qt5-sensors
@@ -34,5 +33,6 @@ qt5-wayland
 qt5-webglplugin
 qt5-webview
 qt5-x11extras
+qt5-xmlpatterns
 qt5-webkit
 pyqt5
