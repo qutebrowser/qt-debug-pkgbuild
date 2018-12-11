@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-xmlpatterns
-_qtver=5.12.0-beta4
+_qtver=5.12.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -10,12 +10,13 @@ url='http://qt-project.org/'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Support for XPath, XQuery, XSLT and XML schema validation'
 depends=('qt5-base')
-makedepends=()
+makedepends=('qt5-declarative')
+optdepends=('qt5-declarative: QML bindings')
 conflicts=('qtchooser')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("http://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('ee74c1a4cd14be25f0b951ea2c787ab4f35042e19d004556bf15bb8fca40d383')
+source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('f36279bcafb8052a0b60edd473e1d341b4733a43eb26239848b4382303679375')
 
 prepare() {
   mkdir -p build
