@@ -6,7 +6,7 @@ RUN pacman -Suy --noconfirm --needed \
     base-devel \
     # qt5-base makedepends
     libfbclient \
-    libmariadbclient \
+    mariadb-libs \
     sqlite \
     unixodbc \
     postgresql-libs \
