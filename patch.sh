@@ -115,10 +115,16 @@ patch_pyqt() {
     grep -q "$line1" $pkg/PKGBUILD || fail
     grep -q "$line2" $pkg/PKGBUILD || fail
 
+    # add debug switch
     if [[ $pkg == pyqt5 ]]; then
-        # add debug switch
         sed -i 's|--qsci-api|& \\\n    --debug|' $pkg/PKGBUILD
         grep -q -- --debug $pkg/PKGBUILD || fail
+    fi
+
+    # fix up URL
+    if [[ $pkg == pyqtwebengine ]]; then
+        sed -i 's|software/pyqtwebengine-debug/intro|software/pyqtwebengine/intro|' $pkg/PKGBUILD
+        grep -q -- software/pyqtwebengine-debug/intro $pkg/PKGBUILD && fail
     fi
 }
 
