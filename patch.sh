@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash5
 
 set -e -x
 
@@ -47,7 +47,7 @@ patch_qt() {
 }
 
 patch_qt_base() {
-    if grep -q _orig_pkgbase $pkg/PKGBUILD; then
+    if grep -q _orig_pkgbase qt5-base/PKGBUILD; then
         echo "qt5-base was already rewritten?"
         exit 1
     fi
@@ -87,7 +87,7 @@ patch_pyqt() {
     sed -i 's/-debug\.so/\.so/g' pyqt5/PKGBUILD
     # add debug options
     sed -i '/^license=/aoptions=("debug" "!strip")' pyqt5/PKGBUILD
-    grep -q options $pkg/PKGBUILD || fail
+    grep -q options pyqt5/PKGBUILD || fail
     # add debug switch
     sed -i 's|--qsci-api|& \\\n    --debug|' pyqt5/PKGBUILD
     grep -q -- --debug pyqt5/PKGBUILD || fail
