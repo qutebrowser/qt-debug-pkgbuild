@@ -3,11 +3,11 @@
 
 pkgname=qt5-declarative-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.0
+_qtver=5.12.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
-url='http://qt-project.org/'
+url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Classes for QML and JavaScript languages'
 depends=('qt5-base')
@@ -17,8 +17,8 @@ conflicts=('qtchooser' 'qt5-declarative')
 _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-declarative=$pkgver")
 options=("debug" "!strip")
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('4ffd58102b5714ae058f91cc31511f1c928978f77f01652beb9ce2352a4c227b')
+source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('a384a734d94f28a98aa74e076d50fa6b9724af83526feb6c371945545d8cb409')
 
 prepare() {
   mkdir -p build

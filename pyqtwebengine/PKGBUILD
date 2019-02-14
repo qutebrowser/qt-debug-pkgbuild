@@ -1,0 +1,70 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgbase=pyqtwebengine-debug
+pkgname=(python-pyqtwebengine-debug python2-pyqtwebengine-debug pyqtwebengine-common-debug)
+pkgver=5.12
+pkgrel=2
+arch=(x86_64)
+url="https://www.riverbankcomputing.com/software/pyqtwebengine-debug/intro"
+license=(GPL)
+options=("debug" "!strip")
+makedepends=(sip qt5-webengine python-pyqt5 python2-pyqt5)
+source=("https://www.riverbankcomputing.com/static/Downloads/PyQtWebEngine/PyQtWebEngine_gpl-$pkgver.tar.gz")
+sha256sums=('b6ea036e7e406aeb7728318fb2980f23bd8d4086b431277faec1c09df9fb3f49')
+
+prepare() {
+  cp -a PyQtWebEngine_gpl-$pkgver{,-py2}
+}
+
+build() {
+  cd "$srcdir"/PyQtWebEngine_gpl-$pkgver
+  python configure.py
+  make
+
+  cd "$srcdir"/PyQtWebEngine_gpl-$pkgver-py2
+  python2 configure.py
+  make
+}
+
+package_pyqtwebengine-common-debug(){
+  provides=("pyqtwebengine-common=$pkgver")
+  conflicts=("pyqtwebengine-common")
+  options=("debug" "!strip")
+  pkgdesc="Common files shared between python-pyqtwebengine-debug and python2-pyqtwebengine-debug"
+  depends=(qt5-webengine)
+
+  cd PyQtWebEngine_gpl-$pkgver
+  install -Dm644 PyQtWebEngine.api -t "$pkgdir"/usr/share/qt/qsci/api/python
+
+  install -d "$pkgdir"/usr/share/sip/PyQt5
+  cp -a sip/* "$pkgdir"/usr/share/sip/PyQt5
+}
+
+package_python-pyqtwebengine-debug(){
+  provides=("python-pyqtwebengine=$pkgver")
+  conflicts=("python-pyqtwebengine")
+  options=("debug" "!strip")
+  pkgdesc="Python 3 bindings for QtWebEngine"
+  depends=(python-pyqt5 pyqtwebengine-common-debug)
+
+  cd PyQtWebEngine_gpl-$pkgver
+  make INSTALL_ROOT="$pkgdir" install -j1
+
+  # Provided by pyqtwebengine-common-debug
+  rm -r "$pkgdir"/usr/share
+}
+
+package_python2-pyqtwebengine-debug(){
+  provides=("python2-pyqtwebengine=$pkgver")
+  conflicts=("python2-pyqtwebengine")
+  options=("debug" "!strip")
+  pkgdesc="Python 2 bindings for QtWebEngine"
+  depends=(python2-pyqt5 pyqtwebengine-common-debug)
+
+  cd PyQtWebEngine_gpl-$pkgver-py2
+  make INSTALL_ROOT="$pkgdir" install -j1
+
+  # Provided by pyqtwebengine-common-debug
+  rm -r "$pkgdir"/usr/share
+}

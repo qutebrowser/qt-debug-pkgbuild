@@ -6,7 +6,7 @@
 
 pkgbase=pyqt5-debug
 pkgname=('pyqt5-common-debug' 'python-pyqt5-debug' 'python2-pyqt5-debug')
-pkgver=5.11.3
+pkgver=5.12
 pkgrel=2
 arch=('x86_64')
 url="http://riverbankcomputing.co.uk/software/pyqt/intro"
@@ -14,9 +14,9 @@ license=('GPL')
 options=("debug" "!strip")
 makedepends=('python-sip-pyqt5' 'python2-sip-pyqt5' 'sip' 'python-opengl' 'python2-opengl' 'python2-enum34'
              'python2-dbus' 'python-dbus' 'qt5-connectivity' 'qt5-multimedia' 'qt5-tools' 'qt5-serialport' 'qt5-svg'
-             'qt5-webengine' 'qt5-webkit' 'qt5-websockets' 'qt5-x11extras' 'qt5-networkauth' 'qt5-xmlpatterns')
-source=("http://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-$pkgver/PyQt5_gpl-$pkgver.tar.gz")
-sha512sums=('6f4abb1866ce357263c208121607072e127c8853e9c6bf039b034fefdda4c40e38f917c3b313375f0d692d764ecf26ff3a6b12cda2a2eeb5237db8b5e9443548')
+             'qt5-webkit' 'qt5-websockets' 'qt5-x11extras' 'qt5-networkauth' 'qt5-xmlpatterns' 'qt5-remoteobjects')
+source=("https://www.riverbankcomputing.com/static/Downloads/PyQt5/PyQt5_gpl-$pkgver.tar.gz")
+sha256sums=('d9e70065b5980afde5f2b9bc900910050331604e02c70666c45fcfc66b0d4f34')
 
 prepare() {
   cp -a PyQt5_gpl-$pkgver{,-py2}
@@ -71,13 +71,20 @@ package_python-pyqt5-debug(){
               'qt5-serialport: QtSerialPort'
               'qt5-websockets: QtWebSockets'
               'qt5-connectivity: QtNfc, QtBluetooth'
-              'qt5-webengine: QtWebEngine, QtWebEngineCore, QtWebEngineWidgets'
               'qt5-x11extras: QtX11Extras'
-              'qt5-networkauth: QtNetworkAuth')
+              'qt5-networkauth: QtNetworkAuth'
+              'qt5-remoteobjects: QtRemoteObjects')
 
   cd PyQt5_gpl-$pkgver
   # INSTALL_ROOT is needed for the QtDesigner module, the other Makefiles use DESTDIR
   make DESTDIR="$pkgdir" INSTALL_ROOT="$pkgdir" install -j1
+
+  # Remove unused py2 version of uic modules:
+  rm -r "$pkgdir"/usr/lib/python*/site-packages/PyQt5/uic/port_v2
+
+  # compile Python bytecode
+  python -m compileall -d / "$pkgdir"/usr/lib
+  python -O -m compileall -d / "$pkgdir"/usr/lib
 
   # Provided by pyqt-common
   rm "$pkgdir"/usr/share/qt/qsci/api/python/PyQt5.api
@@ -100,13 +107,20 @@ package_python2-pyqt5-debug(){
               'qt5-serialport: QtSerialPort'
               'qt5-websockets: QtWebSockets'
               'qt5-connectivity: QtNfc, QtBluetooth'
-              'qt5-webengine: QtWebEngine, QtWebEngineCore, QtWebEngineWidgets'
               'qt5-x11extras: QtX11Extras'
-              'qt5-networkauth: QtNetworkAuth')
+              'qt5-networkauth: QtNetworkAuth'
+              'qt5-remoteobjects: QtRemoteObjects')
 
   cd PyQt5_gpl-$pkgver-py2
   # INSTALL_ROOT is needed for the QtDesigner module, the other Makefiles use DESTDIR
   make DESTDIR="$pkgdir" INSTALL_ROOT="$pkgdir" install -j1
+
+  # Remove unused py3 version of uic modules:
+  rm -r "$pkgdir"/usr/lib/python*/site-packages/PyQt5/uic/port_v3
+
+  # compile Python bytecode
+  python2 -m compileall -d / "$pkgdir"/usr/lib
+  python2 -O -m compileall -d / "$pkgdir"/usr/lib
 
   # Fix conflicts with python-pyqt5-debug
   mv "$pkgdir"/usr/bin/{,python2-}pyuic5

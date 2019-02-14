@@ -3,11 +3,11 @@
 
 pkgname=qt5-serialport-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.0
+_qtver=5.12.1
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
-url='http://qt-project.org/'
+url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Provides access to hardware and virtual serial ports'
 depends=('qt5-base')
@@ -17,8 +17,8 @@ _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-serialport=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-serialport')
-source=("http://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('59d4005695089c6b50fc5123094125d9224c1715655128640158a2404075a9bb')
+source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('243b2502283c45f5163d68c3f23c787d46eb0e3ba58f3d9a0560dc7968a6ce19')
 
 prepare() {
   mkdir -p build
