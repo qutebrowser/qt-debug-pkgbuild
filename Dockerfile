@@ -1,6 +1,7 @@
 FROM thecompiler/archlinux
 MAINTAINER Florian Bruhin <me@the-compiler.org>
 
+RUN pacman -Sy --noconfirm archlinux-keyring
 RUN pacman -Suy --noconfirm --needed \
     git \
     base-devel \
