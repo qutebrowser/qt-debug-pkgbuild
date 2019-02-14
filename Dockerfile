@@ -58,8 +58,10 @@ RUN pacman -Suy --noconfirm --needed \
     python-dbus \
     # to have a running Qt already
     qt5 \
+    qt5-webkit \
     python-pyqt5 \
-    python2-pyqt5
+    python2-pyqt5 \
+    python-pyqtwebengine
 RUN sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf && \
     sed -i 's|#BUILDDIR=.*|BUILDDIR="/tmp/makepkg"|' /etc/makepkg.conf && \
     sed -i 's|#PKGDEST=.*|PKGDEST="/out"|' /etc/makepkg.conf && \
