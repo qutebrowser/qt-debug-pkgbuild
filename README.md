@@ -38,8 +38,8 @@ Here is how an update looks:
 ## Update patched PKGBUILDs
 
 - `git checkout master`
-- `git rm -r qt5-* pyqt5`
-- `git checkout upstream -- qt5-\* pyqt5 pkglist`
+- `git rm -r qt5-* pyqt*`
+- `git checkout upstream -- qt5-\* pyqt\* pkglist`
 - `git reset HEAD .` (unstage all changes)
 - `bash patch.sh`
 - `git status`, add/delete files

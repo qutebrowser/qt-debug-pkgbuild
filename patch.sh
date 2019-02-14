@@ -82,48 +82,53 @@ patch_qt_base() {
 }
 
 patch_pyqt() {
+    pkg=$1
     # replace all pyqt5 references
-    sed -i 's/\(pyqt5[a-z0-9-]*\)/\1-debug/g' pyqt5/PKGBUILD
-    sed -i 's/-debug\.so/\.so/g' pyqt5/PKGBUILD
+    sed -i "s/\\($pkg[a-z0-9-]*\\)/\\1-debug/g" $pkg/PKGBUILD
+    sed -i 's/-debug\.so/\.so/g' $pkg/PKGBUILD
     # add debug options
-    sed -i '/^license=/aoptions=("debug" "!strip")' pyqt5/PKGBUILD
-    grep -q options pyqt5/PKGBUILD || fail
-    # add debug switch
-    sed -i 's|--qsci-api|& \\\n    --debug|' pyqt5/PKGBUILD
-    grep -q -- --debug pyqt5/PKGBUILD || fail
+    sed -i '/^license=/aoptions=("debug" "!strip")' $pkg/PKGBUILD
+    grep -q options $pkg/PKGBUILD || fail
     # fix up sip name
-    sed -i 's/\(python2\?-sip-pyqt5\)-debug/\1/g' pyqt5/PKGBUILD
-    grep -qF python-sip-pyqt5-debug pyqt5/PKGBUILD && fail
-    grep -qF python2-sip-pyqt5-debug pyqt5/PKGBUILD && fail
+    sed -i "s/\\(python2\\?-sip-$pkg\\)-debug/\\1/g" $pkg/PKGBUILD
+    grep -qF python-sip-$pkg-debug $pkg/PKGBUILD && fail
+    grep -qF python2-sip-$pkg-debug $pkg/PKGBUILD && fail
 
     # add provides/conflicts/options sections to package functions
-    line1='  provides=("pyqt5-common=$pkgver")'
-    line2='  conflicts=("pyqt5-common")'
+    line1="  provides=(\"$pkg-common=\$pkgver\")"
+    line2="  conflicts=(\"$pkg-common\")"
     line3='  options=("debug" "!strip")'
-    sed -i "/^package_pyqt5-common-debug/a\\$line1\\n$line2\\n$line3" pyqt5/PKGBUILD
-    grep -q "$line1" pyqt5/PKGBUILD || fail
-    grep -q "$line2" pyqt5/PKGBUILD || fail
-    grep -q "$line3" pyqt5/PKGBUILD || fail
+    sed -i "/^package_$pkg-common-debug/a\\$line1\\n$line2\\n$line3" $pkg/PKGBUILD
+    grep -q "$line1" $pkg/PKGBUILD || fail
+    grep -q "$line2" $pkg/PKGBUILD || fail
+    grep -q "$line3" $pkg/PKGBUILD || fail
 
-    line1='  provides=("python-pyqt5=$pkgver")'
-    line2='  conflicts=("python-pyqt5")'
-    sed -i "/^package_python-pyqt5-debug/a\\$line1\\n$line2\\n$line3" pyqt5/PKGBUILD
-    grep -q "$line1" pyqt5/PKGBUILD || fail
-    grep -q "$line2" pyqt5/PKGBUILD || fail
+    line1="  provides=(\"python-$pkg=\$pkgver\")"
+    line2="  conflicts=(\"python-$pkg\")"
+    sed -i "/^package_python-$pkg-debug/a\\$line1\\n$line2\\n$line3" $pkg/PKGBUILD
+    grep -q "$line1" $pkg/PKGBUILD || fail
+    grep -q "$line2" $pkg/PKGBUILD || fail
 
-    line1='  provides=("python2-pyqt5=$pkgver")'
-    line2='  conflicts=("python2-pyqt5")'
-    sed -i "/^package_python2-pyqt5-debug/a\\$line1\\n$line2\\n$line3" pyqt5/PKGBUILD
-    grep -q "$line1" pyqt5/PKGBUILD || fail
-    grep -q "$line2" pyqt5/PKGBUILD || fail
+    line1="  provides=(\"python2-$pkg=\$pkgver\")"
+    line2="  conflicts=(\"python2-$pkg\")"
+    sed -i "/^package_python2-$pkg-debug/a\\$line1\\n$line2\\n$line3" $pkg/PKGBUILD
+    grep -q "$line1" $pkg/PKGBUILD || fail
+    grep -q "$line2" $pkg/PKGBUILD || fail
+
+    if [[ $pkg == pyqt5 ]]; then
+        # add debug switch
+        sed -i 's|--qsci-api|& \\\n    --debug|' $pkg/PKGBUILD
+        grep -q -- --debug $pkg/PKGBUILD || fail
+    fi
 }
 
 if (( $# == 0 )); then
-    packages=(qt5-* pyqt5)
+    packages=(qt5-* pyqt5 pyqtwebengine)
 else
     packages="$@"
 fi
 
 patch_qt "${packages[@]}"
 [[ "${packages[@]}" == *qt5-base* ]] && patch_qt_base
-[[ "${packages[@]}" == *pyqt5* ]] && patch_pyqt
+[[ "${packages[@]}" == *pyqt5* ]] && patch_pyqt pyqt5
+[[ "${packages[@]}" == *pyqtwebengine* ]] && patch_pyqt pyqtwebengine
