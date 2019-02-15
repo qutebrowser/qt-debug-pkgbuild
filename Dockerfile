@@ -61,7 +61,8 @@ RUN pacman -Suy --noconfirm --needed \
     qt5-webkit \
     python-pyqt5 \
     python2-pyqt5 \
-    python-pyqtwebengine
+    python-pyqtwebengine \
+    python2-pyqtwebengine
 RUN sed -i 's/#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf && \
     sed -i 's|#BUILDDIR=.*|BUILDDIR="/tmp/makepkg"|' /etc/makepkg.conf && \
     sed -i 's|#PKGDEST=.*|PKGDEST="/out"|' /etc/makepkg.conf && \
