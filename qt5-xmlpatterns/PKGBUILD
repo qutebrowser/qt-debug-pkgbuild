@@ -3,7 +3,7 @@
 
 pkgname=qt5-xmlpatterns-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.1
+_qtver=5.12.2
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -19,7 +19,7 @@ _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-xmlpatterns=$pkgver")
 options=("debug" "!strip")
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('76988ca9a7a184b9013b8a5864dad150e4603890c7eb7aecad4baad071802ecb')
+sha256sums=('2e535ec17b542f2a0b87a9db93284666015cc07b6188894ace7e75104c6d860d')
 
 prepare() {
   mkdir -p build
