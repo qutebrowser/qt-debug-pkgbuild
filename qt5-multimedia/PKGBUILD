@@ -3,7 +3,7 @@
 
 pkgname=qt5-multimedia-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.2
+_qtver=5.12.3
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -21,7 +21,7 @@ provides=("qt5-multimedia=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-multimedia')
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('5d3c90c546e64abf523432a3df5e7a3f1b5ad72e7d0b5ea6260729fbefeb30f5')
+sha256sums=('a30beeb37fb284d93522e29c01fb8d12726f40e9248e80b70b1f8ab60197a301')
 
 prepare() {
   mkdir -p build
