@@ -3,7 +3,7 @@
 
 pkgname=qt5-location-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.3
+_qtver=5.12.4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -17,7 +17,7 @@ provides=("qt5-location=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-location')
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('52d589be2852ada0c000b06cc411b61e521cd0797470be567fd1625bcc9d75c6')
+sha256sums=('127b40bd7679fead3fb98f4c9c1d71dde9d6d416e90a6000129b61a5f128b3a0')
 
 prepare() {
   mkdir -p build

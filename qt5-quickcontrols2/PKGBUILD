@@ -3,7 +3,7 @@
 
 pkgname=qt5-quickcontrols2-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.3
+_qtver=5.12.4
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -18,7 +18,7 @@ provides=("qt5-quickcontrols2=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-quickcontrols2')
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('e855e8369c3cb5a2ebcd2028a2a195ba73945fd9d5bc26134706c2fa14e99b3a')
+sha256sums=('9a447eed38bc8c7d7be7bc407317f58940377c077ddca74c9a641b1ee6200331')
 
 prepare() {
   mkdir -p build
