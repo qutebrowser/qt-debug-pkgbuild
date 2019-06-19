@@ -5,7 +5,7 @@ pkgname=qt5-webengine-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.12.4
 pkgver=${_qtver/-/}
-pkgrel=1
+pkgrel=1.1
 arch=('x86_64')
 url='https://www.qt.io'
 license=('LGPL3' 'LGPL2.1' 'BSD')
@@ -19,10 +19,12 @@ provides=("qt5-webengine=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-webengine')
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
-         qtwebengine-harmony.patch qtwebengine-glibc-2.29.patch)
+         qtwebengine-harmony.patch qtwebengine-glibc-2.29.patch
+         "qtbug-72532.patch::https://code.qt.io/cgit/qt/qtwebengine-chromium.git/patch/?id=6f3c15d2319ca11c2e31076292f5733baf64d991")
 sha256sums=('fccf5c945412c19c3805323211b504ac8becbf191c638a2dc85ec91abfb1b331'
             'feca54ab09ac0fc9d0626770a6b899a6ac5a12173c7d0c1005bc3964ec83e7b3'
-            'dd791f154b48e69cd47fd94753c45448655b529590995fd71ac1591c53a3d60c')
+            'dd791f154b48e69cd47fd94753c45448655b529590995fd71ac1591c53a3d60c'
+            '528b856f4a55cc7aeb7a1df26acf3aaae306efc3f55a7c00ab32d5d14120c677')
 
 prepare() {
   mkdir -p build
@@ -38,6 +40,7 @@ prepare() {
 
   cd src/3rdparty/chromium
   patch -p1 -i "$srcdir"/qtwebengine-glibc-2.29.patch # Fix PPAPI plugins with glibc 2.29
+  patch -p2 -i "$srcdir"/qtbug-72532.patch
 }
 
 build() {
