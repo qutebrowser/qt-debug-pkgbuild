@@ -1,7 +1,7 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
-# Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-quickcontrols2-debug
+pkgname=qt5-lottie-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.13.0
 pkgver=${_qtver/-/}
@@ -9,16 +9,15 @@ pkgrel=1
 arch=('x86_64')
 url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
-pkgdesc='Next generation user interface controls based on Qt Quick'
+pkgdesc='A family of player software for a certain json-based file format for describing 2d vector graphics animations'
 depends=('qt5-declarative')
-provides=("qt5-quickcontrols2=$pkgver")
+provides=("qt5-lottie=$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-quickcontrols2')
-optdepends=('qt5-graphicaleffects: for the Material style')
+conflicts=('qt5-lottie')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('a5cb7e6d68285203bfb1aee87551228879fa9d93d87be5c8bab38e5a79dc916d')
+sha256sums=('5315e8a5d1ab76b61e1cf5f88f5ed43fe06b91ec732139902c9a242ac5ea714c')
 
 prepare() {
   mkdir -p build

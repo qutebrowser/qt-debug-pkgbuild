@@ -3,7 +3,7 @@
 
 pkgname=qt5-scxml-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.4
+_qtver=5.13.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -11,14 +11,14 @@ url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Static and runtime integration of SCXML models into Qt code'
 depends=('qt5-declarative')
-makedepends=()
-groups=('qt' 'qt5')
-_pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 provides=("qt5-scxml=$pkgver")
 options=("debug" "!strip")
 conflicts=('qt5-scxml')
+makedepends=()
+groups=('qt' 'qt5')
+_pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('696fb72a62018151275fe589fc80cb160d2becab9a3254321d40e2e11a0ad4f8')
+sha256sums=('fcd5b347a51d47b70b8192a20934951bb80cafa18fa55413ffc9e1fcb1bb2766')
 
 prepare() {
   mkdir -p build

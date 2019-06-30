@@ -3,7 +3,7 @@
 
 pkgname=qt5-websockets-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.12.4
+_qtver=5.13.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -11,15 +11,15 @@ url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Provides WebSocket communication compliant with RFC 6455'
 depends=('qt5-base')
+provides=("qt5-websockets=$pkgver")
+options=("debug" "!strip")
+conflicts=('qt5-websockets')
 makedepends=('qt5-declarative')
 optdepends=('qt5-declarative: QML bindings')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
-provides=("qt5-websockets=$pkgver")
-options=("debug" "!strip")
-conflicts=('qt5-websockets')
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('b471eda2f486d21c51fc3bc53bb8844022117e746d5f15c5eabb82cd37eb2abe')
+sha256sums=('f941dd44f6e16041a25723c1b70ce9e28910c630509da0044ecb9fdda28a6e34')
 
 prepare() {
   mkdir -p build
