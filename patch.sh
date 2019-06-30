@@ -29,15 +29,16 @@ patch_qt() {
         if grep -q '^conflicts=' $pkg/PKGBUILD; then
             sed -i 's|^conflicts=(\(.*\))|conflicts=(\1 '\'$pkg\'')|' $pkg/PKGBUILD
         else
-            grep -q _pkgfqn= $pkg/PKGBUILD || fail
-            sed -i '/^_pkgfqn=/aconflicts=('\'$pkg\'')' $pkg/PKGBUILD
+            grep -q '^depends=' $pkg/PKGBUILD || fail
+            sed -i '/^depends=/aconflicts=('\'$pkg\'')' $pkg/PKGBUILD
         fi
 
         # add provides-entry for non-debug package
         if grep -q provides $pkg/PKGBUILD; then
             sed -i 's/provides=(\(.*\))/provides=("'$pkg'=$pkgver" \1)/' $pkg/PKGBUILD
         else
-            sed -i '/^_pkgfqn=/aprovides=("'$pkg'=$pkgver")' $pkg/PKGBUILD
+            grep -q '^depends=' $pkg/PKGBUILD || fail
+            sed -i '/^depends=/aprovides=("'$pkg'=$pkgver")' $pkg/PKGBUILD
         fi
 
         # add debug options
