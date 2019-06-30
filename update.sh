@@ -11,6 +11,7 @@ if (( $# == 0 )); then
     grep -q qt5-webkit pkglist || echo qt5-webkit >> pkglist
     echo pyqt5 >> pkglist
     echo pyqtwebengine >> pkglist
+    sed -i '/qt5-doc/d' pkglist
 
     mapfile -t packages < pkglist
 else
