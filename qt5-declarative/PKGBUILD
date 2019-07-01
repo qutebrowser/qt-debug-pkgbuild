@@ -10,9 +10,9 @@ arch=('x86_64')
 url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Classes for QML and JavaScript languages'
-depends=('qt5-base')
 provides=("qt5-declarative=$pkgver")
 options=("debug" "!strip")
+depends=('qt5-base')
 makedepends=('python')
 groups=('qt' 'qt5')
 conflicts=('qtchooser' 'qt5-declarative')

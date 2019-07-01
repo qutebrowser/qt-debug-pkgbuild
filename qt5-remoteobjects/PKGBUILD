@@ -10,10 +10,10 @@ arch=(x86_64)
 url='https://www.qt.io'
 license=(GPL3 LGPL3 FDL custom)
 pkgdesc='Inter-process communication (IPC) module developed for Qt'
-depends=(qt5-base)
+conflicts=('qt5-remoteobjects')
 provides=("qt5-remoteobjects=$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-remoteobjects')
+depends=(qt5-base)
 makedepends=(qt5-declarative)
 optdepends=('qt5-declarative: QML bindings')
 groups=(qt qt5)

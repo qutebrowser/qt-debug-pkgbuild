@@ -10,10 +10,10 @@ arch=('x86_64')
 url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Provides WebSocket communication compliant with RFC 6455'
-depends=('qt5-base')
+conflicts=('qt5-websockets')
 provides=("qt5-websockets=$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-websockets')
+depends=('qt5-base')
 makedepends=('qt5-declarative')
 optdepends=('qt5-declarative: QML bindings')
 groups=('qt' 'qt5')

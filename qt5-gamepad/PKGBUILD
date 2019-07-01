@@ -10,10 +10,10 @@ arch=('x86_64')
 url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Adds support for getting events from gamepad devices'
-depends=('qt5-base' 'sdl2')
+conflicts=('qt5-gamepad')
 provides=("qt5-gamepad=$pkgver")
 options=("debug" "!strip")
-conflicts=('qt5-gamepad')
+depends=('qt5-base' 'sdl2')
 makedepends=('qt5-declarative')
 optdepends=('qt5-declarative: QML bindings')
 groups=('qt' 'qt5')
