@@ -87,6 +87,7 @@ patch_pyqt() {
     # replace all pyqt5 references
     sed -i "s/\\($pkg[a-z0-9-]*\\)/\\1-debug/g" $pkg/PKGBUILD
     sed -i 's/-debug\.so/\.so/g' $pkg/PKGBUILD
+    sed -i 's/-debug\.patch/\.patch/g' $pkg/PKGBUILD
     # add debug options
     sed -i '/^license=/aoptions=("debug" "!strip")' $pkg/PKGBUILD
     grep -q options $pkg/PKGBUILD || fail
