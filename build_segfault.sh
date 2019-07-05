@@ -28,11 +28,11 @@ for pkg in $packages; do
     rm -f "$outdir"/*$pkg-*
     rsync -avPh segfault:"$qtbuilddir/out/*${pkg}-*" "$outdir"
 
-    if (( ! temp )); then
-        for f in "$outdir"/*$pkg-*.pkg.tar.xz; do
-            gpg --detach-sign --default-key 0xE80A0C82 "$f"
-        done
+    for f in "$outdir"/*$pkg-*.pkg.tar.xz; do
+        gpg --detach-sign --default-key 0xE80A0C82 "$f"
+    done
 
+    if (( ! temp )); then
         repo-add "$outdir/qt-debug.db.tar.gz" "$outdir"/*"$pkg"-*.pkg.tar.xz
     fi
 done
