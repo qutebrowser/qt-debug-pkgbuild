@@ -12,6 +12,7 @@ if (( $# == 0 )); then
     echo pyqt5 >> pkglist
     echo pyqtwebengine >> pkglist
     sed -i '/qt5-doc/d' pkglist
+    sed -i '/qt5-examples/d' pkglist
 
     mapfile -t packages < pkglist
 else
