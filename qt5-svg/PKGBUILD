@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-svg
-_qtver=5.13.2
+_qtver=5.14.0-beta2
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -12,11 +12,16 @@ pkgdesc='Classes for displaying the contents of SVG files'
 depends=('qt5-base')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('849e2e357e1333b64ecb728352f652cd8d916f029ed848f775b15d0b500cb7d7')
+source=("https://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz"
+         qtbug-78200.patch::"https://code.qt.io/cgit/qt/qtsvg.git/patch/?id=14fa4591")
+sha256sums=('301dc67a1d7c4457baf42c1544637ac4167b60f5fe212160fa606b3973d17465'
+            '2f382af7553ed08b0da16d73090d0e70ebe8cca71a1030859e2aaa42a5fc505c')
 
 prepare() {
   mkdir -p build
+
+  cd $_pkgfqn
+  patch -Rp1 -i ../qtbug-78200.patch # Revert commit that breaks svg rendering in Plasma https://bugreports.qt.io/browse/QTBUG-78200
 }
 
 build() {
