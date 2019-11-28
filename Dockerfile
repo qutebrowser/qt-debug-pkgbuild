@@ -51,6 +51,7 @@ RUN pacman -Suy --noconfirm --needed \
     python-sip-pyqt5 \
     python2-sip-pyqt5 \
     sip \
+    sip5 \
     python-opengl \
     python2-opengl \
     python2-enum34 \

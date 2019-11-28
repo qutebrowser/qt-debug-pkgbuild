@@ -3,26 +3,26 @@
 
 pkgbase=pyqtwebengine-debug
 pkgname=(python-pyqtwebengine-debug python2-pyqtwebengine-debug pyqtwebengine-common-debug)
-pkgver=5.13.1
-pkgrel=1
+pkgver=5.13.2
+pkgrel=3
 arch=(x86_64)
 url="https://www.riverbankcomputing.com/software/pyqtwebengine/intro"
 license=(GPL)
 options=("debug" "!strip")
 makedepends=(sip qt5-webengine python-pyqt5 python2-pyqt5)
-source=("https://www.riverbankcomputing.com/static/Downloads/PyQtWebEngine/$pkgver/PyQtWebEngine_gpl-$pkgver.tar.gz")
-sha256sums=('8d8c1262005d8465653a848bf67327fb338e0d3c2d26090a6f7eb071dbb42092')
+source=("https://www.riverbankcomputing.com/static/Downloads/PyQtWebEngine/$pkgver/PyQtWebEngine-$pkgver.tar.gz")
+sha256sums=('4264911b5847c75721d8c9c30af92e58a216bd25ceef37f7abf921005c1d45a9')
 
 prepare() {
-  cp -a PyQtWebEngine_gpl-$pkgver{,-py2}
+  cp -a PyQtWebEngine-$pkgver{,-py2}
 }
 
 build() {
-  cd "$srcdir"/PyQtWebEngine_gpl-$pkgver
+  cd "$srcdir"/PyQtWebEngine-$pkgver
   python configure.py
   make
 
-  cd "$srcdir"/PyQtWebEngine_gpl-$pkgver-py2
+  cd "$srcdir"/PyQtWebEngine-$pkgver-py2
   python2 configure.py
   make
 }
@@ -34,7 +34,7 @@ package_pyqtwebengine-common-debug(){
   pkgdesc="Common files shared between python-pyqtwebengine-debug and python2-pyqtwebengine-debug"
   depends=(qt5-webengine)
 
-  cd PyQtWebEngine_gpl-$pkgver
+  cd PyQtWebEngine-$pkgver
   install -Dm644 PyQtWebEngine.api -t "$pkgdir"/usr/share/qt/qsci/api/python
 
   install -d "$pkgdir"/usr/share/sip/PyQt5
@@ -48,7 +48,7 @@ package_python-pyqtwebengine-debug(){
   pkgdesc="Python 3 bindings for QtWebEngine"
   depends=(python-pyqt5 pyqtwebengine-common-debug)
 
-  cd PyQtWebEngine_gpl-$pkgver
+  cd PyQtWebEngine-$pkgver
   make INSTALL_ROOT="$pkgdir" install -j1
 
   # Provided by pyqtwebengine-common-debug
@@ -62,7 +62,7 @@ package_python2-pyqtwebengine-debug(){
   pkgdesc="Python 2 bindings for QtWebEngine"
   depends=(python2-pyqt5 pyqtwebengine-common-debug)
 
-  cd PyQtWebEngine_gpl-$pkgver-py2
+  cd PyQtWebEngine-$pkgver-py2
   make INSTALL_ROOT="$pkgdir" install -j1
 
   # Provided by pyqtwebengine-common-debug
