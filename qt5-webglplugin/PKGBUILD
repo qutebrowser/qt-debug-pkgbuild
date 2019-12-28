@@ -2,7 +2,7 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=qt5-webglplugin
-_qtver=5.13.2
+_qtver=5.14.0-beta3
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=(x86_64)
@@ -12,8 +12,8 @@ pkgdesc='QPA plugin for running an application via a browser using streamed WebG
 depends=(qt5-websockets qt5-declarative)
 groups=(qt qt5)
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('ae369929d5a3356391bccd25cac22846dc44cbb726ce7b60924f53944addabb7')
+source=("https://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('c4d8a83f941658e523e410385af03a5c2ea08ac9c67d297e0692eb881f8311ac')
 
 prepare() {
   mkdir -p build

@@ -2,7 +2,7 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 
 pkgname=qt5-speech
-_qtver=5.13.2
+_qtver=5.14.0-beta3
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=(x86_64)
@@ -14,8 +14,8 @@ makedepends=(flite speech-dispatcher)
 optdepends=('flite: flite TTS backend' 'speech-dispatcher: speech-dispatcher TTS backend')
 groups=(qt qt5)
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('a0aca08feeac6925ead7f841319bdcfd60bfc126de07807edaf267c2ca8d13d5')
+source=("https://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('334b294e8606831fb75896fe59d0f0e1c4ab7f1b089e5d79e652070d8f1b5a0e')
 
 prepare() {
   mkdir -p build

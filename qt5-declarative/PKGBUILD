@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-declarative
-_qtver=5.13.2
+_qtver=5.14.0-beta3
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -10,12 +10,12 @@ url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
 pkgdesc='Classes for QML and JavaScript languages'
 depends=('qt5-base')
-makedepends=('python')
+makedepends=('python' 'vulkan-headers')
 groups=('qt' 'qt5')
 conflicts=('qtchooser')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('d9a524f45fe9e136cda2252f9d7013ec17046d907e3f39606db920987c22d1fd')
+source=("https://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('a80da41a45cfbea9d9b08d1c964cb430b61b27f31f91b42772e2570032d22315')
 
 prepare() {
   mkdir -p build

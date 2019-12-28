@@ -25,6 +25,6 @@ for pkg in "${packages[@]}"; do
     echo "Downloading $pkg..."
     git clone git://projects.archlinux.org/svntogit/packages.git \
         --branch=packages/$pkg --single-branch -q || exit 1
-    cp -R packages/trunk $pkg
+    cp -R packages/kde-unstable $pkg
     rm -rf packages
 done
