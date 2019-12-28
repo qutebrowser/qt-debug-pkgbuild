@@ -1,7 +1,7 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=qt5-sensors-debug
+pkgname=qt5-quick3d-debug
 _orig_pkgname=${pkgname/-debug/}
 _qtver=5.14.0
 pkgver=${_qtver/-/}
@@ -9,17 +9,17 @@ pkgrel=1
 arch=('x86_64')
 url='https://www.qt.io'
 license=('GPL3' 'LGPL3' 'FDL' 'custom')
-pkgdesc='Provides access to sensor hardware and motion gesture recognition'
-conflicts=('qt5-sensors')
-provides=("qt5-sensors=$pkgver")
+pkgdesc='Qt module and API for defining 3D content in Qt Quick'
+conflicts=('qt5-quick3d')
+provides=("qt5-quick3d=$pkgver")
 options=("debug" "!strip")
-depends=('qt5-base')
-makedepends=('qt5-declarative')
-optdepends=('qt5-declarative: QML bindings')
+depends=('qt5-declarative')
+makedepends=('assimp')
+optdepends=('assimp: Import from assimp')
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('306fc19309b218b062eb6415e2a8364c5c3b53c2942e200012d45f0c33717926')
+sha256sums=('a826eb4c66b442daf298fceb2099dd2ab3d736c566e50f8a9213aaa80e86177c')
 
 prepare() {
   mkdir -p build

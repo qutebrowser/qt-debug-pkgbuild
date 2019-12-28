@@ -4,7 +4,7 @@
 
 pkgname=qt5-mqtt-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.13.2
+_qtver=5.14.0
 pkgver=${_qtver/-/}
 pkgrel=1
 pkgdesc="Module to implement MQTT protocol v3.1/3.1.1/5.0"
@@ -16,7 +16,7 @@ provides=("qt5-mqtt=$pkgver")
 options=("debug" "!strip")
 depends=(qt5-base)
 makedepends=(git)
-source=("git://code.qt.io/qt/qtmqtt.git#tag=v$pkgver")
+source=("git://code.qt.io/qt/qtmqtt.git#tag=v$_qtver")
 sha512sums=('SKIP')
 _pkgfqn=${_orig_pkgname/5-/}
 
