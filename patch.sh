@@ -96,15 +96,6 @@ patch_pyqt() {
     grep -qF python-sip-$pkg-debug $pkg/PKGBUILD && fail
     grep -qF python2-sip-$pkg-debug $pkg/PKGBUILD && fail
 
-    # add provides/conflicts/options sections to package functions
-    line1="  provides=(\"$pkg-common=\$pkgver\")"
-    line2="  conflicts=(\"$pkg-common\")"
-    line3='  options=("debug" "!strip")'
-    sed -i "/^package_$pkg-common-debug/a\\$line1\\n$line2\\n$line3" $pkg/PKGBUILD
-    grep -q "$line1" $pkg/PKGBUILD || fail
-    grep -q "$line2" $pkg/PKGBUILD || fail
-    grep -q "$line3" $pkg/PKGBUILD || fail
-
     line1="  provides=(\"python-$pkg=\$pkgver\")"
     line2="  conflicts=(\"python-$pkg\")"
     sed -i "/^package_python-$pkg-debug/a\\$line1\\n$line2\\n$line3" $pkg/PKGBUILD
@@ -119,7 +110,7 @@ patch_pyqt() {
 
     # add debug switch
     if [[ $pkg == pyqt5 ]]; then
-        sed -i 's|--qsci-api|& \\\n    --debug|' $pkg/PKGBUILD
+        sed -i 's|--confirm-license \\|&\n    --debug \\|' $pkg/PKGBUILD
         grep -q -- --debug $pkg/PKGBUILD || fail
     fi
 
