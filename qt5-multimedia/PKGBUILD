@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-multimedia
-_qtver=5.14.0-beta3
+_qtver=5.14.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -16,8 +16,8 @@ optdepends=('qt5-declarative: QML bindings' 'gst-plugins-good: camera support, a
             'gst-libav: ffmpeg plugin')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("https://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('dbf3348b37574f3841e8cc0cf86eb62d3ac18838b9ced479bf8106c6b4169108')
+source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('e7901aa32fe71f1409cf73a0c62f27b98f434688e7b16ea8591b29cd8f90ad5e')
 
 prepare() {
   mkdir -p build

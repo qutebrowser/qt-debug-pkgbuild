@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=qt5-quickcontrols2
-_qtver=5.14.0-beta3
+_qtver=5.14.0
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -13,8 +13,8 @@ depends=('qt5-declarative')
 optdepends=('qt5-graphicaleffects: for the Material style')
 groups=('qt' 'qt5')
 _pkgfqn="${pkgname/5-/}-everywhere-src-${_qtver}"
-source=("https://download.qt.io/development_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('12764a62694561e8f6eee3741ed0e26fcda74a30029f82e2f55748de66b1d916')
+source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
+sha256sums=('827bf86db44ce4f698f172378313db04e1cb81c593e9342bdd95bb1708f27911')
 
 prepare() {
   mkdir -p build
