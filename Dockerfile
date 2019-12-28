@@ -18,6 +18,7 @@ RUN pacman -Suy --noconfirm --needed \
     cups \
     freetds \
     vulkan-headers \
+    md4c \
     # qt5-multimedia makedepends
     gst-plugins-bad \
     # qt5-declarative makedepends
@@ -48,7 +49,8 @@ RUN pacman -Suy --noconfirm --needed \
     flite \
     speech-dispatcher \
     # pyqt5 makedepends
-    python-sip-pyqt5 \
+    python-pip \
+    pyqt-builder \
     python2-sip-pyqt5 \
     sip \
     sip5 \
