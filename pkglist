@@ -35,5 +35,6 @@ qt5-webview
 qt5-x11extras
 qt5-xmlpatterns
 qt5-webkit
+qt5-mqtt
 pyqt5
 pyqtwebengine

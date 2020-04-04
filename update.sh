@@ -9,6 +9,7 @@ if (( $# == 0 )); then
     done
 
     grep -q qt5-webkit pkglist || echo qt5-webkit >> pkglist
+    grep -q qt5-mqtt pkglist || echo qt5-mqtt >> pkglist
     echo pyqt5 >> pkglist
     echo pyqtwebengine >> pkglist
     sed -i '/qt5-doc/d' pkglist
