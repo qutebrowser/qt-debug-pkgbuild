@@ -3,7 +3,7 @@
 
 pkgname=qt5-multimedia-debug
 _orig_pkgname=${pkgname/-debug/}
-_qtver=5.14.0
+_qtver=5.14.2
 pkgver=${_qtver/-/}
 pkgrel=1
 arch=('x86_64')
@@ -21,7 +21,7 @@ optdepends=('qt5-declarative: QML bindings' 'gst-plugins-good: camera support, a
 groups=('qt' 'qt5')
 _pkgfqn="${_orig_pkgname/5-/}-everywhere-src-${_qtver}"
 source=("https://download.qt.io/official_releases/qt/${pkgver%.*}/${_qtver}/submodules/${_pkgfqn}.tar.xz")
-sha256sums=('e7901aa32fe71f1409cf73a0c62f27b98f434688e7b16ea8591b29cd8f90ad5e')
+sha256sums=('7acd8ede6835314206e407b35b668f0add67544577fb51fe67afb03137fb9fe9')
 
 prepare() {
   mkdir -p build

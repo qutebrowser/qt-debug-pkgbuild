@@ -7,18 +7,18 @@
 
 pkgbase=pyqt5-debug
 pkgname=('python-pyqt5-debug' 'python2-pyqt5-debug')
-pkgver=5.14.0
-pkgrel=3
+pkgver=5.14.2
+pkgrel=1
 arch=('x86_64')
 url="https://riverbankcomputing.com/software/pyqt/intro"
 license=('GPL')
 options=("debug" "!strip")
-makedepends=('sip5' 'pyqt-builder' 'python2-sip-pyqt5' 'sip' 'python-opengl' 'python2-opengl' 'python2-enum34' 'python-pip'
+makedepends=('sip5' 'pyqt-builder' 'python2-sip-pyqt5' 'sip' 'python-opengl' 'python2-opengl' 'python2-enum34'
              'python2-dbus' 'python-dbus' 'qt5-connectivity' 'qt5-multimedia' 'qt5-tools' 'qt5-serialport' 'qt5-svg'
              'qt5-webkit' 'qt5-websockets' 'qt5-x11extras' 'qt5-networkauth' 'qt5-xmlpatterns' 'qt5-remoteobjects')
 conflicts=('pyqt5-common-debug')
 source=("https://pypi.python.org/packages/source/P/PyQt5/PyQt5-$pkgver.tar.gz")
-sha256sums=('0145a6b7de15756366decb736c349a0cb510d706c83fda5b8cd9e0557bc1da72')
+sha256sums=('bd230c6fd699eabf1ceb51e13a8b79b74c00a80272c622427b80141a22269eb0')
 
 prepare() {
   cp -a PyQt5-$pkgver{,-py2}
@@ -46,9 +46,10 @@ package_python-pyqt5-debug(){
   provides=("python-pyqt5=$pkgver")
   conflicts=("python-pyqt5")
   options=("debug" "!strip")
+
   pkgdesc="A set of Python bindings for the Qt5 toolkit"
   groups=(pyqt5-debug)
-  depends=('python' 'qt5-base')
+  depends=('python-pyqt5-sip' 'qt5-base')
   optdepends=('python-opengl: enable OpenGL 3D graphics in PyQt applications'
               'python-dbus: for python-dbus mainloop support'
               'qt5-multimedia: QtMultimedia, QtMultimediaWidgets'
@@ -73,16 +74,13 @@ package_python-pyqt5-debug(){
   # compile Python bytecode
   python -m compileall -d / "$pkgdir"/usr/lib
   python -O -m compileall -d / "$pkgdir"/usr/lib
-
-  # install sip module
-  sip-module --sdist PyQt5.sip
-  pip install PyQt5_sip-*.tar.gz --root "$pkgdir"
 }
 
 package_python2-pyqt5-debug(){
   provides=("python2-pyqt5=$pkgver")
   conflicts=("python2-pyqt5")
   options=("debug" "!strip")
+
   pkgdesc="A set of Python 2 bindings for the Qt5 toolkit"
   depends=('python2-sip-pyqt5' 'qt5-base' 'python2-enum34')
   optdepends=('python2-opengl: enable OpenGL 3D graphics in PyQt applications'
