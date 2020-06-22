@@ -98,15 +98,16 @@ patch_pyqt() {
     grep -qF python2-sip-$pkg-debug $pkg/PKGBUILD && fail
     grep -qF python2-$pkg-sip-debug $pkg/PKGBUILD && fail
 
-    line1="  provides=(\"python-$pkg=\$pkgver\")"
-    line2="  conflicts=(\"python-$pkg\")"
-    sed -i "/^package_python-$pkg-debug/a\\$line1\\n$line2\\n$line3" $pkg/PKGBUILD
-    grep -q "$line1" $pkg/PKGBUILD || fail
-    grep -q "$line2" $pkg/PKGBUILD || fail
+    line="  conflicts=(\"python-$pkg\")"
+    sed -i "/^package_python-$pkg-debug/a\\$line" $pkg/PKGBUILD
+    grep -q "$line" $pkg/PKGBUILD || fail
+
+    sed -i 's/provides=(\(.*\))/provides=("'python-$pkg'=$pkgver" \1)/' $pkg/PKGBUILD
+    grep -q 'provides=("python-' $pkg/PKGBUILD || fail
 
     line1="  provides=(\"python2-$pkg=\$pkgver\")"
     line2="  conflicts=(\"python2-$pkg\")"
-    sed -i "/^package_python2-$pkg-debug/a\\$line1\\n$line2\\n$line3" $pkg/PKGBUILD
+    sed -i "/^package_python2-$pkg-debug/a\\$line1\\n$line2" $pkg/PKGBUILD
     grep -q "$line1" $pkg/PKGBUILD || fail
     grep -q "$line2" $pkg/PKGBUILD || fail
 

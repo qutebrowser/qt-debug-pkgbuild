@@ -43,10 +43,8 @@ build() {
 }
 
 package_python-pyqt5-debug(){
-  provides=("python-pyqt5=$pkgver")
   conflicts=("python-pyqt5")
   options=("debug" "!strip")
-
   pkgdesc="A set of Python bindings for the Qt5 toolkit"
   groups=(pyqt5-debug)
   depends=('python-pyqt5-sip' 'qt5-base')
@@ -65,7 +63,7 @@ package_python-pyqt5-debug(){
               'qt5-networkauth: QtNetworkAuth'
               'qt5-remoteobjects: QtRemoteObjects'
               'qt5-quick3d: QtQuick3D')
-  provides=(qt5-python-bindings)
+  provides=("python-pyqt5=$pkgver" qt5-python-bindings)
 
   cd PyQt5-$pkgver/build
   make INSTALL_ROOT="$pkgdir" install -j1
@@ -82,7 +80,6 @@ package_python2-pyqt5-debug(){
   provides=("python2-pyqt5=$pkgver")
   conflicts=("python2-pyqt5")
   options=("debug" "!strip")
-
   pkgdesc="A set of Python 2 bindings for the Qt5 toolkit"
   depends=('python2-sip-pyqt5' 'qt5-base' 'python2-enum34')
   optdepends=('python2-opengl: enable OpenGL 3D graphics in PyQt applications'
