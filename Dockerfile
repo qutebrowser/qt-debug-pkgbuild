@@ -29,6 +29,8 @@ RUN pacman -Suy --noconfirm --needed \
     gperf \
     jsoncpp \
     ninja \
+    poppler \
+    libpipewire02 \
     # qt5-webkit makepends
     cmake \
     ruby \
