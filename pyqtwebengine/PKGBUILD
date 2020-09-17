@@ -3,8 +3,8 @@
 
 pkgbase=pyqtwebengine-debug
 pkgname=(python-pyqtwebengine-debug python2-pyqtwebengine-debug)
-pkgver=5.15.0
-pkgrel=2
+pkgver=5.15.1
+pkgrel=1
 arch=(x86_64)
 url="https://www.riverbankcomputing.com/software/pyqtwebengine/intro"
 license=(GPL)
@@ -12,7 +12,7 @@ options=("debug" "!strip")
 makedepends=(sip sip5 pyqt-builder qt5-webengine python-pyqt5 python2-pyqt5)
 conflicts=(pyqtwebengine-common-debug)
 source=("https://pypi.python.org/packages/source/P/PyQtWebEngine/PyQtWebEngine-$pkgver.tar.gz")
-sha256sums=('670812688e40bf75f70ddf01eadd897d231300318d3856b275bf8e7e0085bf75')
+sha256sums=('f0ca7915ee206ba5d703168c6ca40b0aad62c67360328fae4af5359cdbcee439')
 
 prepare() {
   cp -a PyQtWebEngine-$pkgver{,-py2}
@@ -34,12 +34,11 @@ build() {
 }
 
 package_python-pyqtwebengine-debug() {
-  provides=("python-pyqtwebengine=$pkgver")
   conflicts=("python-pyqtwebengine")
-  options=("debug" "!strip")
   options=("debug" "!strip")
   pkgdesc="Python bindings for QtWebEngine"
   groups=(pyqt5)
+  provides=("python-pyqtwebengine=$pkgver")
   depends=(python-pyqt5 qt5-webengine)
 
   cd PyQtWebEngine-$pkgver/build
@@ -50,8 +49,8 @@ package_python2-pyqtwebengine-debug() {
   provides=("python2-pyqtwebengine=$pkgver")
   conflicts=("python2-pyqtwebengine")
   options=("debug" "!strip")
-  options=("debug" "!strip")
   pkgdesc="Python 2 bindings for QtWebEngine"
+  provides=("python-pyqtwebengine=$pkgver")
   depends=(python2-pyqt5 qt5-webengine)
 
   cd PyQtWebEngine-$pkgver-py2
