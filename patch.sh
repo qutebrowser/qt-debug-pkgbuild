@@ -102,7 +102,13 @@ patch_pyqt() {
     sed -i "/^package_python-$pkg-debug/a\\$line" $pkg/PKGBUILD
     grep -q "$line" $pkg/PKGBUILD || fail
 
-    sed -i 's/provides=(\(.*\))/provides=("'python-$pkg'=$pkgver" \1)/' $pkg/PKGBUILD
+    # add provides-entry for non-debug package
+    if grep -q provides $pkg/PKGBUILD; then
+        sed -i 's/provides=(\(.*\))/provides=("'python-$pkg'=$pkgver" \1)/' $pkg/PKGBUILD
+    else
+        grep -q '^  depends=' $pkg/PKGBUILD || fail
+        sed -i '/^  depends=/i\  provides=("'python-$pkg'=$pkgver")' $pkg/PKGBUILD
+    fi
     grep -q 'provides=("python-' $pkg/PKGBUILD || fail
 
     line1="  provides=(\"python2-$pkg=\$pkgver\")"
