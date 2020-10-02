@@ -92,11 +92,9 @@ patch_pyqt() {
     sed -i '/^license=/aoptions=("debug" "!strip")' $pkg/PKGBUILD
     grep -q '^options' $pkg/PKGBUILD || fail
     # fix up sip name
-    sed -i "s/\\(python2\\?-sip-$pkg\\|python2\\?-$pkg-sip\\)-debug/\\1/g" $pkg/PKGBUILD
+    sed -i "s/\\(python-sip-$pkg\\|python-$pkg-sip\\)-debug/\\1/g" $pkg/PKGBUILD
     grep -qF python-sip-$pkg-debug $pkg/PKGBUILD && fail
     grep -qF python-$pkg-sip-debug $pkg/PKGBUILD && fail
-    grep -qF python2-sip-$pkg-debug $pkg/PKGBUILD && fail
-    grep -qF python2-$pkg-sip-debug $pkg/PKGBUILD && fail
 
     line="  conflicts=(\"python-$pkg\")"
     sed -i "/^package_python-$pkg-debug/a\\$line" $pkg/PKGBUILD
@@ -106,20 +104,10 @@ patch_pyqt() {
     if grep -q provides $pkg/PKGBUILD; then
         sed -i 's/provides=(\(.*\))/provides=("'python-$pkg'=$pkgver" \1)/' $pkg/PKGBUILD
     else
-        grep -q '^  depends=' $pkg/PKGBUILD || fail
-        sed -i '/^  depends=/i\  provides=("'python-$pkg'=$pkgver")' $pkg/PKGBUILD
+        grep -q '^depends=' $pkg/PKGBUILD || fail
+        sed -i '/^depends=/i\provides=("'python-$pkg'=$pkgver")' $pkg/PKGBUILD
     fi
     grep -q 'provides=("python-' $pkg/PKGBUILD || fail
-
-    line1="  provides=(\"python2-$pkg=\$pkgver\")"
-    line2="  conflicts=(\"python2-$pkg\")"
-    sed -i "/^package_python2-$pkg-debug/a\\$line1\\n$line2" $pkg/PKGBUILD
-    grep -q "$line1" $pkg/PKGBUILD || fail
-    grep -q "$line2" $pkg/PKGBUILD || fail
-
-    # add packaging debug options
-    sed -i '/^  conflicts=/a\\  options=("debug" "!strip")' $pkg/PKGBUILD
-    grep -q '^  options' $pkg/PKGBUILD || fail
 
     # add debug switch
     if [[ $pkg == pyqt5 ]]; then
