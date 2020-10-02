@@ -115,15 +115,15 @@ patch_pyqt() {
         grep -q -- --debug $pkg/PKGBUILD || fail
     fi
 
-    # fix up URL
-    if [[ $pkg == pyqtwebengine ]]; then
-        sed -i 's|software/pyqtwebengine-debug/intro|software/pyqtwebengine/intro|' $pkg/PKGBUILD
+    # fix up stuff
+    if [[ $pkg == pyqt5-webengine ]]; then
         grep -q -- software/pyqtwebengine-debug/intro $pkg/PKGBUILD && fail
+        sed -i 's/(python-pyqt5-webengine-debug)-debug/(python-pyqt5-webengine-debug)/' $pkg/PKGBUILD
     fi
 }
 
 if (( $# == 0 )); then
-    packages=(qt5-* pyqt5 pyqtwebengine)
+    packages=(qt5-* pyqt5 pyqt5-webengine)
 else
     packages="$@"
 fi
@@ -131,4 +131,4 @@ fi
 patch_qt "${packages[@]}"
 [[ "${packages[@]}" == *qt5-base* ]] && patch_qt_base
 [[ "${packages[@]}" == *pyqt5* ]] && patch_pyqt pyqt5
-[[ "${packages[@]}" == *pyqtwebengine* ]] && patch_pyqt pyqtwebengine
+[[ "${packages[@]}" == *pyqt5-webengine* ]] && patch_pyqt pyqt5-webengine
