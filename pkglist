@@ -38,4 +38,4 @@ qt5-x11extras
 qt5-xmlpatterns
 qt5-webkit
 pyqt5
-pyqtwebengine
+pyqt5-webengine

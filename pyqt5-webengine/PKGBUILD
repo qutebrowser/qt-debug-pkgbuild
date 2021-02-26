@@ -1,20 +1,22 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 
-pkgbase=pyqtwebengine
-pkgname=(python-pyqtwebengine)
+pkgbase=pyqt5-webengine
+pkgname=(python-pyqt5-webengine)
 pkgdesc="Python bindings for QtWebEngine"
-pkgver=5.15.1
-pkgrel=2
+pkgver=5.15.3
+pkgrel=1
 arch=(x86_64)
 url="https://www.riverbankcomputing.com/software/pyqtwebengine/intro"
 license=(GPL)
 groups=(pyqt5)
 depends=(python-pyqt5 qt5-webengine)
-makedepends=(sip5 pyqt-builder)
-conflicts=(pyqtwebengine-common)
+makedepends=(sip pyqt-builder)
+conflicts=(pyqtwebengine-common python-pyqtwebwengine)
+provides=(python-pyqtwebengine)
+replaces=(python-pyqtwebengine)
 source=("https://pypi.python.org/packages/source/P/PyQtWebEngine/PyQtWebEngine-$pkgver.tar.gz")
-sha256sums=('f0ca7915ee206ba5d703168c6ca40b0aad62c67360328fae4af5359cdbcee439')
+sha256sums=('0badc56e6c9ee2b7b4baa87511737d2a7f1de5a45f52b1da8f4965fc17dcf0b6')
 
 build() {
   cd PyQtWebEngine-$pkgver
@@ -25,7 +27,7 @@ build() {
   make
 }
 
-package_python-pyqtwebengine() {
+package_python-pyqt5-webengine() {
   cd PyQtWebEngine-$pkgver/build
-  make INSTALL_ROOT="$pkgdir" install -j1
+  make INSTALL_ROOT="$pkgdir" install
 }
