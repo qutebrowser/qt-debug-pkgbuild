@@ -1,3 +1,9 @@
+**This repository is now archived.** Nowadays, Archlinux provides debug
+information as part of their official packages, via their
+[Debuginfod](https://wiki.archlinux.org/title/debuginfod) server. When you set
+`DEBUGINFOD_URLS="https://debuginfod.archlinux.org/"` in your environment,
+tools like `gdb` will automatically download debug information.
+
 # qt-debug-pkgbuild
 
 Archlinux PKGBUILDs for Qt5/PyQt5 with debugging enabled.
